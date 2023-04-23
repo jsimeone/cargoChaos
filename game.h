@@ -1,5 +1,5 @@
 #ifndef GAME_H
-#define HAME_H
+#define GAME_H
 #include<iostream>
 #include<vector>
 #include<ctime>

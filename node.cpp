@@ -2,7 +2,7 @@
 #include "constants.h"
 
 void Node::set_texture(string texture_file_name) {
-	texture.loadFromFile("assets\\" + texture_file_name);
+	texture.loadFromFile("assets/" + texture_file_name);
 	node_sprite.setTexture(texture);
 }
 

@@ -52,7 +52,6 @@ void Game::poll_events() {
 				player.set_moving_right(false);
 			break;
 		case Event::MouseButtonPressed:
-			player.set_target_position(Mouse::getPosition(*window));
 			break;
 		}
 	}
@@ -81,8 +80,9 @@ void Game::spawn_node(int x_pos, int y_pos, string texture_name)
 
 void Game::update_player()
 {
-	player.update_player_velocity();
-	player.update_player_position();
+//	player.update_player_velocity();
+//	player.update_player_position();
+    player.update();
 }
 
 void Game::update() {

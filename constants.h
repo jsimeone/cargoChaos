@@ -2,13 +2,17 @@
 #define CONSTANTS_H
 
 #include <SFML/System.hpp>
-
+ 
 namespace constants {
     const int SCREEN_HEIGHT = 1200;
     const int SCREEN_WIDTH = 1600;
-    const float PLAYER_SCALE = 0.1;
     const float NODE_SCALE = 0.1;
     const sf::Vector2f off_screen(-100, -100);
+
+    const float PLAYER_SCALE = 0.1;
+    const float PLAYER_SPEED = 4;
+    const float PLAYER_ACCELERATION = 0.1;
+    const float PLAYER_DECELERATION = 0.1;
 }
 
-#endif // CONSTANTS_H
+#endif // CONSTANTS_Hd
