@@ -11,8 +11,8 @@
 using namespace sf;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "cargoChaos");
-    window.setFramerateLimit(60);
+//    sf::RenderWindow window(sf::VideoMode(800, 600), "cargoChaos");
+//    window.setFramerateLimit(60);
 
 //    sf::Font font;
 //    if (!font.loadFromFile("path/to/your/font.ttf")) {
@@ -26,7 +26,7 @@ int main() {
 //    bool gameStarted = false;
     game.spawn_node(500, 500, "circle.png");
 
-    while (window.isOpen()) {
+    while (game.is_running()) {
 //        sf::Event event;
 //        while (window.pollEvent(event)) {
 //            if (event.type == sf::Event::Closed) {
@@ -49,7 +49,7 @@ int main() {
         game.render();
 //        }
 
-        window.display();
+//        window.display();
     }
 
     return 0;
