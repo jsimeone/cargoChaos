@@ -67,7 +67,7 @@ void Player::update() {
 Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
     if (magnitude > 1) {
-        return Vector2(velocity.x / magnitude, velocity.y / magnitude);
+        return Vector2f(velocity.x / magnitude, velocity.y / magnitude);
     }
     return velocity;
 }
@@ -83,7 +83,9 @@ void Player::get_textures() {
     }
     std::cout<< "Load Successful" << std::endl;
     player_sprite.setTexture(player_texture, true);
+    player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
     player_sprite.setOrigin((sf::Vector2f)player_texture.getSize() / 2.f);
+   
 
     
 //    player_sprite.setTexture(texture, true);
