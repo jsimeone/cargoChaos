@@ -67,7 +67,7 @@ void Player::update() {
 Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
     if (magnitude > 1) {
-        return Vector2(velocity.x / magnitude, velocity.y / magnitude);
+        return Vector2f(velocity.x / magnitude, velocity.y / magnitude);
     }
     return velocity;
 }
