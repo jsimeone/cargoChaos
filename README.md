@@ -1,4 +1,4 @@
-# cargoChaos
+# Cargo Chaos Setup Instructions
 
 ## If using XCode
 1. Clone the repository
