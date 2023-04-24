@@ -23,7 +23,7 @@ protected:
 	Sprite node_sprite;
 	bool is_held;
 public:
-	Node(int x_pos, int y_pos, string texture_name);
+	Node(int x_pos, int y_pos);
 	Sprite get_node_sprite();
 	void set_texture(string texture_file_name);
 	void pick_up(Vector2f player_position, float player_rotation);
