@@ -31,30 +31,61 @@ int Player::get_player_width() {
     return player_sprite.getTexture()->getSize().x * constants::PLAYER_SCALE;
 }
 
+void Player::get_textures() {
+    if (!player_texture.loadFromFile("assets/player.png")) {
+        std::cout<< "Load failed" << std::endl;
+        system("pause");
+    }
+    player_sprite.setTexture(player_texture, true);
+    player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
+    player_sprite.setOrigin((sf::Vector2f)player_texture.getSize() / 2.f);
+}
+
+void Player::set_moving_up(bool new_up) {
+    moving_up = new_up;
+}
+
+void Player::set_moving_down(bool new_down) {
+    moving_down = new_down;
+}
+
+void Player::set_moving_right(bool new_right) {
+    moving_right = new_right;
+}
+
+void Player::set_moving_left(bool new_left) {
+    moving_left = new_left;
+}
+
+
+//makes the velocities vector at most length 1 (limits speed to a maximum value of constants::PLAYER_SPEED)
+Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
+    float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
+    if (magnitude > 1) {
+        return Vector2f(velocity.x / magnitude, velocity.y / magnitude);
+    }
+    return velocity;
+}
+
 void Player::update(vector<Node*> nodes) {
+    //====UPDATE VELOCITIES====//
     if (moving_up && !moving_down) {
         velocity.y -= 0.5;
-    }
-    if (moving_down && !moving_up) {
+    } else if (moving_down && !moving_up) {
         velocity.y += 0.5;
-    }
-    if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
+    } else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
         velocity.y /=2;
     }
-    
     if (moving_left && !moving_right) {
         velocity.x -= 0.5;
-    }
-    if (moving_right && !moving_left) {
+    } else if (moving_right && !moving_left) {
         velocity.x += 0.5;
-    }
-    if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
+    } else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
         velocity.x /=2;
     }
-
-    
     velocity = normalize_velocities(velocity);
     
+    //====UPDATE POSITION====//
     int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED)*1.2;
     int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED)*1.2;
     bool x_is_valid;
@@ -66,19 +97,10 @@ void Player::update(vector<Node*> nodes) {
     if (y_is_valid) {
         pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
     }
-    
     float direction = atan2(velocity.y, velocity.x) * 180.0/3.141592653589793238463;
     player_sprite.setRotation(direction+90);
     player_sprite.setPosition(pos.x, pos.y);
         
-}
-
-Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
-    float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
-    if (magnitude > 1) {
-        return Vector2f(velocity.x / magnitude, velocity.y / magnitude);
-    }
-    return velocity;
 }
 
 void Player::display() {
@@ -159,22 +181,20 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
             //the position of new_x, new_y is not valid
             if (pow(pow(node_pos.x - pos.x, 2) + pow(y_dis, 2), 0.5) > distance) {
                 x_is_valid = false;
-            }
-            else if (pow(pow(x_dis, 2) + pow(node_pos.y - pos.y, 2), 0.5) > distance) {
+            } else if (pow(pow(x_dis, 2) + pow(node_pos.y - pos.y, 2), 0.5) > distance) {
                 y_is_valid = false;
-            }
-            else {
+            } else {
                 x_is_valid = false;
                 y_is_valid = false;
                 return;
             }
+
         }
     }
     if (!x_is_valid && !y_is_valid) {
         return; //no need to continue checking
     }
     //check walls:
-    
     if (new_x > constants::SCREEN_WIDTH - get_player_width()/2) {
         x_is_valid = false;
     } else if (new_x < get_player_width()/2) {
