@@ -9,7 +9,7 @@ void Game::init_window() {
 	videoMode.height = constants::SCREEN_HEIGHT;
 	videoMode.width = constants::SCREEN_WIDTH;
 
-	window = new sf::RenderWindow(videoMode, "Final Project", sf::Style::Titlebar | sf::Style::Close);
+	window = new sf::RenderWindow(videoMode, "CargoChaos", sf::Style::Titlebar | sf::Style::Close);
 
 	window->setFramerateLimit(60);
 }
