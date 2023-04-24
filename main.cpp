@@ -24,7 +24,7 @@ int main() {
     Game game;
 
 //    bool gameStarted = false;
-    game.spawn_node(500, 500, "circle.png");
+    game.spawn_cargo_node(500, 500, 1);
 
     while (game.is_running()) {
 //        sf::Event event;

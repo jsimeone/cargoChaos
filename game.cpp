@@ -67,11 +67,8 @@ bool Game::is_running() {
 	return this->window->isOpen();
 }
 
-void Game::spawn_node(int x_pos, int y_pos, string texture_name)
-{
-	nodes.push_back(new Node(x_pos, y_pos, texture_name));
-	nodes[nodes.size() - 1]->set_texture(texture_name);
-
+void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
+	nodes.push_back(new Cargo_Node(x_pos, y_pos, color_index));
 }
 
 void Game::update_player()

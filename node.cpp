@@ -2,16 +2,15 @@
 #include "constants.h"
 
 void Node::set_texture(string texture_file_name) {
-	texture.loadFromFile("assets/" + texture_file_name);
+	texture.loadFromFile("assets/" + texture_file_name + "_Node.png");
 	node_sprite.setTexture(texture);
     node_sprite.setOrigin((sf::Vector2f)texture.getSize() / 2.f);
 }
 
-Node::Node(int x_pos, int y_pos, string texture_name) {
+Node::Node(int x_pos, int y_pos) {
 	is_held = false;
 	node_sprite.setScale(constants::NODE_SCALE, constants::NODE_SCALE);
 	node_sprite.setPosition(x_pos, y_pos);
-	set_texture(texture_name);
     
 }
 
