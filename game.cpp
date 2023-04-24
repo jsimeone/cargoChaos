@@ -61,6 +61,7 @@ void Game::poll_events() {
 Game::Game() {
 	init_variables();
 	init_window();
+    frame_counter = 0;
 }
 
 Game::~Game() {
@@ -103,9 +104,15 @@ void Game::render_nodes()
 	}
 }
 
+void Game::render_conveyor(int frames) {
+    window->draw(conveyor.get_conveyor_sprite(frames));
+}
+
 void Game::render() {
 	window->clear();
 	render_player();
 	render_nodes();
+    render_conveyor(frame_counter);
 	window->display();
+    frame_counter += 1;
 }
