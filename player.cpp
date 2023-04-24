@@ -57,17 +57,14 @@ void Player::update(vector<Node*> nodes) {
     
     int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED)*1.2;
     int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED)*1.2;
-    
-    if (position_is_valid(new_x, new_y, nodes)) {
+    bool x_is_valid;
+    bool y_is_valid;
+    position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
+    if (x_is_valid) {
         pos.x = pos.x + velocity.x * constants::PLAYER_SPEED;
+    }
+    if (y_is_valid) {
         pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
-    } else {
-        //this is lazy: the four lines below allow the player to slide if colliding with something
-        if (position_is_valid(pos.x, new_y, nodes)) {
-            pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
-        } else if (position_is_valid(new_x, pos.y, nodes)){
-            pos.x = pos.x + velocity.x * constants::PLAYER_SPEED;
-        }
     }
     
     float direction = atan2(velocity.y, velocity.x) * 180.0/3.141592653589793238463;
@@ -121,30 +118,49 @@ void Player::set_moving_left(bool new_left) {
 
 
 
-bool Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes) {
+void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid) {
+    x_is_valid = true;
+    y_is_valid = true;
     for (Node* node : nodes){
+        if (!x_is_valid && !y_is_valid) {
+            return; //no need to continue checking
+        }
         Sprite node_sprite = node->get_node_sprite();
         Vector2<float> node_pos = node_sprite.getPosition();
         float x_dis = node_pos.x - new_x;
         float y_dis = node_pos.y - new_y;
         float distance = get_player_width()/2 + (node_sprite.getTexture()->getSize().x * node_sprite.getScale().x)/2;
         if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance) {
-            return false;
+            //the position of new_x, new_y is not valid
+            if (pow(pow(node_pos.x - pos.x, 2) + pow(y_dis, 2), 0.5) > distance) {
+                x_is_valid = false;
+            }
+            else if (pow(pow(x_dis, 2) + pow(node_pos.y - pos.y, 2), 0.5) > distance) {
+                y_is_valid = false;
+            }
+            else {
+                x_is_valid = false;
+                y_is_valid = false;
+            }
+            
+            
         }
+    }
+    if (!x_is_valid && !y_is_valid) {
+        return; //no need to continue checking
     }
     //check walls:
     
     if (new_x > constants::SCREEN_WIDTH - get_player_width()/2) {
-        return false;
+        x_is_valid = false;
     } else if (new_x < get_player_width()/2) {
-        return false;
-    } else if (new_y> constants::SCREEN_HEIGHT - get_player_height()/2) {
-        return false;
-    } else if (new_y < get_player_height()/2 ) {
-        return false;
+        x_is_valid = false;
     }
-    
-    return true;
+    if (new_y> constants::SCREEN_HEIGHT - get_player_height()/2) {
+        y_is_valid = false;
+    } else if (new_y < get_player_height()/2 ) {
+        y_is_valid = false;
+    }
 }
 
 
