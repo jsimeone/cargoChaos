@@ -55,7 +55,7 @@ public:
     void set_moving_left(bool new_left);
     void set_moving_right(bool new_right);
     
-    bool position_is_valid(float new_x, float new_y, vector<Node*> nodes);
+    void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
 };
 
 
