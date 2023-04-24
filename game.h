@@ -30,6 +30,12 @@ private:
 	void init_variables();
 	void init_window();
 	void poll_events();
+    
+    float current_screen_shake = 0;
+    float shake_direction = 1;
+    void screen_shake(float intensity);
+    
+    View view;
 public:
 	Game();
 	~Game();
@@ -41,7 +47,8 @@ public:
 	void update_player();
 	void update_nodes();
 	void update();
-
+    
+    void render_screen_shake();
 	void render_player();
 	void render_nodes();
 	void render();
