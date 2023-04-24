@@ -11,8 +11,8 @@ Player::Player() {
     moving_right = false;
     moving_up = false;
     moving_down = false;
-    
-    
+    is_holding = false;
+    held_node = nullptr;
 }
 
 Player::~Player() {
@@ -110,6 +110,33 @@ void Player::set_moving_down(bool new_down) {
 
 void Player::set_moving_right(bool new_right) {
     moving_right = new_right;
+}
+
+void Player::toggle_pick_up(vector<Node*> nodes) {
+    if (is_holding) {
+        put_down_node();
+    }
+    else {
+        pick_up_node(nodes);
+    }
+}
+
+void Player::pick_up_node(vector<Node*> nodes) {
+    for (Node* node : nodes) {
+        if (!is_holding && player_sprite.getGlobalBounds().intersects(node->get_node_sprite().getGlobalBounds())) {
+            node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+            is_holding = true;
+            held_node = node;
+        }
+    }
+}
+
+void Player::put_down_node() {
+    if (is_holding) {
+        held_node->put_down(player_sprite.getPosition(), player_sprite.getRotation());
+        is_holding = false;
+        held_node = nullptr;
+    }
 }
 
 void Player::set_moving_left(bool new_left) {

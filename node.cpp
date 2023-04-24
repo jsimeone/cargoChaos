@@ -21,14 +21,13 @@ Sprite Node::get_node_sprite() {
 
 
 
-void Node::toggle_pick_up(Vector2f player_position, float player_rotation) {
+void Node::pick_up(Vector2f player_position, float player_rotation) {
+	is_held = true;
+	node_sprite.setPosition(constants::off_screen);
+}
 
-	if (!is_held) {
-		is_held = true;
-		node_sprite.setPosition(constants::off_screen);
-	} else {
-		is_held = false;
-		node_sprite.setPosition(player_position);
-		node_sprite.setRotation(player_rotation);
-	}
+void Node::put_down(Vector2f player_position, float player_rotation) {
+	node_sprite.setPosition(player_position);
+	node_sprite.setRotation(player_rotation);
+	is_held = false;
 }
