@@ -116,9 +116,6 @@ void Player::get_textures() {
     player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
     player_sprite.setOrigin((sf::Vector2f)player_texture.getSize() / 2.f);
    
-
-    
-//    player_sprite.setTexture(texture, true);
     
 }
 
@@ -133,6 +130,11 @@ void Player::set_moving_down(bool new_down) {
 void Player::set_moving_right(bool new_right) {
     moving_right = new_right;
 }
+
+void Player::set_moving_left(bool new_left) {
+    moving_left = new_left;
+}
+
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (is_holding) {
@@ -159,10 +161,6 @@ void Player::put_down_node() {
         is_holding = false;
         held_node = nullptr;
     }
-}
-
-void Player::set_moving_left(bool new_left) {
-    moving_left = new_left;
 }
 
 
