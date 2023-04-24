@@ -11,6 +11,8 @@ Player::Player() {
     moving_right = false;
     moving_up = false;
     moving_down = false;
+    is_holding = false;
+    held_node = nullptr;
 }
 
 Player::~Player() {
@@ -104,6 +106,66 @@ void Player::update(vector<Node*> nodes) {
 void Player::display() {
     
 }
+
+void Player::get_textures() {
+    if (!player_texture.loadFromFile("assets/player.png")) {
+        std::cout<< "Load failed" << std::endl;
+        system("pause");
+    }
+    player_sprite.setTexture(player_texture, true);
+    player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
+    player_sprite.setOrigin((sf::Vector2f)player_texture.getSize() / 2.f);
+   
+
+    
+//    player_sprite.setTexture(texture, true);
+    
+}
+
+void Player::set_moving_up(bool new_up) {
+    moving_up = new_up;
+}
+
+void Player::set_moving_down(bool new_down) {
+    moving_down = new_down;
+}
+
+void Player::set_moving_right(bool new_right) {
+    moving_right = new_right;
+}
+
+void Player::toggle_pick_up(vector<Node*> nodes) {
+    if (is_holding) {
+        put_down_node();
+    }
+    else {
+        pick_up_node(nodes);
+    }
+}
+
+void Player::pick_up_node(vector<Node*> nodes) {
+    for (Node* node : nodes) {
+        if (!is_holding && player_sprite.getGlobalBounds().intersects(node->get_node_sprite().getGlobalBounds())) {
+            node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+            is_holding = true;
+            held_node = node;
+        }
+    }
+}
+
+void Player::put_down_node() {
+    if (is_holding) {
+        held_node->put_down(player_sprite.getPosition(), player_sprite.getRotation());
+        is_holding = false;
+        held_node = nullptr;
+    }
+}
+
+void Player::set_moving_left(bool new_left) {
+    moving_left = new_left;
+}
+
+
 
 void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid) {
     x_is_valid = true;
