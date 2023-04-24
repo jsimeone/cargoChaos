@@ -10,8 +10,10 @@ void Game::init_window() {
 	videoMode.width = constants::SCREEN_WIDTH;
 
 	window = new sf::RenderWindow(videoMode, "CargoChaos", sf::Style::Titlebar | sf::Style::Close);
-
 	window->setFramerateLimit(60);
+    
+    view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
+    window->setView(view);
 }
 
 void Game::poll_events() {
@@ -36,6 +38,8 @@ void Game::poll_events() {
 				player.set_moving_right(true);
 			if (event.key.code == Keyboard::Space)
 				player.toggle_pick_up(nodes);
+            if (event.key.code == Keyboard::T)
+                screen_shake(2);
 			break;
 		case Event::KeyReleased:
 			if (event.key.code == Keyboard::W)
@@ -62,6 +66,11 @@ Game::~Game() {
 	delete window;
 }
 
+
+
+void Game::screen_shake(float intensity) {
+    current_screen_shake = intensity * 10;
+}
 
 bool Game::is_running() {
 	return this->window->isOpen();
@@ -98,7 +107,20 @@ void Game::render_nodes()
 	}
 }
 
+void Game::render_screen_shake() {
+    if (current_screen_shake > 1) {
+        view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
+        window->setView(view);
+        current_screen_shake /= 2;
+        shake_direction *= -1;
+    } else {
+        current_screen_shake = 0;
+        window->setView(window->getDefaultView());
+    }
+}
+
 void Game::render() {
+    render_screen_shake();
 	window->clear();
 	render_player();
 	render_nodes();
