@@ -39,7 +39,7 @@ private:
     Node* held_node;
 
     void pick_up_node(vector<Node*> nodes);
-    void put_down_node();
+    void put_down_node(vector<Node*> nodes);
     
 public:
     Player();

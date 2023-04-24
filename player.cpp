@@ -111,7 +111,7 @@ void Player::display() {
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (is_holding) {
-        put_down_node();
+        put_down_node(nodes);
     }
     else {
         pick_up_node(nodes);
@@ -131,7 +131,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
             if (angle_difference > 180) {
                 angle_difference = abs(angle_difference - 360);
             }
-            std::cout << "Angle Difference=" <<angle_difference << std::endl;
+            //std::cout << "Angle Difference=" <<angle_difference << std::endl;
 //            std::cout << "Distance Difference=" <<abs(pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) - distance) << std::endl;
             
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
@@ -144,12 +144,28 @@ void Player::pick_up_node(vector<Node*> nodes) {
     }
 }
 
-void Player::put_down_node() {
+void Player::put_down_node(vector<Node*> nodes) {
     if (is_holding) {
         Vector2f new_pos;
         new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
         new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
         
+        for (Node* node : nodes) {
+            float x_dist = node->get_node_sprite().getPosition().x - new_pos.x;
+            float y_dist = node->get_node_sprite().getPosition().y - new_pos.y;
+            float angle = atan2(y_dist, x_dist) * 180 / constants::PI;
+            float dist = sqrtf(pow(x_dist, 2) + pow(y_dist, 2));
+            float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
+
+            if (offset < 0) {
+                new_pos.x += cos(angle + 180) * offset;
+                new_pos.y += sin(angle + 180) * offset;
+                cout << "Offset: " << offset << ", distance: " << dist << endl;
+
+            }
+
+        }
+
         if (new_pos.x > constants::SCREEN_WIDTH - get_player_width() / 2) {
             return;
         }
