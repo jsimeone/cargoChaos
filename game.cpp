@@ -1,5 +1,6 @@
 #include "Game.h"
 
+
 void Game::init_variables() {
 	window = nullptr;
 }
@@ -82,7 +83,8 @@ void Game::update_player()
 {
 //	player.update_player_velocity();
 //	player.update_player_position();
-    player.update();
+    
+    player.update(nodes);
 }
 
 void Game::update() {
