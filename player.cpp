@@ -107,33 +107,6 @@ void Player::display() {
     
 }
 
-void Player::get_textures() {
-    if (!player_texture.loadFromFile("assets/player.png")) {
-        std::cout<< "Load failed" << std::endl;
-        system("pause");
-    }
-    player_sprite.setTexture(player_texture, true);
-    player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
-    player_sprite.setOrigin((sf::Vector2f)player_texture.getSize() / 2.f);
-   
-    
-}
-
-void Player::set_moving_up(bool new_up) {
-    moving_up = new_up;
-}
-
-void Player::set_moving_down(bool new_down) {
-    moving_down = new_down;
-}
-
-void Player::set_moving_right(bool new_right) {
-    moving_right = new_right;
-}
-
-void Player::set_moving_left(bool new_left) {
-    moving_left = new_left;
-}
 
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
