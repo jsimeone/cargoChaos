@@ -129,9 +129,9 @@ void Player::pick_up_node(vector<Node*> nodes) {
             float player_direction = player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET;
             float angle_difference =abs(player_direction - node_angle);
             if (angle_difference > 180) {
-                angle_difference -= 360;
+                angle_difference = abs(angle_difference - 360);
             }
-//            std::cout << "Angle Difference=" <<angle_difference << std::endl;
+            std::cout << "Angle Difference=" <<angle_difference << std::endl;
 //            std::cout << "Distance Difference=" <<abs(pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) - distance) << std::endl;
             
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
