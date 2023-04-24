@@ -26,25 +26,25 @@ void Game::poll_events() {
 		case Event::KeyPressed:
 			if (event.key.code == Keyboard::Escape)
 				window->close();
-			if (event.key.code == Keyboard::Up || event.key.code == Keyboard::W)
+			if (event.key.code == Keyboard::W)
 				player.set_moving_up(true);
-			if (event.key.code == Keyboard::Down || event.key.code == Keyboard::S)
+			if (event.key.code == Keyboard::S)
 				player.set_moving_down(true);
-			if (event.key.code == Keyboard::Left || event.key.code == Keyboard::A)
+			if (event.key.code == Keyboard::A)
 				player.set_moving_left(true);
-			if (event.key.code == Keyboard::Right || event.key.code == Keyboard::D)
+			if (event.key.code == Keyboard::D)
 				player.set_moving_right(true);
 			if (event.key.code == Keyboard::Space)
 				player.toggle_pick_up(nodes);
 			break;
 		case Event::KeyReleased:
-			if (event.key.code == Keyboard::Up || event.key.code == Keyboard::W)
+			if (event.key.code == Keyboard::W)
 				player.set_moving_up(false);
-			if (event.key.code == Keyboard::Down || event.key.code == Keyboard::S)
-				player.set_moving_down(false || event.key.code == Keyboard::A);
-			if (event.key.code == Keyboard::Left || event.key.code == Keyboard::A)
+			if (event.key.code == Keyboard::S)
+				player.set_moving_down(false);
+			if (event.key.code == Keyboard::A)
 				player.set_moving_left(false);
-			if (event.key.code == Keyboard::Right || event.key.code == Keyboard::D)
+			if (event.key.code == Keyboard::D)
 				player.set_moving_right(false);
 			break;
 		case Event::MouseButtonPressed:
