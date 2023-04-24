@@ -26,7 +26,8 @@ public:
 	Node(int x_pos, int y_pos, string texture_name);
 	Sprite get_node_sprite();
 	void set_texture(string texture_file_name);
-	void toggle_pick_up(Vector2f player_position, float player_rotation);
+	void pick_up(Vector2f player_position, float player_rotation);
+	void put_down(Vector2f player_position, float player_rotation);
 
 };
 

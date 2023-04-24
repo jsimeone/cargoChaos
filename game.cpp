@@ -35,12 +35,7 @@ void Game::poll_events() {
 			if (event.key.code == Keyboard::Right || event.key.code == Keyboard::D)
 				player.set_moving_right(true);
 			if (event.key.code == Keyboard::Space)
-				for (Node* node : nodes) {
-					if (player.get_player_sprite().getGlobalBounds().intersects(node->get_node_sprite().getGlobalBounds())) {
-						node->toggle_pick_up(player.get_player_sprite().getPosition(), player.get_player_sprite().getRotation());
-					}
-
-				}
+				player.toggle_pick_up(nodes);
 			break;
 		case Event::KeyReleased:
 			if (event.key.code == Keyboard::Up || event.key.code == Keyboard::W)
