@@ -148,6 +148,20 @@ void Player::put_down_node() {
         Vector2f new_pos;
         new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
         new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+        
+        if (new_pos.x > constants::SCREEN_WIDTH - get_player_width() / 2) {
+            return;
+        }
+        else if (new_pos.x < get_player_width() / 2) {
+            return;
+        }
+        if (new_pos.y > constants::SCREEN_HEIGHT - get_player_height() / 2) {
+            return;
+        }
+        else if (new_pos.y < get_player_height() / 2) {
+            return;
+        }
+        
         held_node->put_down(new_pos, player_sprite.getRotation());
         is_holding = false;
         held_node = nullptr;
