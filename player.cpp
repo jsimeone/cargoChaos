@@ -86,8 +86,8 @@ void Player::update(vector<Node*> nodes) {
     velocity = normalize_velocities(velocity);
     
     //====UPDATE POSITION====//
-    int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED)*1.2;
-    int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED)*1.2;
+    int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED);
+    int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED);
     bool x_is_valid;
     bool y_is_valid;
     position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
@@ -97,7 +97,7 @@ void Player::update(vector<Node*> nodes) {
     if (y_is_valid) {
         pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
     }
-    float direction = atan2(velocity.y, velocity.x) * 180.0/3.141592653589793238463;
+    float direction = atan2(velocity.y, velocity.x) * 180.0/constants::PI;
     player_sprite.setRotation(direction+90);
     player_sprite.setPosition(pos.x, pos.y);
         
@@ -119,11 +119,26 @@ void Player::toggle_pick_up(vector<Node*> nodes) {
 }
 
 void Player::pick_up_node(vector<Node*> nodes) {
-    for (Node* node : nodes) {
-        if (!is_holding && player_sprite.getGlobalBounds().intersects(node->get_node_sprite().getGlobalBounds())) {
-            node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
-            is_holding = true;
-            held_node = node;
+    if (!is_holding) {
+        for (Node* node : nodes) {
+            Vector2<float> node_pos = node->get_node_sprite().getPosition();
+            float x_dis = node_pos.x - pos.x;
+            float y_dis = node_pos.y - pos.y;
+            float distance = (get_player_width()/2 + (node->get_node_sprite().getTexture()->getSize().x * node->get_node_sprite().getScale().x)/2)*1.2;
+            float node_angle = atan2(y_dis, x_dis)* 180.0/constants::PI;; //angle between player and node
+            float player_direction = player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET;
+            float angle_difference =abs(player_direction - node_angle);
+            if (angle_difference > 180) {
+                angle_difference -= 360;
+            }
+//            std::cout << "Angle Difference=" <<angle_difference << std::endl;
+//            std::cout << "Distance Difference=" <<abs(pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) - distance) << std::endl;
+            
+            if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
+                node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+                is_holding = true;
+                held_node = node;
+            }
         }
     }
 }
