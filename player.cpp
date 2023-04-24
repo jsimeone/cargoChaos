@@ -153,17 +153,22 @@ void Player::put_down_node(vector<Node*> nodes) {
         for (Node* node : nodes) {
             float x_dist = node->get_node_sprite().getPosition().x - new_pos.x;
             float y_dist = node->get_node_sprite().getPosition().y - new_pos.y;
-            float angle = atan2(y_dist, x_dist) * 180 / constants::PI;
+            float angle = atan2(y_dist, x_dist);
             float dist = sqrtf(pow(x_dist, 2) + pow(y_dist, 2));
             float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
 
             if (offset < 0) {
-                new_pos.x += cos(angle + 180) * offset;
-                new_pos.y += sin(angle + 180) * offset;
-                cout << "Offset: " << offset << ", distance: " << dist << endl;
-
+                new_pos.x += cos(angle + constants::PI) * abs(offset);
+                new_pos.y += sin(angle + constants::PI) * abs(offset);
             }
 
+        }
+        float x_dist = new_pos.x - pos.x;
+        float y_dist = new_pos.y - pos.y;
+        
+        if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + get_player_width()/2){
+            //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
+            return;
         }
 
         if (new_pos.x > constants::SCREEN_WIDTH - get_player_width() / 2) {
