@@ -1,7 +1,24 @@
-﻿  main.cpp
+﻿  player.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(7,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(11,34): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(14,35): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(17,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(18,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(27,52): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(31,52): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(89,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(90,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(93,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(93,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(100,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(127,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(128,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe

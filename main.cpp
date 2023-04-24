@@ -24,7 +24,10 @@ int main() {
     Game game;
 
 //    bool gameStarted = false;
-    game.spawn_cargo_node(500, 500, 1);
+    game.spawn_cargo_node(500, 500, 0);
+    game.spawn_cargo_node(400, 400, 1);
+    game.spawn_cargo_node(300, 300, 2);
+
 
     while (game.is_running()) {
 //        sf::Event event;

@@ -138,6 +138,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
                 node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
                 is_holding = true;
                 held_node = node;
+                return;
             }
         }
     }
