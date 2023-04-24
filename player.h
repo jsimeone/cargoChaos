@@ -37,6 +37,9 @@ private:
 
     bool is_holding;
     Node* held_node;
+
+    void pick_up_node(vector<Node*> nodes);
+    void put_down_node();
     
 public:
     Player();
@@ -59,8 +62,7 @@ public:
     void set_moving_right(bool new_right);
 
     void toggle_pick_up(vector<Node*> nodes);
-    void pick_up_node(vector<Node*> nodes);
-    void put_down_node();
+    
     
     bool position_is_valid(float new_x, float new_y, vector<Node*> nodes);
 };
