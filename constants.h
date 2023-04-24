@@ -19,9 +19,6 @@ namespace constants {
     const int PLACE_DISTANCE = 100;
     const float PLACE_ANGLE_OFFSET = -90;
 
-    const float PLAYER_SPEED = 10;
-    const float PLAYER_ACCELERATION = 0.1; //not in use
-    const float PLAYER_DECELERATION = 0.1; //not in use
 }
 
 #endif // CONSTANTS_Hd
