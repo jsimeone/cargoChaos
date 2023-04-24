@@ -13,6 +13,8 @@
 #include <vector>
 
 #include "constants.h"
+#include "node.h"
+
 
 using namespace sf;
 using namespace std;
@@ -41,7 +43,7 @@ public:
     int get_player_height();
     int get_player_width();
     
-    void update();
+    void update(vector<Node*> nodes);
     void display();
     Vector2<float> velocity;
     Vector2<float> pos;
@@ -52,7 +54,8 @@ public:
     void set_moving_down(bool new_down);
     void set_moving_left(bool new_left);
     void set_moving_right(bool new_right);
-
+    
+    bool position_is_valid(float new_x, float new_y, vector<Node*> nodes);
 };
 
 
