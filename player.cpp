@@ -107,7 +107,59 @@ void Player::display() {
     
 }
 
+void Player::set_moving_left(bool new_left) {
+    moving_left = new_left;
+}
 
+
+//makes the velocities vector at most length 1 (limits speed to a maximum value of constants::PLAYER_SPEED)
+Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
+    float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
+    if (magnitude > 1) {
+        return Vector2f(velocity.x / magnitude, velocity.y / magnitude);
+    }
+    return velocity;
+}
+
+void Player::update(vector<Node*> nodes) {
+    //====UPDATE VELOCITIES====//
+    if (moving_up && !moving_down) {
+        velocity.y -= 0.5;
+    } else if (moving_down && !moving_up) {
+        velocity.y += 0.5;
+    } else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
+        velocity.y /=2;
+    }
+    if (moving_left && !moving_right) {
+        velocity.x -= 0.5;
+    } else if (moving_right && !moving_left) {
+        velocity.x += 0.5;
+    } else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
+        velocity.x /=2;
+    }
+    velocity = normalize_velocities(velocity);
+    
+    //====UPDATE POSITION====//
+    int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED)*1.2;
+    int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED)*1.2;
+    bool x_is_valid;
+    bool y_is_valid;
+    position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
+    if (x_is_valid) {
+        pos.x = pos.x + velocity.x * constants::PLAYER_SPEED;
+    }
+    if (y_is_valid) {
+        pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
+    }
+    float direction = atan2(velocity.y, velocity.x) * 180.0/3.141592653589793238463;
+    player_sprite.setRotation(direction+90);
+    player_sprite.setPosition(pos.x, pos.y);
+        
+}
+
+void Player::display() {
+    
+}
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (is_holding) {
@@ -130,7 +182,10 @@ void Player::pick_up_node(vector<Node*> nodes) {
 
 void Player::put_down_node() {
     if (is_holding) {
-        held_node->put_down(player_sprite.getPosition(), player_sprite.getRotation());
+        Vector2f new_pos;
+        new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+        new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+        held_node->put_down(new_pos, player_sprite.getRotation());
         is_holding = false;
         held_node = nullptr;
     }
