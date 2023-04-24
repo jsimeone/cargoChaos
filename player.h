@@ -64,7 +64,7 @@ public:
     void toggle_pick_up(vector<Node*> nodes);
     
     
-    bool position_is_valid(float new_x, float new_y, vector<Node*> nodes);
+    void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
 };
 
 
