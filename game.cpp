@@ -9,9 +9,11 @@ void Game::init_window() {
 	videoMode.height = constants::SCREEN_HEIGHT;
 	videoMode.width = constants::SCREEN_WIDTH;
 
-	window = new sf::RenderWindow(videoMode, "Final Project", sf::Style::Titlebar | sf::Style::Close);
-
+	window = new sf::RenderWindow(videoMode, "CargoChaos", sf::Style::Titlebar | sf::Style::Close);
 	window->setFramerateLimit(60);
+    
+    view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
+    window->setView(view);
 }
 
 void Game::poll_events() {
@@ -26,30 +28,27 @@ void Game::poll_events() {
 		case Event::KeyPressed:
 			if (event.key.code == Keyboard::Escape)
 				window->close();
-			if (event.key.code == Keyboard::Up || event.key.code == Keyboard::W)
+			if (event.key.code == Keyboard::W)
 				player.set_moving_up(true);
-			if (event.key.code == Keyboard::Down || event.key.code == Keyboard::S)
+			if (event.key.code == Keyboard::S)
 				player.set_moving_down(true);
-			if (event.key.code == Keyboard::Left || event.key.code == Keyboard::A)
+			if (event.key.code == Keyboard::A)
 				player.set_moving_left(true);
-			if (event.key.code == Keyboard::Right || event.key.code == Keyboard::D)
+			if (event.key.code == Keyboard::D)
 				player.set_moving_right(true);
 			if (event.key.code == Keyboard::Space)
-				for (Node* node : nodes) {
-					if (player.get_player_sprite().getGlobalBounds().intersects(node->get_node_sprite().getGlobalBounds())) {
-						node->toggle_pick_up(player.get_player_sprite().getPosition(), player.get_player_sprite().getRotation());
-					}
-
-				}
+				player.toggle_pick_up(nodes);
+            if (event.key.code == Keyboard::T)
+                screen_shake(2);
 			break;
 		case Event::KeyReleased:
-			if (event.key.code == Keyboard::Up || event.key.code == Keyboard::W)
+			if (event.key.code == Keyboard::W)
 				player.set_moving_up(false);
-			if (event.key.code == Keyboard::Down || event.key.code == Keyboard::S)
-				player.set_moving_down(false || event.key.code == Keyboard::A);
-			if (event.key.code == Keyboard::Left || event.key.code == Keyboard::A)
+			if (event.key.code == Keyboard::S)
+				player.set_moving_down(false);
+			if (event.key.code == Keyboard::A)
 				player.set_moving_left(false);
-			if (event.key.code == Keyboard::Right || event.key.code == Keyboard::D)
+			if (event.key.code == Keyboard::D)
 				player.set_moving_right(false);
 			break;
 		case Event::MouseButtonPressed:
@@ -69,15 +68,17 @@ Game::~Game() {
 }
 
 
+
+void Game::screen_shake(float intensity) {
+    current_screen_shake = intensity * 10;
+}
+
 bool Game::is_running() {
 	return this->window->isOpen();
 }
 
-void Game::spawn_node(int x_pos, int y_pos, string texture_name)
-{
-	nodes.push_back(new Node(x_pos, y_pos, texture_name));
-	nodes[nodes.size() - 1]->set_texture(texture_name);
-
+void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
+	nodes.push_back(new Cargo_Node(x_pos, y_pos, color_index));
 }
 
 void Game::update_player()
@@ -108,7 +109,20 @@ void Game::render_conveyor(int frames) {
     window->draw(conveyor.get_conveyor_sprite(frames));
 }
 
+void Game::render_screen_shake() {
+    if (current_screen_shake > 1) {
+        view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
+        window->setView(view);
+        current_screen_shake /= 2;
+        shake_direction *= -1;
+    } else {
+        current_screen_shake = 0;
+        window->setView(window->getDefaultView());
+    }
+}
+
 void Game::render() {
+    render_screen_shake();
 	window->clear();
 	render_player();
 	render_nodes();

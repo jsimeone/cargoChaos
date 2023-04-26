@@ -15,6 +15,7 @@
 #include "player.h"
 #include "node.h"
 #include "conveyor.h"
+#include "cargo_node.h"
 
 using namespace sf;
 
@@ -32,18 +33,25 @@ private:
 	void init_variables();
 	void init_window();
 	void poll_events();
+    
+    float current_screen_shake = 0;
+    float shake_direction = 1;
+    void screen_shake(float intensity);
+    
+    View view;
 public:
 	Game();
 	~Game();
 
 	bool is_running();
 
-	void spawn_node(int x_pos, int y_pos, string texture);
+	void spawn_cargo_node(int x_pos, int y_pos, int color_index);
 
 	void update_player();
 	void update_nodes();
 	void update();
-
+    
+    void render_screen_shake();
 	void render_player();
 	void render_nodes();
     void render_conveyor(int frames);

@@ -16,20 +16,18 @@ Sprite Conveyor::get_conveyor_sprite(int frames) {
         cout << "Loading conveyor texture failed" << endl;
     }
     
-    sf::IntRect rect_source_sprite(0, 0, 1354, animation_status);
+    sf::IntRect rect_source_sprite(0, animation_status, 1354, 225);
     
     
-//    if (frames % 30 == 0) {
+    if (frames % 30 == 0) {
         if (animation_status == 0) {
             animation_status = 225;
             rect_source_sprite.top = animation_status;
-            cout << "Animation status true" << endl;
         } else {
             animation_status = 0;
             rect_source_sprite.top = animation_status;
-            cout << "Animation status false" << endl;
         }
-//    }
+    }
     
     conveyor_sprite = Sprite(conveyor_texture, rect_source_sprite);
     
