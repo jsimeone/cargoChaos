@@ -6,7 +6,7 @@ using namespace sf;
 
 Player::Player() {
     get_textures();
-    pos = {(float)get_player_width(), (float)get_player_height()};
+    pos = {(constants::PLAY_AREA_WIDTH_BOUNDS.y-constants::PLAY_AREA_WIDTH_BOUNDS.x)/2 + constants::PLAY_AREA_WIDTH_BOUNDS.x, (constants::PLAY_AREA_HEIGHT_BOUNDS.y-constants::PLAY_AREA_HEIGHT_BOUNDS.x)/2 + constants::PLAY_AREA_HEIGHT_BOUNDS.x};
     moving_left = false;
     moving_right = false;
     moving_up = false;
