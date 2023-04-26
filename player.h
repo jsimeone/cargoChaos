@@ -21,8 +21,6 @@ using namespace std;
 
 class Player {
 private:
-//    vector<Texture> idle_textures;
-//    vector<Texture> walking_textures;
     
     void get_textures();
     Sprite player_sprite;
