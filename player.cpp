@@ -5,8 +5,8 @@
 using namespace sf;
 
 Player::Player() {
-    pos = {400, 400};
     get_textures();
+    pos = {(float)get_player_width(), (float)get_player_height()};
     moving_left = false;
     moving_right = false;
     moving_up = false;

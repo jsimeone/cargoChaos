@@ -60,13 +60,27 @@ void Game::poll_events() {
 Game::Game() {
 	init_variables();
 	init_window();
+    get_backdrop();
 }
 
 Game::~Game() {
 	delete window;
 }
 
+void Game::get_backdrop() {
+    if (!backdrop_texture.loadFromFile("assets/backdrop.png")) {
+        std::cout<< "Load failed" << std::endl;
+        system("pause");
+    }
+    backdrop_sprite.setTexture(backdrop_texture, true);
+    backdrop_sprite.setScale(1, 1);
+    backdrop_sprite.setOrigin((sf::Vector2f)backdrop_texture.getSize() / 2.f);
+    backdrop_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
+}
 
+void Game::render_backdrop() {
+    window->draw(backdrop_sprite);
+}
 
 void Game::screen_shake(float intensity) {
     current_screen_shake = intensity * 10;
@@ -119,6 +133,7 @@ void Game::render_screen_shake() {
 void Game::render() {
     render_screen_shake();
 	window->clear();
+    render_backdrop();
 	render_player();
 	render_nodes();
 	window->display();

@@ -35,6 +35,10 @@ private:
     float shake_direction = 1;
     void screen_shake(float intensity);
     
+    void get_backdrop();
+    Texture backdrop_texture;
+    Sprite backdrop_sprite;
+    
     View view;
 public:
 	Game();
@@ -48,6 +52,7 @@ public:
 	void update_nodes();
 	void update();
     
+    void render_backdrop();
     void render_screen_shake();
 	void render_player();
 	void render_nodes();
