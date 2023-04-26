@@ -41,6 +41,8 @@ private:
     void get_backdrop();
     Texture backdrop_texture;
     Sprite backdrop_sprite;
+    Texture scorebox_texture;
+    Sprite scorebox_sprite;
     
     View view;
 public:
@@ -60,6 +62,7 @@ public:
 	void render_player();
 	void render_nodes();
     void render_conveyor(int frames);
+    void render_scorebox();
 	void render();
 	
 };
