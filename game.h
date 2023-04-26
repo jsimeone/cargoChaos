@@ -14,6 +14,7 @@
 #include "constants.h"
 #include "player.h"
 #include "node.h"
+#include "conveyor.h"
 #include "cargo_node.h"
 
 using namespace sf;
@@ -24,8 +25,10 @@ private:
 	Event event;
 	VideoMode videoMode;
 	Player player;
+    Conveyor conveyor;
 	vector<Node*> nodes;
 	//Node node_test;
+    int frame_counter;
 
 	void init_variables();
 	void init_window();
@@ -56,6 +59,7 @@ public:
     void render_screen_shake();
 	void render_player();
 	void render_nodes();
+    void render_conveyor(int frames);
 	void render();
 	
 };
