@@ -22,9 +22,9 @@ namespace constants {
     const float PLAYER_ACCELERATION = 0.1; //not in use
     const float PLAYER_DECELERATION = 0.1; //not in use
 
-    const int PLACE_DISTANCE = 125; // should be a function of node_size + player_size
+    const int PLACE_DISTANCE = 110; // should be a function of node_size + player_size
     const float PLACE_ANGLE_OFFSET = -90;
-    const float MAX_PLACE_OFFSET = 30;
+    const float MAX_PLACE_OFFSET = 50;
 
 }
 
