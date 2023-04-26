@@ -6,7 +6,7 @@ using namespace sf;
 
 Player::Player() {
     get_textures();
-    pos = {(constants::PLAY_AREA_WIDTH_BOUNDS.y-constants::PLAY_AREA_WIDTH_BOUNDS.x)/2 + constants::PLAY_AREA_WIDTH_BOUNDS.x, (constants::PLAY_AREA_HEIGHT_BOUNDS.y-constants::PLAY_AREA_HEIGHT_BOUNDS.x)/2 + constants::PLAY_AREA_HEIGHT_BOUNDS.x};
+    pos = {(constants::PLAY_AREA_WIDTH_BOUNDS[1]-constants::PLAY_AREA_WIDTH_BOUNDS[0])/2 + constants::PLAY_AREA_WIDTH_BOUNDS[0], (constants::PLAY_AREA_HEIGHT_BOUNDS[1]-constants::PLAY_AREA_HEIGHT_BOUNDS[0])/2 + constants::PLAY_AREA_HEIGHT_BOUNDS[0]};
     moving_left = false;
     moving_right = false;
     moving_up = false;
@@ -179,29 +179,19 @@ void Player::put_down_node(vector<Node*> nodes) {
             return;
         }
 
-<<<<<<< Updated upstream
-        if (new_pos.x > constants::SCREEN_WIDTH - get_player_width() / 2) {
+
+
+        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2) {
+
             return;
         }
-        else if (new_pos.x < get_player_width() / 2) {
+        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
             return;
         }
-        if (new_pos.y > constants::SCREEN_HEIGHT - get_player_height() / 2) {
+        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2) {
             return;
         }
-        else if (new_pos.y < get_player_height() / 2) {
-=======
-        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - player_body_radius) {
-            return;
-        }
-        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + player_body_radius) {
-            return;
-        }
-        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - player_body_radius) {
-            return;
-        }
-        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + player_body_radius) {
->>>>>>> Stashed changes
+        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
             return;
         }
         
@@ -243,19 +233,6 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
         return; //no need to continue checking
     }
     //check walls:
-<<<<<<< Updated upstream
-    if (new_x > constants::SCREEN_WIDTH - get_player_width()/2) {
-        x_is_valid = false;
-    } else if (new_x < get_player_width()/2) {
-        x_is_valid = false;
-    }
-    if (new_y> constants::SCREEN_HEIGHT - get_player_height()/2) {
-        y_is_valid = false;
-    } else if (new_y < get_player_height()/2 ) {
-=======
-    
-
- 
     
     if (new_x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - player_body_radius) {
         x_is_valid = false;
@@ -265,7 +242,6 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
     if (new_y> constants::PLAY_AREA_HEIGHT_BOUNDS[1] - player_body_radius) {
         y_is_valid = false;
     } else if (new_y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + player_body_radius) {
->>>>>>> Stashed changes
         y_is_valid = false;
     }
 }

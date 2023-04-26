@@ -9,15 +9,13 @@
 
 Conveyor::Conveyor() {
     animation_status = 225;
-}
-
-Sprite Conveyor::get_conveyor_sprite(int frames) {
     if (!conveyor_texture.loadFromFile("assets/conveyorStates.png")) {
         cout << "Loading conveyor texture failed" << endl;
     }
-    
+}
+
+Sprite Conveyor::get_conveyor_sprite(int frames) {
     sf::IntRect rect_source_sprite(0, animation_status, 1354, 225);
-    
     
     if (frames % 30 == 0) {
         if (animation_status == 0) {
@@ -35,5 +33,5 @@ Sprite Conveyor::get_conveyor_sprite(int frames) {
 }
 
 Conveyor::~Conveyor() {
-    
+    return;
 }

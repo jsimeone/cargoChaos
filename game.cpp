@@ -70,13 +70,19 @@ Game::~Game() {
 
 void Game::get_backdrop() {
     if (!backdrop_texture.loadFromFile("assets/backdrop.png")) {
-        std::cout<< "Load failed" << std::endl;
+        cout<< "Load failed" << endl;
         system("pause");
     }
     backdrop_sprite.setTexture(backdrop_texture, true);
     backdrop_sprite.setScale(1, 1);
     backdrop_sprite.setOrigin((sf::Vector2f)backdrop_texture.getSize() / 2.f);
     backdrop_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
+    
+    if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
+        cout << "Failed to load scorebox asset" << endl;
+    }
+    scorebox_sprite.setTexture(scorebox_texture, true);
+    scorebox_sprite.setPosition(1324, 0);
 }
 
 void Game::render_backdrop() {
@@ -106,6 +112,7 @@ void Game::update_player()
 void Game::update() {
 	poll_events();
 	update_player();
+    //implement updating the score
 }
 
 void Game::render_player() {
@@ -123,6 +130,11 @@ void Game::render_conveyor(int frames) {
     window->draw(conveyor.get_conveyor_sprite(frames));
 }
 
+void Game::render_scorebox() {
+    window->draw(scorebox_sprite);
+    //render the scorebox text here
+}
+
 void Game::render_screen_shake() {
     if (current_screen_shake > 1) {
         view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
@@ -136,18 +148,13 @@ void Game::render_screen_shake() {
 }
 
 void Game::render() {
-    render_screen_shake();
+  render_screen_shake();
 	window->clear();
-    render_backdrop();
-	
+  render_backdrop();
 	render_nodes();
-<<<<<<< Updated upstream
-    render_conveyor(frame_counter);
-=======
-    render_player();
-//    render_conveyor(frame_counter);
-    render_scorebox();
->>>>>>> Stashed changes
+  //render_conveyor(frame_counter);
+  render_player();
+  render_scorebox();
 	window->display();
-    frame_counter += 1;
+  frame_counter += 1;
 }

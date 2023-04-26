@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cargo_node.cpp" />
+    <ClCompile Include="conveyor.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="cargo_node.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="conveyor.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="player.h" />
