@@ -13,6 +13,9 @@ Player::Player() {
     moving_down = false;
     is_holding = false;
     held_node = nullptr;
+    player_body_radius = player_sprite.getTexture()->getSize().x * constants::PLAYER_SCALE*(.25);
+    std::cout << "Player_radius: " << player_body_radius << std::endl;
+    //player_body_radius = 1000;
 }
 
 Player::~Player() {
@@ -124,7 +127,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
             Vector2<float> node_pos = node->get_node_sprite().getPosition();
             float x_dis = node_pos.x - pos.x;
             float y_dis = node_pos.y - pos.y;
-            float distance = (get_player_width()/2 + (node->get_node_sprite().getTexture()->getSize().x * node->get_node_sprite().getScale().x)/2)*1.2;
+            float distance = (player_body_radius + (node->get_node_sprite().getTexture()->getSize().x * node->get_node_sprite().getScale().x)/2)*1.2;
             float node_angle = atan2(y_dis, x_dis)* 180.0/constants::PI;; //angle between player and node
             float player_direction = player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET;
             float angle_difference =abs(player_direction - node_angle);
@@ -171,11 +174,12 @@ void Player::put_down_node(vector<Node*> nodes) {
         float x_dist = new_pos.x - pos.x;
         float y_dist = new_pos.y - pos.y;
         
-        if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + get_player_width()/2){
+        if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + player_body_radius){
             //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
             return;
         }
 
+<<<<<<< Updated upstream
         if (new_pos.x > constants::SCREEN_WIDTH - get_player_width() / 2) {
             return;
         }
@@ -186,6 +190,18 @@ void Player::put_down_node(vector<Node*> nodes) {
             return;
         }
         else if (new_pos.y < get_player_height() / 2) {
+=======
+        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - player_body_radius) {
+            return;
+        }
+        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + player_body_radius) {
+            return;
+        }
+        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - player_body_radius) {
+            return;
+        }
+        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + player_body_radius) {
+>>>>>>> Stashed changes
             return;
         }
         
@@ -208,7 +224,7 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
         Vector2<float> node_pos = node_sprite.getPosition();
         float x_dis = node_pos.x - new_x;
         float y_dis = node_pos.y - new_y;
-        float distance = get_player_width()/2 + (node_sprite.getTexture()->getSize().x * node_sprite.getScale().x)/2;
+        float distance = player_body_radius + (node_sprite.getTexture()->getSize().x * node_sprite.getScale().x)/2;
         if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance) {
             //the position of new_x, new_y is not valid
             if (pow(pow(node_pos.x - pos.x, 2) + pow(y_dis, 2), 0.5) > distance) {
@@ -227,6 +243,7 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
         return; //no need to continue checking
     }
     //check walls:
+<<<<<<< Updated upstream
     if (new_x > constants::SCREEN_WIDTH - get_player_width()/2) {
         x_is_valid = false;
     } else if (new_x < get_player_width()/2) {
@@ -235,6 +252,20 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
     if (new_y> constants::SCREEN_HEIGHT - get_player_height()/2) {
         y_is_valid = false;
     } else if (new_y < get_player_height()/2 ) {
+=======
+    
+
+ 
+    
+    if (new_x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - player_body_radius) {
+        x_is_valid = false;
+    } else if (new_x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + player_body_radius) {
+        x_is_valid = false;
+    }
+    if (new_y> constants::PLAY_AREA_HEIGHT_BOUNDS[1] - player_body_radius) {
+        y_is_valid = false;
+    } else if (new_y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + player_body_radius) {
+>>>>>>> Stashed changes
         y_is_valid = false;
     }
 }

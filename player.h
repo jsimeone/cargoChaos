@@ -46,6 +46,7 @@ public:
     Sprite get_player_sprite();
     int get_player_height();
     int get_player_width();
+    float player_body_radius;
     
     void update(vector<Node*> nodes);
     void display();

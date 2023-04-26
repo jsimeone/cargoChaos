@@ -139,9 +139,15 @@ void Game::render() {
     render_screen_shake();
 	window->clear();
     render_backdrop();
-	render_player();
+	
 	render_nodes();
+<<<<<<< Updated upstream
     render_conveyor(frame_counter);
+=======
+    render_player();
+//    render_conveyor(frame_counter);
+    render_scorebox();
+>>>>>>> Stashed changes
 	window->display();
     frame_counter += 1;
 }
