@@ -111,7 +111,7 @@ void Player::display() {
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (is_holding) {
-        put_down_node();
+        put_down_node(nodes);
     }
     else {
         pick_up_node(nodes);
@@ -131,7 +131,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
             if (angle_difference > 180) {
                 angle_difference = abs(angle_difference - 360);
             }
-            std::cout << "Angle Difference=" <<angle_difference << std::endl;
+            //std::cout << "Angle Difference=" <<angle_difference << std::endl;
 //            std::cout << "Distance Difference=" <<abs(pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) - distance) << std::endl;
             
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
@@ -144,14 +144,12 @@ void Player::pick_up_node(vector<Node*> nodes) {
     }
 }
 
-void Player::put_down_node() {
+void Player::put_down_node(vector<Node*> nodes) {
     if (is_holding) {
         Vector2f new_pos;
         new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
         new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
-        
-<<<<<<< Updated upstream
-=======
+
         for (Node* node : nodes) {
             float x_dist = node->get_node_sprite().getPosition().x - new_pos.x;
             float y_dist = node->get_node_sprite().getPosition().y - new_pos.y;
@@ -162,6 +160,7 @@ void Player::put_down_node() {
             if (offset < -constants::MAX_PLACE_OFFSET) {
                 return;
             }
+
 
             if (offset < 0) {
                 new_pos.x += cos(angle + constants::PI) * abs(offset);
@@ -177,7 +176,6 @@ void Player::put_down_node() {
             return;
         }
 
->>>>>>> Stashed changes
         if (new_pos.x > constants::SCREEN_WIDTH - get_player_width() / 2) {
             return;
         }

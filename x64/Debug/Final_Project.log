@@ -47,9 +47,10 @@ C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(93,23): w
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(100,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(127,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(128,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-<<<<<<< Updated upstream
-=======
+
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(157,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
->>>>>>> Stashed changes
-  Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe
+
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(157,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+
+Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe
