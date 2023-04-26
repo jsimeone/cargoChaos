@@ -149,13 +149,18 @@ void Player::put_down_node(vector<Node*> nodes) {
         Vector2f new_pos;
         new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
         new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
-        
+
         for (Node* node : nodes) {
             float x_dist = node->get_node_sprite().getPosition().x - new_pos.x;
             float y_dist = node->get_node_sprite().getPosition().y - new_pos.y;
             float angle = atan2(y_dist, x_dist);
             float dist = sqrtf(pow(x_dist, 2) + pow(y_dist, 2));
             float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
+
+            if (offset < -constants::MAX_PLACE_OFFSET) {
+                return;
+            }
+
 
             if (offset < 0) {
                 new_pos.x += cos(angle + constants::PI) * abs(offset);
@@ -233,7 +238,3 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
         y_is_valid = false;
     }
 }
-
-
-
-
