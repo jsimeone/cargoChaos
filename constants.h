@@ -19,6 +19,7 @@ namespace constants {
     const float PLAYER_SCALE = 0.25;
 
     const float PLAYER_SPEED = 8;
+    const float PLAYER_SPRINT_SPEED = 10;
     const float PLAYER_ACCELERATION = 0.1; //not in use
     const float PLAYER_DECELERATION = 0.1; //not in use
 

@@ -12,10 +12,12 @@
 #include <SFML/Network.hpp>
 
 #include "constants.h"
+#include "game_objects.h"
 #include "player.h"
 #include "node.h"
 #include "conveyor.h"
 #include "cargo_node.h"
+
 
 using namespace sf;
 
@@ -55,6 +57,7 @@ public:
 
 	void update_player();
 	void update_nodes();
+    void update_screen_shake();
 	void update();
     
     void render_backdrop();
