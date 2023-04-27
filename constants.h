@@ -25,7 +25,7 @@ namespace constants {
 
     const int PLACE_DISTANCE = 110; // should be a function of node_size + player_size
     const float PLACE_ANGLE_OFFSET = -90;
-    const float MAX_PLACE_OFFSET = 75;
+    const float MAX_PLACE_OFFSET = 65;
 
     const float SCREEN_SHAKE_INVALID_NODE_PLACEMENT = 0.8;
 
