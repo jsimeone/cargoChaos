@@ -148,13 +148,13 @@ void Game::render_screen_shake() {
 }
 
 void Game::render() {
-    render_screen_shake();
+  render_screen_shake();
 	window->clear();
-    render_backdrop();
-	render_player();
+  render_backdrop();
 	render_nodes();
-//    render_conveyor(frame_counter);
-    render_scorebox();
+  //render_conveyor(frame_counter);
+  render_player();
+  render_scorebox();
 	window->display();
-    frame_counter += 1;
+  frame_counter += 1;
 }
