@@ -1,5 +1,6 @@
 #include "player.h"
 #include "constants.h"
+#include "game_objects.h"
 #include <iostream>
 #include <cmath>
 using namespace sf;
@@ -7,16 +8,18 @@ using namespace sf;
 Player::Player() {
     get_textures();
     pos = {(constants::PLAY_AREA_WIDTH_BOUNDS[1]-constants::PLAY_AREA_WIDTH_BOUNDS[0])/2 + constants::PLAY_AREA_WIDTH_BOUNDS[0], (constants::PLAY_AREA_HEIGHT_BOUNDS[1]-constants::PLAY_AREA_HEIGHT_BOUNDS[0])/2 + constants::PLAY_AREA_HEIGHT_BOUNDS[0]};
+    moving = false;
     moving_left = false;
     moving_right = false;
     moving_up = false;
     moving_down = false;
+    is_sprinting = false;
     is_holding = false;
     held_node = nullptr;
     player_body_radius = player_sprite.getTexture()->getSize().x * constants::PLAYER_SCALE*(.25);
-    std::cout << "Player_radius: " << player_body_radius << std::endl;
-    //player_body_radius = 1000;
+    sprint_speed_factor = 1;
 }
+
 
 Player::~Player() {
     return;
@@ -77,31 +80,39 @@ void Player::update(vector<Node*> nodes) {
     } else if (moving_down && !moving_up) {
         velocity.y += 0.5;
     } else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
-        velocity.y /=2;
+        velocity.y /=3;
     }
     if (moving_left && !moving_right) {
         velocity.x -= 0.5;
     } else if (moving_right && !moving_left) {
         velocity.x += 0.5;
     } else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
-        velocity.x /=2;
+        velocity.x /=3;
     }
     velocity = normalize_velocities(velocity);
     
     //====UPDATE POSITION====//
-    int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED);
-    int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED);
+    if (is_sprinting) {
+        sprint_speed_factor = constants::PLAYER_SPRINT_SPEED / constants::PLAYER_SPEED;
+    } else {
+        sprint_speed_factor = 1;
+    }
+    int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor;
+    int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor;
     bool x_is_valid;
     bool y_is_valid;
     position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
     if (x_is_valid) {
-        pos.x = pos.x + velocity.x * constants::PLAYER_SPEED;
+        pos.x = new_x;
     }
     if (y_is_valid) {
-        pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
+        pos.y = new_y;
     }
-    float direction = atan2(velocity.y, velocity.x) * 180.0/constants::PI;
-    player_sprite.setRotation(direction+90);
+    
+    if (moving_left || moving_right || moving_down || moving_up) {
+        float direction = atan2(velocity.y, velocity.x) * 180.0/constants::PI;
+        player_sprite.setRotation(direction+90);
+    }
     player_sprite.setPosition(pos.x, pos.y);
         
 }
@@ -179,21 +190,27 @@ void Player::put_down_node(vector<Node*> nodes) {
             return;
         }
 
-
-
-        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2) {
-
+        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2 || new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
+            new_shake_intensity = 1;
             return;
         }
-        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
+        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2 || new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
+            new_shake_intensity = 1;
             return;
         }
-        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2) {
-            return;
-        }
-        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
-            return;
-        }
+        
+//        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2) {
+//            return;
+//        }
+//        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
+//            return;
+//        }
+//        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2) {
+//            return;
+//        }
+//        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
+//            return;
+//        }
         
         held_node->put_down(new_pos, player_sprite.getRotation());
         is_holding = false;
