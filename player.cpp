@@ -172,6 +172,7 @@ void Player::put_down_node(vector<Node*> nodes) {
             float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
 
             if (offset < -constants::MAX_PLACE_OFFSET) {
+                new_shake_intensity = 1;
                 return;
             }
 
@@ -186,6 +187,7 @@ void Player::put_down_node(vector<Node*> nodes) {
         float y_dist = new_pos.y - pos.y;
         
         if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + player_body_radius){
+            new_shake_intensity = 1;
             //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
             return;
         }
