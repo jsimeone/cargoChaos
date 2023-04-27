@@ -7,12 +7,15 @@ using namespace sf;
 Player::Player() {
     get_textures();
     pos = {(constants::PLAY_AREA_WIDTH_BOUNDS[1]-constants::PLAY_AREA_WIDTH_BOUNDS[0])/2 + constants::PLAY_AREA_WIDTH_BOUNDS[0], (constants::PLAY_AREA_HEIGHT_BOUNDS[1]-constants::PLAY_AREA_HEIGHT_BOUNDS[0])/2 + constants::PLAY_AREA_HEIGHT_BOUNDS[0]};
+    moving = false;
     moving_left = false;
     moving_right = false;
     moving_up = false;
     moving_down = false;
+    is_sprinting = false;
     is_holding = false;
     held_node = nullptr;
+    sprint_speed_factor = 1;
     player_body_radius = player_sprite.getTexture()->getSize().x / constants::PLAYER_ANIMATION_FRAMES * constants::PLAYER_SCALE*(.25);
     cout << "Player_radius: " << player_body_radius << endl;
     //player_body_radius = 1000;
@@ -20,6 +23,7 @@ Player::Player() {
     put_down_animation_status = 0;
     pickup_color = "";
 }
+
 
 Player::~Player() {
     return;
@@ -83,31 +87,39 @@ void Player::update(vector<Node*> nodes) {
     } else if (moving_down && !moving_up) {
         velocity.y += 0.5;
     } else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
-        velocity.y /=2;
+        velocity.y /=3;
     }
     if (moving_left && !moving_right) {
         velocity.x -= 0.5;
     } else if (moving_right && !moving_left) {
         velocity.x += 0.5;
     } else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
-        velocity.x /=2;
+        velocity.x /=3;
     }
     velocity = normalize_velocities(velocity);
     
     //====UPDATE POSITION====//
-    int new_x = pos.x + (velocity.x * constants::PLAYER_SPEED);
-    int new_y = pos.y + (velocity.y * constants::PLAYER_SPEED);
+    if (is_sprinting) {
+        sprint_speed_factor = constants::PLAYER_SPRINT_SPEED / constants::PLAYER_SPEED;
+    } else {
+        sprint_speed_factor = 1;
+    }
+    int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor;
+    int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor;
     bool x_is_valid;
     bool y_is_valid;
     position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
     if (x_is_valid) {
-        pos.x = pos.x + velocity.x * constants::PLAYER_SPEED;
+        pos.x = new_x;
     }
     if (y_is_valid) {
-        pos.y = pos.y + velocity.y * constants::PLAYER_SPEED;
+        pos.y = new_y;
     }
-    float direction = atan2(velocity.y, velocity.x) * 180.0/constants::PI;
-    player_sprite.setRotation(direction+90);
+    
+    if (moving_left || moving_right || moving_down || moving_up) {
+        float direction = atan2(velocity.y, velocity.x) * 180.0/constants::PI;
+        player_sprite.setRotation(direction+90);
+    }
     player_sprite.setPosition(pos.x, pos.y);
     
     if (pickup_animation_status != 0) {
@@ -177,6 +189,7 @@ void Player::put_down_node(vector<Node*> nodes) {
             float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
 
             if (offset < -constants::MAX_PLACE_OFFSET) {
+                new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
                 return;
             }
 
@@ -189,25 +202,18 @@ void Player::put_down_node(vector<Node*> nodes) {
         }
         float x_dist = new_pos.x - pos.x;
         float y_dist = new_pos.y - pos.y;
-        
+        //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
         if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + player_body_radius){
-            //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
+            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
             return;
         }
 
-
-
-        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2) {
-
+        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2 || new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
+            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
             return;
         }
-        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
-            return;
-        }
-        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2) {
-            return;
-        }
-        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
+        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2 || new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
+            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
             return;
         }
         

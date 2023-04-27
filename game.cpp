@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "game.h"
 
 
 void Game::init_variables() {
@@ -40,6 +40,8 @@ void Game::poll_events() {
 				player.toggle_pick_up(nodes);
             if (event.key.code == Keyboard::T)
                 screen_shake(2);
+            if (event.key.code == Keyboard::LShift)
+                player.is_sprinting = true;
 			break;
 		case Event::KeyReleased:
 			if (event.key.code == Keyboard::W)
@@ -50,6 +52,8 @@ void Game::poll_events() {
 				player.set_moving_left(false);
 			if (event.key.code == Keyboard::D)
 				player.set_moving_right(false);
+            if (event.key.code == Keyboard::LShift)
+                player.is_sprinting = false;
 			break;
 		case Event::MouseButtonPressed:
 			break;
@@ -101,17 +105,22 @@ void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
 	nodes.push_back(new Cargo_Node(x_pos, y_pos, color_index));
 }
 
+void Game::update_screen_shake() {
+    if (new_shake_intensity > 0) {
+        screen_shake(new_shake_intensity);
+        new_shake_intensity = 0;
+    }
+}
+
 void Game::update_player()
 {
-//	player.update_player_velocity();
-//	player.update_player_position();
-    
     player.update(nodes);
 }
 
 void Game::update() {
 	poll_events();
 	update_player();
+    update_screen_shake();
     //implement updating the score
 }
 
@@ -136,6 +145,8 @@ void Game::render_scorebox() {
 }
 
 void Game::render_screen_shake() {
+
+    
     if (current_screen_shake > 1) {
         view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
         window->setView(view);

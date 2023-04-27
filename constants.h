@@ -20,12 +20,15 @@ namespace constants {
     const int PLAYER_ANIMATION_FRAMES = 6;
 
     const float PLAYER_SPEED = 8;
+    const float PLAYER_SPRINT_SPEED = 10;
     const float PLAYER_ACCELERATION = 0.1; //not in use
     const float PLAYER_DECELERATION = 0.1; //not in use
 
     const int PLACE_DISTANCE = 110; // should be a function of node_size + player_size
     const float PLACE_ANGLE_OFFSET = -90;
-    const float MAX_PLACE_OFFSET = 50;
+    const float MAX_PLACE_OFFSET = 65;
+
+    const float SCREEN_SHAKE_INVALID_NODE_PLACEMENT = 0.8;
 
 }
 
