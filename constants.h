@@ -11,7 +11,7 @@ namespace constants {
     const int SCREEN_WIDTH = 1600;
 
     const std::vector<float> PLAY_AREA_WIDTH_BOUNDS = {150, 1450};
-    const std::vector<float> PLAY_AREA_HEIGHT_BOUNDS = {200, 1150};
+    const std::vector<float> PLAY_AREA_HEIGHT_BOUNDS = {190, 1100};
 
     const float NODE_SCALE = 0.275;
     const sf::Vector2f off_screen(-100, -100);
