@@ -27,6 +27,8 @@ namespace constants {
     const float PLACE_ANGLE_OFFSET = -90;
     const float MAX_PLACE_OFFSET = 50;
 
+    const float SCREEN_SHAKE_INVALID_NODE_PLACEMENT = 0.8;
+
 }
 
 #endif // CONSTANTS_Hd
