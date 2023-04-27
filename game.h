@@ -12,7 +12,7 @@
 #include <SFML/Network.hpp>
 
 #include "constants.h"
-#include "game_objects.h"
+#include "globals.h"
 #include "player.h"
 #include "node.h"
 #include "conveyor.h"

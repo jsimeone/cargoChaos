@@ -1,6 +1,5 @@
 #include "player.h"
 #include "constants.h"
-#include "game_objects.h"
 #include <iostream>
 #include <cmath>
 using namespace sf;
@@ -172,7 +171,7 @@ void Player::put_down_node(vector<Node*> nodes) {
             float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
 
             if (offset < -constants::MAX_PLACE_OFFSET) {
-                new_shake_intensity = 1;
+                new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
                 return;
             }
 
@@ -185,34 +184,20 @@ void Player::put_down_node(vector<Node*> nodes) {
         }
         float x_dist = new_pos.x - pos.x;
         float y_dist = new_pos.y - pos.y;
-        
+        //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
         if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + player_body_radius){
-            new_shake_intensity = 1;
-            //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
+            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
             return;
         }
 
         if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2 || new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
-            new_shake_intensity = 1;
+            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
             return;
         }
         if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2 || new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
-            new_shake_intensity = 1;
+            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
             return;
         }
-        
-//        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2) {
-//            return;
-//        }
-//        else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
-//            return;
-//        }
-//        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2) {
-//            return;
-//        }
-//        else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
-//            return;
-//        }
         
         held_node->put_down(new_pos, player_sprite.getRotation());
         is_holding = false;

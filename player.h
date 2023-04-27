@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "constants.h"
-#include "game_objects.h"
+#include "globals.h"
 #include "node.h"
 
 
