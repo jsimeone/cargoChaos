@@ -15,6 +15,7 @@
 #include "constants.h"
 #include "globals.h"
 #include "node.h"
+#include "cargo_node.h"
 
 
 using namespace sf;
@@ -37,11 +38,17 @@ private:
     
     bool is_holding;
     Node* held_node;
+    
+    int pickup_animation_status;
+    int put_down_animation_status;
+    String pickup_color;
 
     void pick_up_node(vector<Node*> nodes);
     void put_down_node(vector<Node*> nodes);
     
     float sprint_speed_factor;
+    void pick_up_animation(String color);
+    void put_down_animation();
     
 public:
     Player();

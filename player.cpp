@@ -15,8 +15,13 @@ Player::Player() {
     is_sprinting = false;
     is_holding = false;
     held_node = nullptr;
-    player_body_radius = player_sprite.getTexture()->getSize().x * constants::PLAYER_SCALE*(.25);
     sprint_speed_factor = 1;
+    player_body_radius = player_sprite.getTexture()->getSize().x / constants::PLAYER_ANIMATION_FRAMES * constants::PLAYER_SCALE*(.25);
+    cout << "Player_radius: " << player_body_radius << endl;
+    //player_body_radius = 1000;
+    pickup_animation_status = 0;
+    put_down_animation_status = 0;
+    pickup_color = "";
 }
 
 
@@ -33,17 +38,20 @@ int Player::get_player_height() {
 }
 
 int Player::get_player_width() {
-    return player_sprite.getTexture()->getSize().x * constants::PLAYER_SCALE;
+    return player_sprite.getTexture()->getSize().x / constants::PLAYER_ANIMATION_FRAMES * constants::PLAYER_SCALE;
 }
 
 void Player::get_textures() {
-    if (!player_texture.loadFromFile("assets/player.png")) {
-        std::cout<< "Load failed" << std::endl;
+    if (!player_texture.loadFromFile("assets/yellowSpriteSheet.png")) {
+        cout<< "Loading player texture failed" << endl;
         system("pause");
     }
     player_sprite.setTexture(player_texture, true);
+    player_sprite.setTextureRect(IntRect(0, 0, 512, 512));
     player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
-    player_sprite.setOrigin((sf::Vector2f)player_texture.getSize() / 2.f);
+    player_sprite.setOrigin(player_sprite.getTextureRect().width / 2, player_sprite.getTextureRect().height / 2);
+    cout << "x value:" << player_sprite.getOrigin().x << endl;
+    cout << "y value:" << player_sprite.getOrigin().y << endl;
 }
 
 void Player::set_moving_up(bool new_up) {
@@ -113,6 +121,12 @@ void Player::update(vector<Node*> nodes) {
         player_sprite.setRotation(direction+90);
     }
     player_sprite.setPosition(pos.x, pos.y);
+    
+    if (pickup_animation_status != 0) {
+        pick_up_animation(pickup_color);
+    } else if (put_down_animation_status != 0) {
+        put_down_animation();
+    }
         
 }
 
@@ -123,11 +137,13 @@ void Player::display() {
 
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
-    if (is_holding) {
-        put_down_node(nodes);
-    }
-    else {
-        pick_up_node(nodes);
+    if (pickup_animation_status == 0 && put_down_animation_status == 0) {
+        if (is_holding) {
+            put_down_node(nodes);
+        }
+        else {
+            pick_up_node(nodes);
+        }
     }
 }
 
@@ -149,6 +165,8 @@ void Player::pick_up_node(vector<Node*> nodes) {
             
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
                 node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+                pick_up_animation(node->get_color());
+                pickup_color = node->get_color();
                 is_holding = true;
                 held_node = node;
                 return;
@@ -202,6 +220,7 @@ void Player::put_down_node(vector<Node*> nodes) {
         held_node->put_down(new_pos, player_sprite.getRotation());
         is_holding = false;
         held_node = nullptr;
+        put_down_animation();
     }
 }
 
@@ -248,4 +267,34 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
     } else if (new_y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + player_body_radius) {
         y_is_valid = false;
     }
+}
+
+void Player::pick_up_animation(String color) {
+    pickup_animation_status++;
+    
+    if (pickup_animation_status >= constants::PLAYER_ANIMATION_FRAMES) {
+        pickup_animation_status = 0;
+        if (!player_texture.loadFromFile("assets/" + color + "SpriteSheet.png")) {
+            cout<< "Pick up animation: Loading player texture failed" << endl;
+        }
+        return;
+    }
+    
+    player_sprite.setTextureRect(IntRect(512 * pickup_animation_status, 0, 512, 512));
+    //Player should grab the color from the node and then set its texture to that color by animating left to right and staying there until the node is put down
+}
+
+void Player::put_down_animation() {
+    put_down_animation_status++;
+    
+    if (put_down_animation_status >= constants::PLAYER_ANIMATION_FRAMES) {
+        put_down_animation_status = 0;
+        if (!player_texture.loadFromFile("assets/YellowSpriteSheet.png")) {
+            cout<< "Put down animation: Loading player texture failed" << endl;
+        }
+        return;
+    }
+    
+    player_sprite.setTextureRect(IntRect(512 * (6 - put_down_animation_status), 0, 512, 512));
+    //player should un-animate its way from right to left and then switch back to the default yellow in first position
 }

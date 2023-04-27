@@ -64,8 +64,8 @@ void Game::poll_events() {
 Game::Game() {
 	init_variables();
 	init_window();
-  get_backdrop();
-  frame_counter = 0;
+    get_backdrop();
+    frame_counter = 0;
 }
 
 Game::~Game() {

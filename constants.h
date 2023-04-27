@@ -17,6 +17,7 @@ namespace constants {
     const sf::Vector2f off_screen(-100, -100);
 
     const float PLAYER_SCALE = 0.25;
+    const int PLAYER_ANIMATION_FRAMES = 6;
 
     const float PLAYER_SPEED = 8;
     const float PLAYER_SPRINT_SPEED = 10;
