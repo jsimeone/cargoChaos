@@ -164,12 +164,15 @@ void Player::pick_up_node(vector<Node*> nodes) {
 //            std::cout << "Distance Difference=" <<abs(pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) - distance) << std::endl;
             
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
-                node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
-                pick_up_animation(node->get_color());
-                pickup_color = node->get_color();
-                is_holding = true;
-                held_node = node;
-                return;
+                string color = node->get_color();
+                if (color != "Fried") {
+                    node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+                    pick_up_animation(color);
+                    pickup_color = color;
+                    is_holding = true;
+                    held_node = node;
+                    return;
+                }
             }
         }
     }
@@ -269,7 +272,7 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
     }
 }
 
-void Player::pick_up_animation(String color) {
+void Player::pick_up_animation(string color) {
     pickup_animation_status++;
     
     if (pickup_animation_status >= constants::PLAYER_ANIMATION_FRAMES) {

@@ -5,11 +5,13 @@
 
 class Cargo_Node : public Node {
 private:
+	int color_index;
 	Cargo_Node() = delete;
-	static vector<string> colors;
 public:
-	Cargo_Node(int x_pos, int y_pos, int new_color_index);
+	static vector<string> colors;
 
+	Cargo_Node(int x_pos, int y_pos, int new_color_index);
+	string get_color();
 };
 
 #endif //CARGO_NODE_H

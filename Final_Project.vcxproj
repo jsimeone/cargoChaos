@@ -135,7 +135,9 @@
   <ItemGroup>
     <ClCompile Include="cargo_node.cpp" />
     <ClCompile Include="conveyor.cpp" />
+    <ClCompile Include="fried_node.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="player.cpp" />
@@ -144,7 +146,9 @@
     <ClInclude Include="cargo_node.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="conveyor.h" />
+    <ClInclude Include="fried_node.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
