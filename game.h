@@ -17,6 +17,7 @@
 #include "node.h"
 #include "conveyor.h"
 #include "cargo_node.h"
+#include "fried_node.h"
 
 
 using namespace sf;
@@ -54,6 +55,7 @@ public:
 	bool is_running();
 
 	void spawn_cargo_node(int x_pos, int y_pos, int color_index);
+	void spawn_fried_node(int x_pos, int y_pos);
 
 	void update_player();
 	void update_nodes();

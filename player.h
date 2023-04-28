@@ -41,13 +41,13 @@ private:
     
     int pickup_animation_status;
     int put_down_animation_status;
-    String pickup_color;
+    string pickup_color;
 
     void pick_up_node(vector<Node*> nodes);
     void put_down_node(vector<Node*> nodes);
     
     float sprint_speed_factor;
-    void pick_up_animation(String color);
+    void pick_up_animation(string color);
     void put_down_animation();
     
 public:

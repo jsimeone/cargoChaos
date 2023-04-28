@@ -18,19 +18,18 @@ using namespace std;
 
 class Node {
 private:
-    static vector<string> colors;
 protected:
 	Texture texture;
 	Sprite node_sprite;
 	bool is_held;
-    int color_index;
 public:
 	Node(int x_pos, int y_pos);
 	Sprite get_node_sprite();
 	void set_texture(string texture_file_name);
-	void pick_up(Vector2f player_position, float player_rotation);
+	virtual void pick_up(Vector2f player_position, float player_rotation);
 	void put_down(Vector2f player_position, float player_rotation);
-    String get_color();
+	virtual string get_color() = 0;
+
 };
 
 #endif //NODE_H

@@ -30,6 +30,15 @@
     <ClCompile Include="cargo_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="conveyor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fried_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -45,6 +54,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="cargo_node.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conveyor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fried_node.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

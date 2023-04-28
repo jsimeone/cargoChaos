@@ -105,6 +105,10 @@ void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
 	nodes.push_back(new Cargo_Node(x_pos, y_pos, color_index));
 }
 
+void Game::spawn_fried_node(int x_pos, int y_pos) {
+	nodes.push_back(new Fried_Node(x_pos, y_pos));
+}
+
 void Game::update_screen_shake() {
     if (new_shake_intensity > 0) {
         screen_shake(new_shake_intensity);

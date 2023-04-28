@@ -18,12 +18,6 @@ Sprite Node::get_node_sprite() {
 	return node_sprite;
 }
 
-String Node::get_color() {
-    return colors[color_index];
-}
-
-vector<string> Node::colors = { "Red", "Green", "Blue" };
-
 void Node::pick_up(Vector2f player_position, float player_rotation) {
 	is_held = true;
 	node_sprite.setPosition(constants::off_screen);
