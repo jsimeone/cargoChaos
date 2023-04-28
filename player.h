@@ -47,6 +47,7 @@ private:
     void put_down_node(vector<Node*> nodes);
     
     float sprint_speed_factor;
+    float encumbered_speed_factor;
     void pick_up_animation(string color);
     void put_down_animation();
     

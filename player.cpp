@@ -99,13 +99,21 @@ void Player::update(vector<Node*> nodes) {
     velocity = normalize_velocities(velocity);
     
     //====UPDATE POSITION====//
+    
     if (is_sprinting) {
         sprint_speed_factor = constants::PLAYER_SPRINT_SPEED / constants::PLAYER_SPEED;
     } else {
         sprint_speed_factor = 1;
     }
-    int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor;
-    int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor;
+    
+    if (is_holding) {
+        encumbered_speed_factor = constants::PLAYER_ENCUMBERED_SPEED / constants::PLAYER_SPEED;
+    } else {
+        encumbered_speed_factor = 1;
+    }
+    
+    int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor * encumbered_speed_factor;
+    int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor * encumbered_speed_factor;
     bool x_is_valid;
     bool y_is_valid;
     position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
@@ -172,6 +180,8 @@ void Player::pick_up_node(vector<Node*> nodes) {
                     is_holding = true;
                     held_node = node;
                     return;
+                } else {
+                    new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
                 }
             }
         }
@@ -192,7 +202,7 @@ void Player::put_down_node(vector<Node*> nodes) {
             float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
 
             if (offset < -constants::MAX_PLACE_OFFSET) {
-                new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
+                new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
                 return;
             }
 
@@ -207,16 +217,16 @@ void Player::put_down_node(vector<Node*> nodes) {
         float y_dist = new_pos.y - pos.y;
         //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
         if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + player_body_radius){
-            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
+            new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
             return;
         }
 
         if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2 || new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
-            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
+            new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
             return;
         }
         if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2 || new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
-            new_shake_intensity = constants::SCREEN_SHAKE_INVALID_NODE_PLACEMENT;
+            new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
             return;
         }
         
