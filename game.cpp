@@ -14,6 +14,8 @@ void Game::init_window() {
     
     view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
     window->setView(view);
+
+	window->setKeyRepeatEnabled(false);
 }
 
 void Game::poll_events() {
