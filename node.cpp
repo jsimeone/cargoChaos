@@ -28,3 +28,15 @@ void Node::put_down(Vector2f player_position, float player_rotation) {
 	node_sprite.setRotation(player_rotation);
 	is_held = false;
 }
+
+void Node::update(vector<Node*> nodes) {
+	return;
+}
+
+void Node::render(RenderWindow* window) {
+	window->draw(node_sprite);
+}
+
+bool Node::get_is_held() {
+	return is_held;
+}

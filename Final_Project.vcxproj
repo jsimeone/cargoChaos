@@ -138,6 +138,8 @@
     <ClCompile Include="fried_node.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="laser.cpp" />
+    <ClCompile Include="laser_node.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="player.cpp" />
@@ -149,6 +151,8 @@
     <ClInclude Include="fried_node.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="laser.h" />
+    <ClInclude Include="laser_node.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>

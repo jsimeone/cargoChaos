@@ -18,6 +18,7 @@
 #include "conveyor.h"
 #include "cargo_node.h"
 #include "fried_node.h"
+#include "laser_node.h"
 
 
 using namespace sf;
@@ -56,6 +57,7 @@ public:
 
 	void spawn_cargo_node(int x_pos, int y_pos, int color_index);
 	void spawn_fried_node(int x_pos, int y_pos);
+	void spawn_laser_node(int x_pos, int y_pos);
 
 	void update_player();
 	void update_nodes();

@@ -27,8 +27,11 @@ public:
 	Sprite get_node_sprite();
 	void set_texture(string texture_file_name);
 	virtual void pick_up(Vector2f player_position, float player_rotation);
-	void put_down(Vector2f player_position, float player_rotation);
+	virtual void put_down(Vector2f player_position, float player_rotation);
 	virtual string get_color() = 0;
+	virtual void update(vector<Node*> nodes);
+	virtual void render(RenderWindow* window);
+	bool get_is_held();
 
 };
 
