@@ -17,8 +17,6 @@ Player::Player() {
     held_node = nullptr;
     sprint_speed_factor = 1;
     player_body_radius = player_sprite.getTexture()->getSize().x / constants::PLAYER_ANIMATION_FRAMES * constants::PLAYER_SCALE*(.25);
-    cout << "Player_radius: " << player_body_radius << endl;
-    //player_body_radius = 1000;
     pickup_animation_status = 0;
     put_down_animation_status = 0;
     pickup_color = "";
@@ -50,8 +48,6 @@ void Player::get_textures() {
     player_sprite.setTextureRect(IntRect(0, 0, 512, 512));
     player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
     player_sprite.setOrigin(player_sprite.getTextureRect().width / 2, player_sprite.getTextureRect().height / 2);
-    cout << "x value:" << player_sprite.getOrigin().x << endl;
-    cout << "y value:" << player_sprite.getOrigin().y << endl;
 }
 
 void Player::set_moving_up(bool new_up) {
@@ -160,8 +156,6 @@ void Player::pick_up_node(vector<Node*> nodes) {
             if (angle_difference > 180) {
                 angle_difference = abs(angle_difference - 360);
             }
-            //std::cout << "Angle Difference=" <<angle_difference << std::endl;
-//            std::cout << "Distance Difference=" <<abs(pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) - distance) << std::endl;
             
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
                 string color = node->get_color();

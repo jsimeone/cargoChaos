@@ -40,10 +40,7 @@ void Game::poll_events() {
 				player.toggle_pick_up(nodes);
             if (event.key.code == Keyboard::T)
                 screen_shake(2);
-			if (event.key.code == Keyboard::LShift) {
 				player.is_sprinting = true;
-				cout << "MOUSE: " << Mouse::getPosition(*window).x << ", " << Mouse::getPosition(*window).y << endl;
-			}
 			break;
 		case Event::KeyReleased:
 			if (event.key.code == Keyboard::W)

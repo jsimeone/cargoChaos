@@ -45,6 +45,7 @@ void Laser_Node::update(vector<Node*> nodes) {
 		red_laser.set_laser(false);
 		blue_laser.set_laser(false);
 		green_laser.set_laser(false);
+		node_sprite.setRotation(node_sprite.getRotation() + .5);
 	}
 	red_laser.update_laser(node_sprite.getPosition(), node_sprite.getRotation(), nodes, node_sprite);
 	green_laser.update_laser(node_sprite.getPosition(), node_sprite.getRotation(), nodes, node_sprite);
