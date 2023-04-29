@@ -40,8 +40,10 @@ void Game::poll_events() {
 				player.toggle_pick_up(nodes);
             if (event.key.code == Keyboard::T)
                 screen_shake(2);
-            if (event.key.code == Keyboard::LShift)
-                player.is_sprinting = true;
+			if (event.key.code == Keyboard::LShift) {
+				player.is_sprinting = true;
+				cout << "MOUSE: " << Mouse::getPosition(*window).x << ", " << Mouse::getPosition(*window).y << endl;
+			}
 			break;
 		case Event::KeyReleased:
 			if (event.key.code == Keyboard::W)
@@ -109,6 +111,10 @@ void Game::spawn_fried_node(int x_pos, int y_pos) {
 	nodes.push_back(new Fried_Node(x_pos, y_pos));
 }
 
+void Game::spawn_laser_node(int x_pos, int y_pos) {
+	nodes.insert(nodes.begin(), new Laser_Node(x_pos, y_pos));
+}
+
 void Game::update_screen_shake() {
     if (new_shake_intensity > 0) {
         screen_shake(new_shake_intensity);
@@ -121,8 +127,15 @@ void Game::update_player()
     player.update(nodes);
 }
 
+void Game::update_nodes() {
+	for (Node* node : nodes) {
+		node->update(nodes);
+	}
+}
+
 void Game::update() {
 	poll_events();
+	update_nodes();
 	update_player();
     update_screen_shake();
     //implement updating the score
@@ -135,6 +148,7 @@ void Game::render_player() {
 void Game::render_nodes()
 {
 	for (Node* node : nodes) {
+		node->render(window);
 		window->draw(node->get_node_sprite());
 	}
 }
@@ -163,13 +177,13 @@ void Game::render_screen_shake() {
 }
 
 void Game::render() {
-  render_screen_shake();
+	render_screen_shake();
 	window->clear();
-  render_backdrop();
+	render_backdrop();
 	render_nodes();
   //render_conveyor(frame_counter);
-  render_player();
-  render_scorebox();
+	render_player();
+	render_scorebox();
 	window->display();
-  frame_counter += 1;
+	frame_counter += 1;
 }

@@ -1,7 +1,7 @@
 ﻿  game.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(24,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(31,58): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
   Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe
