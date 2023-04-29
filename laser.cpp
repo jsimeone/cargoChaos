@@ -7,7 +7,7 @@ Laser::Laser(Vector2f node_pos, int new_color_index) :
     color_index(new_color_index),
     rotation_offset(color_index * 120),
     length(0),
-    width(20)
+    width(5)
 {
 	set_texture(colors[color_index]);
 }
@@ -30,14 +30,12 @@ void Laser::set_laser(bool new_laser_on) {
     if (laser_on == !new_laser_on) {
         laser_on = new_laser_on;
         length = 0;
-        cout << colors[color_index] << "laser is toggled";
     }
 }
 
 void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> nodes, Sprite parent) {
 	float end_x = node_pos.x + ((length - 50) * cos((node_rotation + rotation_offset + 90) * (constants::PI / 180)));
 	float end_y = node_pos.y + ((length - 50) * sin((node_rotation + rotation_offset + 90) * (constants::PI / 180)));
-    cout << end_x << ", " << end_y << endl;
     bool x_is_valid = true;
     bool y_is_valid = true;
     for (Node* node : nodes) {
@@ -83,7 +81,7 @@ void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> 
         y_is_valid = false;
     }
     if (x_is_valid && y_is_valid) {
-        length+=5;
+        length += 10;
     }
     
 }
