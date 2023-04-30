@@ -12,8 +12,14 @@
 #include <SFML/Network.hpp>
 
 #include "constants.h"
+#include "globals.h"
 #include "player.h"
 #include "node.h"
+#include "conveyor.h"
+#include "cargo_node.h"
+#include "fried_node.h"
+#include "laser_node.h"
+
 
 using namespace sf;
 
@@ -23,26 +29,47 @@ private:
 	Event event;
 	VideoMode videoMode;
 	Player player;
+    Conveyor conveyor;
 	vector<Node*> nodes;
 	//Node node_test;
+    int frame_counter;
 
 	void init_variables();
 	void init_window();
 	void poll_events();
+    
+    float current_screen_shake = 0;
+    float shake_direction = 1;
+    void screen_shake(float intensity);
+    
+    void get_backdrop();
+    Texture backdrop_texture;
+    Sprite backdrop_sprite;
+    Texture scorebox_texture;
+    Sprite scorebox_sprite;
+    
+    View view;
 public:
 	Game();
 	~Game();
 
 	bool is_running();
 
-	void spawn_node(int x_pos, int y_pos, string texture);
+	void spawn_cargo_node(int x_pos, int y_pos, int color_index);
+	void spawn_fried_node(int x_pos, int y_pos);
+	void spawn_laser_node(int x_pos, int y_pos);
 
 	void update_player();
 	void update_nodes();
+    void update_screen_shake();
 	void update();
-
+    
+    void render_backdrop();
+    void render_screen_shake();
 	void render_player();
 	void render_nodes();
+    void render_conveyor(int frames);
+    void render_scorebox();
 	void render();
 	
 };
