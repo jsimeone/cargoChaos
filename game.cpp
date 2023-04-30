@@ -88,10 +88,22 @@ void Game::get_backdrop() {
     }
     scorebox_sprite.setTexture(scorebox_texture, true);
     scorebox_sprite.setPosition(1324, 0);
+    
+    if (!backdrop_walls_texture.loadFromFile("assets/backdrop_walls.png")) {
+        cout << "Failed to load scorebox asset" << endl;
+    }
+    backdrop_walls_sprite.setTexture(backdrop_walls_texture, true);
+    backdrop_walls_sprite.setScale(1, 1);
+    backdrop_walls_sprite.setOrigin((sf::Vector2f)backdrop_walls_texture.getSize() / 2.f);
+    backdrop_walls_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
 }
 
 void Game::render_backdrop() {
     window->draw(backdrop_sprite);
+}
+
+void Game::render_backdrop_walls() {
+    window->draw(backdrop_walls_sprite);
 }
 
 void Game::screen_shake(float intensity) {
@@ -182,6 +194,7 @@ void Game::render() {
 	render_nodes();
   //render_conveyor(frame_counter);
 	render_player();
+    render_backdrop_walls();
 	render_scorebox();
 	window->display();
 	frame_counter += 1;

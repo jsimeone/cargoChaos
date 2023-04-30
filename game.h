@@ -43,10 +43,15 @@ private:
     void screen_shake(float intensity);
     
     void get_backdrop();
+    
     Texture backdrop_texture;
     Sprite backdrop_sprite;
+    
     Texture scorebox_texture;
     Sprite scorebox_sprite;
+    
+    Texture backdrop_walls_texture;
+    Sprite backdrop_walls_sprite;
     
     View view;
 public:
@@ -65,6 +70,7 @@ public:
 	void update();
     
     void render_backdrop();
+    void render_backdrop_walls();
     void render_screen_shake();
 	void render_player();
 	void render_nodes();
