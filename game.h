@@ -1,9 +1,10 @@
+// Game.h
 #ifndef GAME_H
 #define GAME_H
-#include<iostream>
-#include<vector>
-#include<ctime>
-#include<sstream>
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <sstream>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -18,33 +19,34 @@
 using namespace sf;
 
 class Game {
-private: 
-	RenderWindow* window;
-	Event event;
-	VideoMode videoMode;
-	Player player;
-	vector<Node*> nodes;
-	//Node node_test;
+private:
+    RenderWindow* window;
+    Event event;
+    VideoMode videoMode;
+    Player player;
+    std::vector<Node*> nodes;
+    //Node node_test;
 
-	void init_variables();
-	void init_window();
-	void poll_events();
+    void init_variables();
+    void init_window();
+    void poll_events();
 public:
-	Game();
-	~Game();
+    Game();
+    ~Game();
 
-	bool is_running();
+    bool is_running();
+    sf::RenderWindow& get_window(); // Added method
 
-	void spawn_node(int x_pos, int y_pos, string texture);
+    void spawn_node(int x_pos, int y_pos, std::string texture);
 
-	void update_player();
-	void update_nodes();
-	void update();
+    void update_player();
+    void update_nodes();
+    void update();
 
-	void render_player();
-	void render_nodes();
-	void render();
-	
+    void render_player();
+    void render_nodes();
+    void render();
+    void process_events();
 };
 
 #endif // GAME_H

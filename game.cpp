@@ -57,6 +57,13 @@ void Game::poll_events() {
 		}
 	}
 }
+sf::RenderWindow& Game::get_window() {
+	return *window;
+}
+
+void Game::process_events() {
+	poll_events();
+}
 
 Game::Game() {
 	init_variables();
