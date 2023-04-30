@@ -288,7 +288,6 @@ void Player::pick_up_animation(string color) {
     }
     
     player_sprite.setTextureRect(IntRect(512 * pickup_animation_status, 0, 512, 512));
-    //Player should grab the color from the node and then set its texture to that color by animating left to right and staying there until the node is put down
 }
 
 void Player::put_down_animation() {
@@ -303,5 +302,4 @@ void Player::put_down_animation() {
     }
     
     player_sprite.setTextureRect(IntRect(512 * (6 - put_down_animation_status), 0, 512, 512));
-    //player should un-animate its way from right to left and then switch back to the default yellow in first position
 }

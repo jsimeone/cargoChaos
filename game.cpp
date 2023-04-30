@@ -192,10 +192,11 @@ void Game::render() {
 	window->clear();
 	render_backdrop();
 	render_nodes();
-  //render_conveyor(frame_counter);
+    render_conveyor(frame_counter);
 	render_player();
     render_backdrop_walls();
 	render_scorebox();
 	window->display();
+    
 	frame_counter += 1;
 }
