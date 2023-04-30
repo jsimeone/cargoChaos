@@ -2,16 +2,15 @@
 #include "constants.h"
 
 void Node::set_texture(string texture_file_name) {
-	texture.loadFromFile("assets/" + texture_file_name);
+	texture.loadFromFile("assets/" + texture_file_name + "_Node.png");
 	node_sprite.setTexture(texture);
     node_sprite.setOrigin((sf::Vector2f)texture.getSize() / 2.f);
 }
 
-Node::Node(int x_pos, int y_pos, string texture_name) {
+Node::Node(int x_pos, int y_pos) {
 	is_held = false;
 	node_sprite.setScale(constants::NODE_SCALE, constants::NODE_SCALE);
 	node_sprite.setPosition(x_pos, y_pos);
-	set_texture(texture_name);
     
 }
 
@@ -19,16 +18,25 @@ Sprite Node::get_node_sprite() {
 	return node_sprite;
 }
 
+void Node::pick_up(Vector2f player_position, float player_rotation) {
+	is_held = true;
+	node_sprite.setPosition(constants::off_screen);
+}
 
+void Node::put_down(Vector2f player_position, float player_rotation) {
+	node_sprite.setPosition(player_position);
+	node_sprite.setRotation(player_rotation);
+	is_held = false;
+}
 
-void Node::toggle_pick_up(Vector2f player_position, float player_rotation) {
+void Node::update(vector<Node*> nodes) {
+	return;
+}
 
-	if (!is_held) {
-		is_held = true;
-		node_sprite.setPosition(constants::off_screen);
-	} else {
-		is_held = false;
-		node_sprite.setPosition(player_position);
-		node_sprite.setRotation(player_rotation);
-	}
+void Node::render(RenderWindow* window) {
+	window->draw(node_sprite);
+}
+
+bool Node::get_is_held() {
+	return is_held;
 }

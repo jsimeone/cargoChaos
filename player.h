@@ -13,7 +13,9 @@
 #include <vector>
 
 #include "constants.h"
+#include "globals.h"
 #include "node.h"
+#include "cargo_node.h"
 
 
 using namespace sf;
@@ -21,8 +23,6 @@ using namespace std;
 
 class Player {
 private:
-//    vector<Texture> idle_textures;
-//    vector<Texture> walking_textures;
     
     void get_textures();
     Sprite player_sprite;
@@ -35,6 +35,22 @@ private:
     bool moving_up;
     bool moving_down;
     
+    
+    bool is_holding;
+    Node* held_node;
+    
+    int pickup_animation_status;
+    int put_down_animation_status;
+    string pickup_color;
+
+    void pick_up_node(vector<Node*> nodes);
+    void put_down_node(vector<Node*> nodes);
+    
+    float sprint_speed_factor;
+    float encumbered_speed_factor;
+    void pick_up_animation(string color);
+    void put_down_animation();
+    
 public:
     Player();
     ~Player();
@@ -42,21 +58,27 @@ public:
     Sprite get_player_sprite();
     int get_player_height();
     int get_player_width();
+    float player_body_radius;
     
     void update(vector<Node*> nodes);
     void display();
     Vector2<float> velocity;
     Vector2<float> pos;
-    bool moving = false;
+    bool moving;
+    bool is_sprinting;
      
 
     void set_moving_up(bool new_up);
     void set_moving_down(bool new_down);
     void set_moving_left(bool new_left);
     void set_moving_right(bool new_right);
+
+    void toggle_pick_up(vector<Node*> nodes);
+    void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
     
-    bool position_is_valid(float new_x, float new_y, vector<Node*> nodes);
+    
 };
+
 
 
 #endif // PLAYER_H
