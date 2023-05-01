@@ -36,6 +36,8 @@ private:
 
 	void init_variables();
 	void init_window();
+    void key_press_checker();
+    void key_release_checker();
 	void poll_events();
     
     float current_screen_shake = 0;
@@ -60,6 +62,8 @@ private:
 public:
 	Game();
 	~Game();
+
+    void get_scorebox();
 
 	bool is_running();
 

@@ -7,9 +7,12 @@
 
 #include "conveyor.h"
 
-Conveyor::Conveyor() {
-    animation_status = 865;
-    if (!conveyor_texture.loadFromFile("assets/ConveyorSpriteSheet.png")) {
+Conveyor::Conveyor() : 
+    animation_status(225) 
+{
+    if (!conveyor_texture.loadFromFile("assets/conveyorStates.png")) {
+
+
         cout << "Loading conveyor texture failed" << endl;
     }
     conveyor_sprite.setTexture(conveyor_texture);
