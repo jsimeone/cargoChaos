@@ -35,7 +35,6 @@ private:
     bool moving_up;
     bool moving_down;
     
-    
     bool is_holding;
     Node* held_node;
     
@@ -43,7 +42,18 @@ private:
     int put_down_animation_status;
     string pickup_color;
 
+    Vector2<float> velocity;
+    Vector2<float> pos;
+    bool moving;
+
+    void update_player_velocity();
+    void update_player_speed();
+    void update_player_position(vector<Node*> nodes);
+    void update_player_animations();
+
     void pick_up_node(vector<Node*> nodes);
+    float calculate_placement_offset(Node* node, Vector2f new_pos, float &angle);
+    bool offset_on_placement(Vector2f &new_pos, float angle, float offset);
     void put_down_node(vector<Node*> nodes);
     
     float sprint_speed_factor;
@@ -58,18 +68,12 @@ public:
     int get_player_height();
     int get_player_width();
     float player_body_radius;
-    
+
     void update(vector<Node*> nodes);
-    void update_player_velocity();
-    void update_player_speed();
-    void update_player_position(vector<Node*> nodes);
-    void update_player_animations();
+    
     void display();
-    Vector2<float> velocity;
-    Vector2<float> pos;
-    bool moving;
+
     bool is_sprinting;
-     
 
     void set_moving_up(bool new_up);
     void set_moving_down(bool new_down);
@@ -77,9 +81,9 @@ public:
     void set_moving_right(bool new_right);
 
     void toggle_pick_up(vector<Node*> nodes);
+    void check_play_bounds(float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
+    void check_node_collisions(Node* node, float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
     void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
-    
-    
 };
 
 
