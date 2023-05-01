@@ -7,9 +7,16 @@
 
 #include "conveyor.h"
 
+<<<<<<< Updated upstream
 Conveyor::Conveyor() {
     animation_status = 225;
     if (!conveyor_texture.loadFromFile("assets/conveyorStates.png")) {
+=======
+Conveyor::Conveyor() : 
+    animation_status(865) 
+{
+    if (!conveyor_texture.loadFromFile("assets/ConveyorSpriteSheet.png")) {
+>>>>>>> Stashed changes
         cout << "Loading conveyor texture failed" << endl;
     }
 }

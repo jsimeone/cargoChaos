@@ -16,6 +16,38 @@ void Game::init_window() {
     window->setView(view);
 }
 
+void Game::key_press_checker() {
+    if (event.key.code == Keyboard::Escape)
+        window->close();
+    if (event.key.code == Keyboard::W)
+        player.set_moving_up(true);
+    if (event.key.code == Keyboard::S)
+        player.set_moving_down(true);
+    if (event.key.code == Keyboard::A)
+        player.set_moving_left(true);
+    if (event.key.code == Keyboard::D)
+        player.set_moving_right(true);
+    if (event.key.code == Keyboard::Space)
+        player.toggle_pick_up(nodes);
+    if (event.key.code == Keyboard::T)
+        screen_shake(2);
+    if (event.key.code == Keyboard::LShift)
+        player.is_sprinting = true;
+}
+
+void Game::key_release_checker() {
+    if (event.key.code == Keyboard::W)
+        player.set_moving_up(false);
+    if (event.key.code == Keyboard::S)
+        player.set_moving_down(false);
+    if (event.key.code == Keyboard::A)
+        player.set_moving_left(false);
+    if (event.key.code == Keyboard::D)
+        player.set_moving_right(false);
+    if (event.key.code == Keyboard::LShift)
+        player.is_sprinting = false;
+}
+
 void Game::poll_events() {
 	//Event polling
 	while (window->pollEvent(event))
@@ -26,33 +58,10 @@ void Game::poll_events() {
 			window->close();
 			break;
 		case Event::KeyPressed:
-			if (event.key.code == Keyboard::Escape)
-				window->close();
-			if (event.key.code == Keyboard::W)
-				player.set_moving_up(true);
-			if (event.key.code == Keyboard::S)
-				player.set_moving_down(true);
-			if (event.key.code == Keyboard::A)
-				player.set_moving_left(true);
-			if (event.key.code == Keyboard::D)
-				player.set_moving_right(true);
-			if (event.key.code == Keyboard::Space)
-				player.toggle_pick_up(nodes);
-            if (event.key.code == Keyboard::T)
-                screen_shake(2);
-				player.is_sprinting = true;
+            key_press_checker();
 			break;
 		case Event::KeyReleased:
-			if (event.key.code == Keyboard::W)
-				player.set_moving_up(false);
-			if (event.key.code == Keyboard::S)
-				player.set_moving_down(false);
-			if (event.key.code == Keyboard::A)
-				player.set_moving_left(false);
-			if (event.key.code == Keyboard::D)
-				player.set_moving_right(false);
-            if (event.key.code == Keyboard::LShift)
-                player.is_sprinting = false;
+            key_release_checker();
 			break;
 		case Event::MouseButtonPressed:
 			break;
@@ -64,11 +73,27 @@ Game::Game() {
 	init_variables();
 	init_window();
     get_backdrop();
+    get_scorebox();
     frame_counter = 0;
 }
 
 Game::~Game() {
 	delete window;
+}
+
+void Game::get_scorebox() {
+    if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
+        cout << "Failed to load scorebox asset" << endl;
+    }
+    scorebox_sprite.setTexture(scorebox_texture, true);
+    scorebox_sprite.setPosition(1324, 0);
+
+    if (!scorebox_font.loadFromFile("assets/copperplate.otf")) {
+        cout << "Failed to load scorebox font" << endl;
+    }
+    scorebox_text.setFont(scorebox_font);
+    scorebox_text.setCharacterSize(50);
+    scorebox_text.setFillColor(Color(47, 47, 47));
 }
 
 void Game::get_backdrop() {
@@ -81,11 +106,21 @@ void Game::get_backdrop() {
     backdrop_sprite.setOrigin((sf::Vector2f)backdrop_texture.getSize() / 2.f);
     backdrop_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
     
+<<<<<<< Updated upstream
     if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
         cout << "Failed to load scorebox asset" << endl;
     }
     scorebox_sprite.setTexture(scorebox_texture, true);
     scorebox_sprite.setPosition(1324, 0);
+=======
+    if (!backdrop_walls_texture.loadFromFile("assets/backdrop_walls.png")) {
+        cout << "Failed to load scorebox asset" << endl;
+    }
+    backdrop_walls_sprite.setTexture(backdrop_walls_texture, true);
+    backdrop_walls_sprite.setScale(1, 1);
+    backdrop_walls_sprite.setOrigin((sf::Vector2f)backdrop_walls_texture.getSize() / 2.f);
+    backdrop_walls_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
+>>>>>>> Stashed changes
 }
 
 void Game::render_backdrop() {
@@ -119,8 +154,7 @@ void Game::update_screen_shake() {
     }
 }
 
-void Game::update_player()
-{
+void Game::update_player() {
     player.update(nodes);
 }
 
@@ -146,7 +180,6 @@ void Game::render_nodes()
 {
 	for (Node* node : nodes) {
 		node->render(window);
-		//window->draw(node->get_node_sprite());
 	}
 }
 

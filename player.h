@@ -60,6 +60,10 @@ public:
     float player_body_radius;
     
     void update(vector<Node*> nodes);
+    void update_player_velocity();
+    void update_player_speed();
+    void update_player_position(vector<Node*> nodes);
+    void update_player_animations();
     void display();
     Vector2<float> velocity;
     Vector2<float> pos;

@@ -4,24 +4,24 @@
 #include <cmath>
 using namespace sf;
 
-Player::Player() {
+Player::Player() : 
+    pos({ (constants::PLAY_AREA_WIDTH_BOUNDS[1] - constants::PLAY_AREA_WIDTH_BOUNDS[0]) / 2 + constants::PLAY_AREA_WIDTH_BOUNDS[0], (constants::PLAY_AREA_HEIGHT_BOUNDS[1] - constants::PLAY_AREA_HEIGHT_BOUNDS[0]) / 2 + constants::PLAY_AREA_HEIGHT_BOUNDS[0] } ),
+    moving(false),
+    moving_left(false),
+    moving_right(false),
+    moving_up(false),
+    moving_down(false),
+    is_sprinting(false),
+    is_holding(false),
+    held_node(nullptr),
+    sprint_speed_factor(1),
+    pickup_animation_status(0),
+    put_down_animation_status(0),
+    pickup_color("")
+{
     get_textures();
-    pos = {(constants::PLAY_AREA_WIDTH_BOUNDS[1]-constants::PLAY_AREA_WIDTH_BOUNDS[0])/2 + constants::PLAY_AREA_WIDTH_BOUNDS[0], (constants::PLAY_AREA_HEIGHT_BOUNDS[1]-constants::PLAY_AREA_HEIGHT_BOUNDS[0])/2 + constants::PLAY_AREA_HEIGHT_BOUNDS[0]};
-    moving = false;
-    moving_left = false;
-    moving_right = false;
-    moving_up = false;
-    moving_down = false;
-    is_sprinting = false;
-    is_holding = false;
-    held_node = nullptr;
-    sprint_speed_factor = 1;
     player_body_radius = player_sprite.getTexture()->getSize().x / constants::PLAYER_ANIMATION_FRAMES * constants::PLAYER_SCALE*(.25);
-    pickup_animation_status = 0;
-    put_down_animation_status = 0;
-    pickup_color = "";
 }
-
 
 Player::~Player() {
     return;
@@ -66,7 +66,6 @@ void Player::set_moving_left(bool new_left) {
     moving_left = new_left;
 }
 
-
 //makes the velocities vector at most length 1 (limits speed to a maximum value of constants::PLAYER_SPEED)
 Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
@@ -76,32 +75,58 @@ Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     return velocity;
 }
 
-void Player::update(vector<Node*> nodes) {
+void Player::update_player_velocity() {
     //====UPDATE VELOCITIES====//
     if (moving_up && !moving_down) {
         velocity.y -= 0.5;
-    } else if (moving_down && !moving_up) {
+    }
+    else if (moving_down && !moving_up) {
         velocity.y += 0.5;
-    } else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
-        velocity.y /=3;
+    }
+    else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
+        velocity.y /= 3;
     }
     if (moving_left && !moving_right) {
         velocity.x -= 0.5;
-    } else if (moving_right && !moving_left) {
+    }
+    else if (moving_right && !moving_left) {
         velocity.x += 0.5;
-    } else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
-        velocity.x /=3;
+    }
+    else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
+        velocity.x /= 3;
     }
     velocity = normalize_velocities(velocity);
+<<<<<<< Updated upstream
     
     //====UPDATE POSITION====//
+=======
+}
+
+void Player::update_player_speed() {
+>>>>>>> Stashed changes
     if (is_sprinting) {
         sprint_speed_factor = constants::PLAYER_SPRINT_SPEED / constants::PLAYER_SPEED;
-    } else {
+    }
+    else {
         sprint_speed_factor = 1;
     }
+<<<<<<< Updated upstream
     int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor;
     int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor;
+=======
+
+    if (is_holding) {
+        encumbered_speed_factor = constants::PLAYER_ENCUMBERED_SPEED / constants::PLAYER_SPEED;
+    }
+    else {
+        encumbered_speed_factor = 1;
+    }
+}
+
+void Player::update_player_position(vector<Node*> nodes) {
+    int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor * encumbered_speed_factor;
+    int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor * encumbered_speed_factor;
+>>>>>>> Stashed changes
     bool x_is_valid;
     bool y_is_valid;
     position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
@@ -111,26 +136,33 @@ void Player::update(vector<Node*> nodes) {
     if (y_is_valid) {
         pos.y = new_y;
     }
-    
+
     if (moving_left || moving_right || moving_down || moving_up) {
-        float direction = atan2(velocity.y, velocity.x) * 180.0/constants::PI;
-        player_sprite.setRotation(direction+90);
+        float direction = atan2(velocity.y, velocity.x) * 180.0 / constants::PI;
+        player_sprite.setRotation(direction + 90);
     }
     player_sprite.setPosition(pos.x, pos.y);
-    
+}
+
+void Player::update_player_animations() {
     if (pickup_animation_status != 0) {
         pick_up_animation(pickup_color);
-    } else if (put_down_animation_status != 0) {
+    }
+    else if (put_down_animation_status != 0) {
         put_down_animation();
     }
-        
+}
+
+void Player::update(vector<Node*> nodes) {
+    update_player_velocity();
+    update_player_speed();
+    update_player_position(nodes);
+    update_player_animations();
 }
 
 void Player::display() {
-    
+    return;
 }
-
-
 
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (pickup_animation_status == 0 && put_down_animation_status == 0) {
@@ -172,6 +204,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
     }
 }
 
+// **Need to split**
 void Player::put_down_node(vector<Node*> nodes) {
     if (is_holding) {
         Vector2f new_pos;
@@ -221,8 +254,7 @@ void Player::put_down_node(vector<Node*> nodes) {
     }
 }
 
-
-
+// **Need to split**
 void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid) {
     x_is_valid = true;
     y_is_valid = true;
