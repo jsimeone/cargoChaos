@@ -67,6 +67,7 @@ Game::Game() {
 	init_window();
     get_backdrop();
     frame_counter = 0;
+    score = 100;
 }
 
 Game::~Game() {
@@ -88,6 +89,13 @@ void Game::get_backdrop() {
     }
     scorebox_sprite.setTexture(scorebox_texture, true);
     scorebox_sprite.setPosition(1324, 0);
+    
+    if (!scorebox_font.loadFromFile("assets/copperplate.otf")) {
+        cout << "Failed to load scorebox font" << endl;
+    }
+    scorebox_text.setFont(scorebox_font);
+    scorebox_text.setCharacterSize(50);
+    scorebox_text.setFillColor(Color(47, 47, 47));
     
     if (!backdrop_walls_texture.loadFromFile("assets/backdrop_walls.png")) {
         cout << "Failed to load scorebox asset" << endl;
@@ -126,6 +134,11 @@ void Game::spawn_laser_node(int x_pos, int y_pos) {
 	nodes.insert(nodes.begin(), new Laser_Node(x_pos, y_pos));
 }
 
+//Not sure if this will be needed but if the user scoring is handled somewhere that's not the game class, will come in handy
+void Game::increment_score(int value) {
+    score += value;
+}
+
 void Game::update_screen_shake() {
     if (new_shake_intensity > 0) {
         screen_shake(new_shake_intensity);
@@ -149,7 +162,6 @@ void Game::update() {
 	update_nodes();
 	update_player();
     update_screen_shake();
-    //implement updating the score
 }
 
 void Game::render_player() {
@@ -169,8 +181,12 @@ void Game::render_conveyor(int frames) {
 }
 
 void Game::render_scorebox() {
+    scorebox_text.setString(to_string(score));
+    scorebox_text.setPosition(1463 - (scorebox_text.getGlobalBounds().width / 2) - (0.1 * score), 65); //The 0.1 will change depending how high the score should feasibly go. Or this can be changed entirely
+    
     window->draw(scorebox_sprite);
-    //render the scorebox text here
+    window->draw(scorebox_text);
+    
 }
 
 void Game::render_screen_shake() {
