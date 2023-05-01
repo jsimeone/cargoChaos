@@ -84,16 +84,16 @@ void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> 
 <<<<<<< Updated upstream
     //check walls:
 
-    if (end_x > constants::PLAY_AREA_WIDTH_BOUNDS[1]) {
+    if (end_x > (constants::PLAY_AREA_WIDTH_BOUNDS[1] + 2*constants::SCREEN_WIDTH)/3) {
         x_is_valid = false;
     }
-    else if (end_x < constants::PLAY_AREA_WIDTH_BOUNDS[0]) {
+    else if (end_x < constants::PLAY_AREA_WIDTH_BOUNDS[0]/3) {
         x_is_valid = false;
     }
-    if (end_y > constants::PLAY_AREA_HEIGHT_BOUNDS[1]) {
+    if (end_y > (constants::PLAY_AREA_HEIGHT_BOUNDS[1] + 2*constants::SCREEN_HEIGHT)/3) {
         y_is_valid = false;
     }
-    else if (end_y < constants::PLAY_AREA_HEIGHT_BOUNDS[0]) {
+    else if (end_y < constants::PLAY_AREA_HEIGHT_BOUNDS[0]/3) {
         y_is_valid = false;
     }
 =======

@@ -14,6 +14,8 @@ void Game::init_window() {
     
     view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
     window->setView(view);
+
+	window->setKeyRepeatEnabled(false);
 }
 
 void Game::key_press_checker() {
@@ -65,6 +67,8 @@ void Game::poll_events() {
 			break;
 		case Event::MouseButtonPressed:
 			break;
+        default:
+            break;
 		}
 	}
 }
@@ -75,6 +79,7 @@ Game::Game() {
     get_backdrop();
     get_scorebox();
     frame_counter = 0;
+    score = 100;
 }
 
 Game::~Game() {
@@ -106,13 +111,6 @@ void Game::get_backdrop() {
     backdrop_sprite.setOrigin((sf::Vector2f)backdrop_texture.getSize() / 2.f);
     backdrop_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
     
-<<<<<<< Updated upstream
-    if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
-        cout << "Failed to load scorebox asset" << endl;
-    }
-    scorebox_sprite.setTexture(scorebox_texture, true);
-    scorebox_sprite.setPosition(1324, 0);
-=======
     if (!backdrop_walls_texture.loadFromFile("assets/backdrop_walls.png")) {
         cout << "Failed to load scorebox asset" << endl;
     }
@@ -120,11 +118,14 @@ void Game::get_backdrop() {
     backdrop_walls_sprite.setScale(1, 1);
     backdrop_walls_sprite.setOrigin((sf::Vector2f)backdrop_walls_texture.getSize() / 2.f);
     backdrop_walls_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
->>>>>>> Stashed changes
 }
 
 void Game::render_backdrop() {
     window->draw(backdrop_sprite);
+}
+
+void Game::render_backdrop_walls() {
+    window->draw(backdrop_walls_sprite);
 }
 
 void Game::screen_shake(float intensity) {
@@ -145,6 +146,11 @@ void Game::spawn_fried_node(int x_pos, int y_pos) {
 
 void Game::spawn_laser_node(int x_pos, int y_pos) {
 	nodes.insert(nodes.begin(), new Laser_Node(x_pos, y_pos));
+}
+
+//Not sure if this will be needed but if the user scoring is handled somewhere that's not the game class, will come in handy
+void Game::increment_score(int value) {
+    score += value;
 }
 
 void Game::update_screen_shake() {
@@ -169,7 +175,6 @@ void Game::update() {
 	update_nodes();
 	update_player();
     update_screen_shake();
-    //implement updating the score
 }
 
 void Game::render_player() {
@@ -188,8 +193,12 @@ void Game::render_conveyor(int frames) {
 }
 
 void Game::render_scorebox() {
+    scorebox_text.setString(to_string(score));
+    scorebox_text.setPosition(1463 - (scorebox_text.getGlobalBounds().width / 2) - (0.1 * score), 65); //The 0.1 will change depending how high the score should feasibly go. Or this can be changed entirely
+    
     window->draw(scorebox_sprite);
-    //render the scorebox text here
+    window->draw(scorebox_text);
+    
 }
 
 void Game::render_screen_shake() {
@@ -211,9 +220,11 @@ void Game::render() {
 	window->clear();
 	render_backdrop();
 	render_nodes();
-  //render_conveyor(frame_counter);
+    render_conveyor(frame_counter);
 	render_player();
+    render_backdrop_walls();
 	render_scorebox();
 	window->display();
+    
 	frame_counter += 1;
 }

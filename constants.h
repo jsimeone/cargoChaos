@@ -21,6 +21,7 @@ namespace constants {
 
     const float PLAYER_SPEED = 8;
     const float PLAYER_SPRINT_SPEED = 10;
+    const float PLAYER_ENCUMBERED_SPEED = 5.5;
     const float PLAYER_ACCELERATION = 0.1; //not in use
     const float PLAYER_DECELERATION = 0.1; //not in use
 
@@ -28,7 +29,7 @@ namespace constants {
     const float PLACE_ANGLE_OFFSET = -90;
     const float MAX_PLACE_OFFSET = 65;
 
-    const float SCREEN_SHAKE_INVALID_NODE_PLACEMENT = 0.8;
+    const float INVALID_PLACEMENT_SHAKE= 0.8;
 
 }
 

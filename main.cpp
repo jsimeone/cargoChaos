@@ -30,6 +30,9 @@ int main() {
 
     //game.spawn_fried_node(600, 600);
     game.spawn_laser_node(600, 600);
+    game.spawn_laser_node(700, 700);
+    game.spawn_laser_node(800, 800);
+    game.spawn_laser_node(900, 900);
 
 
     while (game.is_running()) {
