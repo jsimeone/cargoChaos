@@ -58,6 +58,8 @@ void Game::poll_events() {
 			break;
 		case Event::MouseButtonPressed:
 			break;
+        default:
+            break;
 		}
 	}
 }
