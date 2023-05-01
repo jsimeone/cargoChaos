@@ -1,9 +1,8 @@
-﻿  laser.cpp
+﻿  laser_node.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser.cpp(8,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser.cpp(26,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser_node.cpp(48,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe
