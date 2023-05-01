@@ -101,7 +101,7 @@ void Laser::set_texture(string texture_name) {
 		cout << "Loading laser texture failed" << endl;
 	}
 	laser_sprite.setTexture(texture);
-	laser_sprite.setOrigin(texture.getSize().y / 2.f, 0);
+	laser_sprite.setOrigin(texture.getSize().x / 2.f, 0);
 }
 
 vector<string> Laser::colors = { "Red", "Green", "Blue" };

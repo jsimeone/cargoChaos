@@ -146,7 +146,7 @@ void Game::render_nodes()
 {
 	for (Node* node : nodes) {
 		node->render(window);
-		window->draw(node->get_node_sprite());
+		//window->draw(node->get_node_sprite());
 	}
 }
 
