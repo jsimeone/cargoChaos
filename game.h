@@ -49,6 +49,9 @@ private:
     
     Texture scorebox_texture;
     Sprite scorebox_sprite;
+    Text scorebox_text;
+    Font scorebox_font;
+    int score;
     
     Texture backdrop_walls_texture;
     Sprite backdrop_walls_sprite;
@@ -63,6 +66,8 @@ public:
 	void spawn_cargo_node(int x_pos, int y_pos, int color_index);
 	void spawn_fried_node(int x_pos, int y_pos);
 	void spawn_laser_node(int x_pos, int y_pos);
+    
+    void increment_score(int value);
 
 	void update_player();
 	void update_nodes();
