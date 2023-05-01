@@ -81,9 +81,7 @@ void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> 
     if (!x_is_valid && !y_is_valid) {
         return; //no need to continue checking
     }
-<<<<<<< Updated upstream
     //check walls:
-
     if (end_x > (constants::PLAY_AREA_WIDTH_BOUNDS[1] + 2*constants::SCREEN_WIDTH)/3) {
         x_is_valid = false;
     }
@@ -96,9 +94,7 @@ void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> 
     else if (end_y < constants::PLAY_AREA_HEIGHT_BOUNDS[0]/3) {
         y_is_valid = false;
     }
-=======
     check_wall_collisions(x_is_valid, y_is_valid, end_x, end_y);
->>>>>>> Stashed changes
     if (x_is_valid && y_is_valid) {
         length += 10;
     }

@@ -10,7 +10,7 @@
 Conveyor::Conveyor() : 
     animation_status(225) 
 {
-    if (!conveyor_texture.loadFromFile("assets/conveyorStates.png")) {
+    if (!conveyor_texture.loadFromFile("assets/ConveyorSpriteSheet.png")) {
 
 
         cout << "Loading conveyor texture failed" << endl;

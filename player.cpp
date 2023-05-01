@@ -229,78 +229,6 @@ Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     return velocity;
 }
 
-<<<<<<< Updated upstream
-void Player::update_player_velocity() {
-    //====UPDATE VELOCITIES====//
-    if (moving_up && !moving_down) {
-        velocity.y -= 0.5;
-    }
-    else if (moving_down && !moving_up) {
-        velocity.y += 0.5;
-    }
-    else if ((!moving_up && !moving_down) || (moving_up && moving_down)) {
-        velocity.y /= 3;
-    }
-    if (moving_left && !moving_right) {
-        velocity.x -= 0.5;
-    }
-    else if (moving_right && !moving_left) {
-        velocity.x += 0.5;
-    }
-    else if ((!moving_left && !moving_right) || (moving_left && moving_right)) {
-        velocity.x /= 3;
-    }
-    velocity = normalize_velocities(velocity);
-}
-
-void Player::update_player_speed() {
-    if (is_sprinting) {
-        sprint_speed_factor = constants::PLAYER_SPRINT_SPEED / constants::PLAYER_SPEED;
-    }
-    else {
-        sprint_speed_factor = 1;
-    }
-
-    if (is_holding) {
-        encumbered_speed_factor = constants::PLAYER_ENCUMBERED_SPEED / constants::PLAYER_SPEED;
-    }
-    else {
-        encumbered_speed_factor = 1;
-    }
-}
-
-void Player::update_player_position(vector<Node*> nodes) {
-    int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * sprint_speed_factor * encumbered_speed_factor;
-    int new_y = pos.y + velocity.y * constants::PLAYER_SPEED * sprint_speed_factor * encumbered_speed_factor;
-
-    bool x_is_valid;
-    bool y_is_valid;
-    position_is_valid(new_x, new_y, nodes, x_is_valid, y_is_valid);
-    if (x_is_valid) {
-        pos.x = new_x;
-    }
-    if (y_is_valid) {
-        pos.y = new_y;
-    }
-
-    if (moving_left || moving_right || moving_down || moving_up) {
-        float direction = atan2(velocity.y, velocity.x) * 180.0 / constants::PI;
-        player_sprite.setRotation(direction + 90);
-    }
-    player_sprite.setPosition(pos.x, pos.y);
-}
-
-void Player::update_player_animations() {
-    if (pickup_animation_status != 0) {
-        pick_up_animation(pickup_color);
-    }
-    else if (put_down_animation_status != 0) {
-        put_down_animation();
-    }
-}
-
-=======
->>>>>>> Stashed changes
 void Player::update(vector<Node*> nodes) {
     update_player_velocity();
     update_player_speed();
@@ -323,35 +251,6 @@ void Player::toggle_pick_up(vector<Node*> nodes) {
     }
 }
 
-<<<<<<< Updated upstream
-void Player::pick_up_node(vector<Node*> nodes) {
-    if (!is_holding) {
-        for (Node* node : nodes) {
-            Vector2<float> node_pos = node->get_node_sprite().getPosition();
-            float x_dis = node_pos.x - pos.x;
-            float y_dis = node_pos.y - pos.y;
-            float distance = (player_body_radius + (node->get_node_sprite().getTexture()->getSize().x * node->get_node_sprite().getScale().x)/2)*1.3;
-            float node_angle = atan2(y_dis, x_dis)* 180.0/constants::PI;; //angle between player and node
-            float player_direction = player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET;
-            float angle_difference =abs(player_direction - node_angle);
-            if (angle_difference > 180) {
-                angle_difference = abs(angle_difference - 360);
-            }
-            
-            if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
-                string color = node->get_color();
-                if (color != "Fried") {
-                    node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
-                    pick_up_animation(color);
-                    pickup_color = color;
-                    is_holding = true;
-                    held_node = node;
-                    return;
-                } else {
-                    new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-                }
-            }
-=======
 void Player::check_play_bounds(float new_x, float new_y, bool &x_is_valid, bool &y_is_valid) {
     if (new_x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - player_body_radius) {
         x_is_valid = false;
@@ -383,65 +282,10 @@ void Player::check_node_collisions(Node* node, float new_x, float new_y, bool &x
         else {
             x_is_valid = false;
             y_is_valid = false;
->>>>>>> Stashed changes
         }
     }
 }
 
-<<<<<<< Updated upstream
-// **Need to split**
-void Player::put_down_node(vector<Node*> nodes) {
-    if (is_holding) {
-        Vector2f new_pos;
-        new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
-        new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
-
-        for (Node* node : nodes) {
-            float x_dist = node->get_node_sprite().getPosition().x - new_pos.x;
-            float y_dist = node->get_node_sprite().getPosition().y - new_pos.y;
-            float angle = atan2(y_dist, x_dist);
-            float dist = sqrtf(pow(x_dist, 2) + pow(y_dist, 2));
-            float offset = dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
-
-            if (offset < -constants::MAX_PLACE_OFFSET) {
-                new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-                return;
-            }
-
-
-            if (offset < 0) {
-                new_pos.x += cos(angle + constants::PI) * abs(offset);
-                new_pos.y += sin(angle + constants::PI) * abs(offset);
-            }
-
-        }
-        float x_dist = new_pos.x - pos.x;
-        float y_dist = new_pos.y - pos.y;
-        //if player places a node on top of another and it shifts it back onto the player, don't let the player place the node
-        if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE/2 + player_body_radius){
-            new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-            return;
-        }
-
-        if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2 || new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
-            new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-            return;
-        }
-        if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2 || new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
-            new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-            return;
-        }
-        
-        held_node->put_down(new_pos, player_sprite.getRotation());
-        is_holding = false;
-        held_node = nullptr;
-        put_down_animation();
-    }
-}
-
-// **Need to split**
-=======
->>>>>>> Stashed changes
 void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid) {
     x_is_valid = true;
     y_is_valid = true;
