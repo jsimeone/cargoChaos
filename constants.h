@@ -29,9 +29,10 @@ namespace constants {
     const int PLACE_DISTANCE = 110; // should be a function of node_size + player_size
     const float PLACE_ANGLE_OFFSET = -90;
     const float MAX_PLACE_OFFSET = 65;
+    const float PLAYER_LASER_BUFFER = 5;
 
     const float INVALID_PLACEMENT_SHAKE= 0.8;
-    const float HIT_SHAKE = 5;
+    const float HIT_SHAKE = 0.2;
 
     const int CONVEYOR_SPAWN_X = 1400;
     const int CONVEYOR_SPAWN_Y = 85;

@@ -136,9 +136,12 @@ float Laser::get_distance(Vector2<float> pos1, Vector2<float> pos2) {
 bool Laser::colliding_with(Player player) {
     //Check if player ran into laser
     Vector2<float> player_pos = player.get_player_sprite().getPosition();
-    float collision_angle = direction - constants::PI/2;
-    Vector2<float> collision_point = {player.player_body_radius * cos(collision_angle), player.player_body_radius* sin(collision_angle)};
-    if (get_distance(start_pos, player_pos) + get_distance(player_pos, end_pos) - length < 2) {
+    float player_laser_angle = atan2(start_pos.y-player_pos.y, start_pos.x - player_pos.x);
+    float collision_angle = player_laser_angle = constants::PI/2;
+    float collision_point_x = player_pos.x + player.player_body_radius * cos(collision_angle);
+    float collision_point_y = player_pos.y + player.player_body_radius * sin(collision_angle);
+    Vector2<float> collision_point = {collision_point_x, collision_point_y};
+    if (get_distance(start_pos, collision_point) + get_distance(end_pos, collision_point) - get_distance(start_pos, end_pos) < constants::PLAYER_LASER_BUFFER) {
         return true;
     }
     //Check if laser hit player
