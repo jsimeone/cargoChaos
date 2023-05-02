@@ -118,4 +118,8 @@ void Laser::set_texture(string texture_name) {
 	laser_sprite.setOrigin(texture.getSize().x / 2.f, 0);
 }
 
+Sprite* Laser::get_sprite() {
+    return &laser_sprite;
+}
+
 vector<string> Laser::colors = { "Red", "Green", "Blue" };

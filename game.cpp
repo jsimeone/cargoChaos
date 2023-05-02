@@ -193,6 +193,13 @@ void Game::update_screen_shake() {
 
 void Game::update_player() {
     player.update(nodes);
+    for (Node* node : nodes) {
+        if (node->get_color() == "Laser") {
+            for (Laser* laser : node->get_lasers()) {
+                // Do whatever to every laser
+            }
+        }
+    }
 }
 
 void Game::update_nodes() {

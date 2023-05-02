@@ -26,6 +26,7 @@ public:
 	void set_laser(bool new_laser_on);
 	void check_node_collisions(vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid, float end_x, float end_y, Sprite parent);
 	void check_wall_collisions(bool& x_is_valid, bool& y_is_valid, float end_x, float end_y);
+	Sprite* get_sprite();
 };
 
 #endif //LASER_H
