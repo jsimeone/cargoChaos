@@ -39,6 +39,8 @@ private:
     void key_press_checker();
     void key_release_checker();
 	void poll_events();
+
+    void conveyor_pick_up();
     
     float current_screen_shake = 0;
     float shake_direction = 1;
@@ -75,6 +77,7 @@ public:
 
 	void update_player();
 	void update_nodes();
+    void random_spawn();
     void update_screen_shake();
 	void update();
     
