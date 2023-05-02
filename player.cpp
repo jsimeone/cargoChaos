@@ -338,3 +338,29 @@ void Player::put_down_animation() {
     
     player_sprite.setTextureRect(IntRect(512 * (6 - put_down_animation_status), 0, 512, 512));
 }
+
+Vector2<float> Player::put_down_fried_node(vector<Node*> nodes) {
+//    if (!is_holding) {
+//        cout << "ERROR" << endl;
+//        return {0, 0};
+//    }
+    Vector2f new_pos;
+    new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+    new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+    for (Node* node : nodes) {
+        float angle = 0;
+        float offset = calculate_placement_offset(node, new_pos, angle);
+        offset_on_placement(new_pos, angle, offset);
+        //            if (!offset_on_placement(new_pos, angle, offset)) {
+        //                return;
+        //            }
+    }
+    //held_node->put_down(new_pos, player_sprite.getRotation());
+    held_node->is_held = false;
+    is_holding = false;
+    held_node = nullptr;
+    put_down_animation();
+    
+    return new_pos;
+}
+

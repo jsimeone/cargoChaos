@@ -41,3 +41,7 @@ void Node::render(RenderWindow* window) {
 bool Node::get_is_held() {
 	return is_held;
 }
+
+vector<Laser*> Node::get_lasers() {
+    return {nullptr, nullptr, nullptr}; //should never be run just for complier. Function used by Laser nodes. 
+}

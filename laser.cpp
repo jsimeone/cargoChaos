@@ -73,8 +73,9 @@ void Laser::check_wall_collisions(bool& x_is_valid, bool& y_is_valid, float end_
 }
 
 void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> nodes, Sprite parent) {
-	float end_x = node_pos.x + ((length - 50) * cos((node_rotation + rotation_offset + 90) * (constants::PI / 180)));
-	float end_y = node_pos.y + ((length - 50) * sin((node_rotation + rotation_offset + 90) * (constants::PI / 180)));
+    direction = (node_rotation + rotation_offset + 90) * (constants::PI / 180);
+    float end_x = node_pos.x + ((length - 50) * cos(direction));
+    float end_y = node_pos.y + ((length - 50) * sin(direction));
     bool x_is_valid = true;
     bool y_is_valid = true;
     check_node_collisions(nodes, x_is_valid, y_is_valid, end_x, end_y, parent);
@@ -98,6 +99,10 @@ void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> 
     if (x_is_valid && y_is_valid) {
         length += 10;
     }
+    end_x = node_pos.x + length * cos(direction);
+    end_y = node_pos.y + length * sin(direction);
+    start_pos = node_pos;
+    end_pos = {end_x, end_y};
 }
 
 void Laser::update_laser(Vector2f node_pos, float node_rotation, vector<Node*> nodes, Sprite parent) {
@@ -116,6 +121,41 @@ void Laser::set_texture(string texture_name) {
 	}
 	laser_sprite.setTexture(texture);
 	laser_sprite.setOrigin(texture.getSize().x / 2.f, 0);
+}
+
+Sprite* Laser::get_sprite() {
+    return &laser_sprite;
+}
+
+float Laser::get_distance(Vector2<float> pos1, Vector2<float> pos2) {
+    float x_dis = pos1.x - pos2.x;
+    float y_dis = pos1.y - pos2.y;
+    return sqrt( pow ( x_dis, 2 ) + pow ( y_dis , 2) );
+}
+
+bool Laser::colliding_with(Player player) {
+    //Check if player ran into laser
+    Vector2<float> player_pos = player.get_player_sprite().getPosition();
+    float player_laser_angle = atan2(start_pos.y-player_pos.y, start_pos.x - player_pos.x);
+    float collision_angle = player_laser_angle = constants::PI/2;
+    float collision_point_x = player_pos.x + player.player_body_radius * cos(collision_angle);
+    float collision_point_y = player_pos.y + player.player_body_radius * sin(collision_angle);
+    Vector2<float> collision_point = {collision_point_x, collision_point_y};
+    if (get_distance(start_pos, collision_point) + get_distance(end_pos, collision_point) - get_distance(start_pos, end_pos) < constants::PLAYER_LASER_BUFFER) {
+        return true;
+    }
+    //Check if laser hit player
+    if (get_distance(end_pos, player_pos) <= player.player_body_radius) {
+        cout << "Laser hit Player!" << endl;
+        return true;
+    }
+    
+    
+    return false;
+}
+
+bool Laser::get_laser_on() {
+    return laser_on;
 }
 
 vector<string> Laser::colors = { "Red", "Green", "Blue" };
