@@ -15,13 +15,13 @@ Node::Node(int x_pos, int y_pos) :
     
 }
 
-Sprite Node::get_node_sprite() {
-	return node_sprite;
+Sprite* Node::get_node_sprite() {
+	return &node_sprite;
 }
 
 void Node::pick_up(Vector2f player_position, float player_rotation) {
 	is_held = true;
-	node_sprite.setPosition(constants::off_screen);
+	node_sprite.setPosition(constants::OFF_SCREEN);
 }
 
 void Node::put_down(Vector2f player_position, float player_rotation) {

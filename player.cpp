@@ -76,10 +76,10 @@ void Player::update_player_animations() {
 void Player::pick_up_node(vector<Node*> nodes) {
     if (!is_holding) {
         for (Node* node : nodes) {
-            Vector2<float> node_pos = node->get_node_sprite().getPosition();
+            Vector2<float> node_pos = node->get_node_sprite()->getPosition();
             float x_dis = node_pos.x - pos.x;
             float y_dis = node_pos.y - pos.y;
-            float distance = (player_body_radius + (node->get_node_sprite().getTexture()->getSize().x * node->get_node_sprite().getScale().x) / 2) * 1.3;
+            float distance = (player_body_radius + (node->get_node_sprite()->getTexture()->getSize().x * node->get_node_sprite()->getScale().x) / 2) * 1.3;
             float node_angle = atan2(y_dis, x_dis) * 180.0 / constants::PI;; //angle between player and node
             float player_direction = player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET;
             float angle_difference = abs(player_direction - node_angle);
@@ -106,11 +106,11 @@ void Player::pick_up_node(vector<Node*> nodes) {
 }
 
 float Player::calculate_placement_offset(Node* node, Vector2f new_pos, float &angle) {
-    float x_dist = node->get_node_sprite().getPosition().x - new_pos.x;
-    float y_dist = node->get_node_sprite().getPosition().y - new_pos.y;
+    float x_dist = node->get_node_sprite()->getPosition().x - new_pos.x;
+    float y_dist = node->get_node_sprite()->getPosition().y - new_pos.y;
     angle = atan2(y_dist, x_dist);
     float dist = sqrtf(pow(x_dist, 2) + pow(y_dist, 2));
-    return dist - node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE;
+    return dist - node->get_node_sprite()->getTexture()->getSize().x * constants::NODE_SCALE;
 }
 
 bool Player::offset_on_placement(Vector2f &new_pos, float angle, float offset) {
@@ -124,7 +124,7 @@ bool Player::offset_on_placement(Vector2f &new_pos, float angle, float offset) {
     }
     float x_dist = new_pos.x - pos.x;
     float y_dist = new_pos.y - pos.y;
-    if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite().getTexture()->getSize().x * constants::NODE_SCALE / 2 + player_body_radius) {
+    if (sqrt(pow(x_dist, 2) + pow(y_dist, 2)) <= held_node->get_node_sprite()->getTexture()->getSize().x * constants::NODE_SCALE / 2 + player_body_radius) {
         new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
         return false;
     }
@@ -267,7 +267,7 @@ void Player::check_play_bounds(float new_x, float new_y, bool &x_is_valid, bool 
 }
 
 void Player::check_node_collisions(Node* node, float new_x, float new_y, bool &x_is_valid, bool &y_is_valid) {
-    Sprite node_sprite = node->get_node_sprite();
+    Sprite node_sprite = *(node->get_node_sprite());
     Vector2<float> node_pos = node_sprite.getPosition();
     float x_dis = node_pos.x - new_x;
     float y_dis = node_pos.y - new_y;
@@ -299,6 +299,16 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
         return; 
     }
     check_play_bounds(new_x, new_y, x_is_valid, y_is_valid);
+}
+
+void Player::pick_up_from_conveyor(Node* node) {
+    if (!is_holding) {
+        node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+        pick_up_animation(node->get_color());
+        pickup_color = node->get_color();
+        is_holding = true;
+        held_node = node;
+    }
 }
 
 void Player::pick_up_animation(string color) {

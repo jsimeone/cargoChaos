@@ -29,10 +29,14 @@ void Game::key_press_checker() {
         player.set_moving_left(true);
     if (event.key.code == Keyboard::D)
         player.set_moving_right(true);
-    if (event.key.code == Keyboard::Space)
+    if (event.key.code == Keyboard::Space) {
+        if (player.get_player_sprite().getPosition().x < constants::CONVEYOR_PICK_UP_BOUNDS[0] && player.get_player_sprite().getPosition().y < constants::CONVEYOR_PICK_UP_BOUNDS[1]) {
+            conveyor_pick_up();
+        }
         player.toggle_pick_up(nodes);
+    }
     if (event.key.code == Keyboard::T)
-        screen_shake(2);
+        conveyor.spawn_random_node();
     if (event.key.code == Keyboard::LShift)
         player.is_sprinting = true;
 }
@@ -71,6 +75,33 @@ void Game::poll_events() {
             break;
 		}
 	}
+}
+
+void Game::conveyor_pick_up() {
+    String node_type = conveyor.pick_up_node();
+    if (!player.is_holding) {
+        if (node_type == "Laser") {
+            spawn_laser_node(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
+            player.pick_up_from_conveyor(nodes[0]);
+        }
+        else if (node_type == "Red") {
+            spawn_cargo_node(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y, 0);
+            player.pick_up_from_conveyor(nodes[nodes.size() - 1]);
+        }
+        else if (node_type == "Green") {
+            spawn_cargo_node(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y, 1);
+            player.pick_up_from_conveyor(nodes[nodes.size() - 1]);
+        }
+        else if (node_type == "Blue") {
+            spawn_cargo_node(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y, 2);
+            player.pick_up_from_conveyor(nodes[nodes.size() - 1]);
+        }
+        else {
+            return;
+        }
+        
+    }
+    
 }
 
 Game::Game() {
@@ -170,26 +201,34 @@ void Game::update_nodes() {
 	}
 }
 
+void Game::random_spawn() {
+    if (frame_counter % 300 == 0) {
+        conveyor.spawn_random_node();
+    }
+}
+
+
 void Game::update() {
+    random_spawn();
 	poll_events();
 	update_nodes();
 	update_player();
     update_screen_shake();
+    conveyor.update();
 }
 
 void Game::render_player() {
 	window->draw(player.get_player_sprite());
 }
 
-void Game::render_nodes()
-{
+void Game::render_nodes() {
 	for (Node* node : nodes) {
 		node->render(window);
 	}
 }
 
 void Game::render_conveyor(int frames) {
-    window->draw(conveyor.get_conveyor_sprite(frames));
+    conveyor.render(window, frames);
 }
 
 void Game::render_scorebox() {
@@ -202,8 +241,6 @@ void Game::render_scorebox() {
 }
 
 void Game::render_screen_shake() {
-
-    
     if (current_screen_shake > 1) {
         view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
         window->setView(view);

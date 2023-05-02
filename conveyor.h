@@ -9,7 +9,11 @@
 #define conveyor_h
 #include <iostream>
 #include <vector>
+#include <random>
 #include "node.h"
+#include "cargo_node.h"
+#include "laser_node.h"
+
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -26,6 +30,11 @@ public:
     ~Conveyor();
     
     Sprite get_conveyor_sprite(int frames);
+
+    void spawn_random_node();
+    String pick_up_node();
+    void update();
+    void render(RenderWindow* window, int frames);
 };
 
 #endif /* conveyor_h */

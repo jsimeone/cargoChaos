@@ -36,7 +36,7 @@ void Laser::check_node_collisions(vector<Node*> nodes, bool &x_is_valid, bool &y
         if (!x_is_valid && !y_is_valid) {
             return;
         }
-        Sprite node_sprite = node->get_node_sprite();
+        Sprite node_sprite = *(node->get_node_sprite());
         Vector2<float> node_pos = node_sprite.getPosition();
         float x_dis = node_pos.x - end_x;
         float y_dis = node_pos.y - end_y;

@@ -17,7 +17,6 @@
 #include "node.h"
 #include "cargo_node.h"
 
-
 using namespace sf;
 using namespace std;
 
@@ -35,7 +34,6 @@ private:
     bool moving_up;
     bool moving_down;
     
-    bool is_holding;
     Node* held_node;
     
     int pickup_animation_status;
@@ -74,6 +72,7 @@ public:
     
     void display();
 
+    bool is_holding;
     bool is_sprinting;
 
     void set_moving_up(bool new_up);
@@ -85,6 +84,7 @@ public:
     void check_play_bounds(float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
     void check_node_collisions(Node* node, float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
     void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
+    void pick_up_from_conveyor(Node* node);
 };
 
 

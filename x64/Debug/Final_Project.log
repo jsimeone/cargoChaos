@@ -1,1 +1,48 @@
-﻿  Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe
+﻿  game.cpp
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(17,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(27,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(33,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(84,76): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(84,51): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(88,76): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(88,51): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(92,76): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(92,51): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(96,76): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(96,51): warning C4244: 'argument': conversion from 'const T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(236,82): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe
