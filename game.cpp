@@ -78,8 +78,8 @@ void Game::poll_events() {
 }
 
 void Game::conveyor_pick_up() {
-    String node_type = conveyor.pick_up_node();
     if (!player.is_holding) {
+        String node_type = conveyor.pick_up_node();
         if (node_type == "Laser") {
             spawn_laser_node(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
             player.pick_up_from_conveyor(nodes[0]);
