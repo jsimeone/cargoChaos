@@ -1,6 +1,113 @@
-﻿  main.cpp
-C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(9,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(12,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(14,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(15,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+﻿  AudioConstants.cpp
+  Button.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\Button.cpp(33,75): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\Button.cpp(33,63): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  cargo_node.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+  conveyor.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+  fried_node.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+  game.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+  globals.cpp
+  laser.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\laser.cpp(8,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\laser.cpp(26,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  laser_node.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\laser_node.cpp(48,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+  node.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\node.cpp(13,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\node.cpp(13,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  player.cpp
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(16,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(25,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\constants.h(32,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(19,128): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(35,52): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(39,89): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(50,109): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(50,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(111,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(112,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(115,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(115,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(117,17): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(120,17): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(124,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(160,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(161,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Shadow\source\repos\jsimeone\cargoChaos\player.cpp(195,47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   Final_Project.vcxproj -> C:\Users\Shadow\source\repos\jsimeone\cargoChaos\x64\Debug\Final_Project.exe

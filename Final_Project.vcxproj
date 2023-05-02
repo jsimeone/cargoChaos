@@ -139,16 +139,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioConstants.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="cargo_node.cpp" />
+    <ClCompile Include="conveyor.cpp" />
+    <ClCompile Include="fried_node.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="laser.cpp" />
+    <ClCompile Include="laser_node.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioConstants.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="cargo_node.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="conveyor.h" />
+    <ClInclude Include="fried_node.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="laser.h" />
+    <ClInclude Include="laser_node.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>

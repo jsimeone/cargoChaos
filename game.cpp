@@ -11,9 +11,9 @@ void Game::init_window() {
 
 	window = new sf::RenderWindow(videoMode, "CargoChaos", sf::Style::Titlebar | sf::Style::Close);
 	window->setFramerateLimit(60);
-    
-    view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
-    window->setView(view);
+
+	view = View({ constants::SCREEN_WIDTH / 2, constants::SCREEN_HEIGHT / 2 }, { constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT });
+	window->setView(view);
 
 	window->setKeyRepeatEnabled(false);
 }
@@ -40,9 +40,9 @@ void Game::poll_events() {
 				player.set_moving_right(true);
 			if (event.key.code == Keyboard::Space)
 				player.toggle_pick_up(nodes);
-            if (event.key.code == Keyboard::T)
-                screen_shake(2);
-				player.is_sprinting = true;
+			if (event.key.code == Keyboard::T)
+				screen_shake(2);
+			player.is_sprinting = true;
 			break;
 		case Event::KeyReleased:
 			if (event.key.code == Keyboard::W)
@@ -53,27 +53,20 @@ void Game::poll_events() {
 				player.set_moving_left(false);
 			if (event.key.code == Keyboard::D)
 				player.set_moving_right(false);
-            if (event.key.code == Keyboard::LShift)
-                player.is_sprinting = false;
+			if (event.key.code == Keyboard::LShift)
+				player.is_sprinting = false;
 			break;
 		case Event::MouseButtonPressed:
 			break;
 		}
 	}
 }
-sf::RenderWindow& Game::get_window() {
-	return *window;
-}
-
-void Game::process_events() {
-	poll_events();
-}
 
 Game::Game() {
 	init_variables();
 	init_window();
-    get_backdrop();
-    frame_counter = 0;
+	get_backdrop();
+	frame_counter = 0;
 }
 
 Game::~Game() {
@@ -81,28 +74,28 @@ Game::~Game() {
 }
 
 void Game::get_backdrop() {
-    if (!backdrop_texture.loadFromFile("assets/backdrop.png")) {
-        cout<< "Load failed" << endl;
-        system("pause");
-    }
-    backdrop_sprite.setTexture(backdrop_texture, true);
-    backdrop_sprite.setScale(1, 1);
-    backdrop_sprite.setOrigin((sf::Vector2f)backdrop_texture.getSize() / 2.f);
-    backdrop_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
-    
-    if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
-        cout << "Failed to load scorebox asset" << endl;
-    }
-    scorebox_sprite.setTexture(scorebox_texture, true);
-    scorebox_sprite.setPosition(1324, 0);
+	if (!backdrop_texture.loadFromFile("assets/backdrop.png")) {
+		cout << "Load failed" << endl;
+		system("pause");
+	}
+	backdrop_sprite.setTexture(backdrop_texture, true);
+	backdrop_sprite.setScale(1, 1);
+	backdrop_sprite.setOrigin((sf::Vector2f)backdrop_texture.getSize() / 2.f);
+	backdrop_sprite.setPosition(constants::SCREEN_WIDTH / 2, constants::SCREEN_HEIGHT / 2);
+
+	if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
+		cout << "Failed to load scorebox asset" << endl;
+	}
+	scorebox_sprite.setTexture(scorebox_texture, true);
+	scorebox_sprite.setPosition(1324, 0);
 }
 
 void Game::render_backdrop() {
-    window->draw(backdrop_sprite);
+	window->draw(backdrop_sprite);
 }
 
 void Game::screen_shake(float intensity) {
-    current_screen_shake = intensity * 10;
+	current_screen_shake = intensity * 10;
 }
 
 bool Game::is_running() {
@@ -122,15 +115,15 @@ void Game::spawn_laser_node(int x_pos, int y_pos) {
 }
 
 void Game::update_screen_shake() {
-    if (new_shake_intensity > 0) {
-        screen_shake(new_shake_intensity);
-        new_shake_intensity = 0;
-    }
+	if (new_shake_intensity > 0) {
+		screen_shake(new_shake_intensity);
+		new_shake_intensity = 0;
+	}
 }
 
 void Game::update_player()
 {
-    player.update(nodes);
+	player.update(nodes);
 }
 
 void Game::update_nodes() {
@@ -143,8 +136,8 @@ void Game::update() {
 	poll_events();
 	update_nodes();
 	update_player();
-    update_screen_shake();
-    //implement updating the score
+	update_screen_shake();
+	//implement updating the score
 }
 
 void Game::render_player() {
@@ -160,26 +153,27 @@ void Game::render_nodes()
 }
 
 void Game::render_conveyor(int frames) {
-    window->draw(conveyor.get_conveyor_sprite(frames));
+	window->draw(conveyor.get_conveyor_sprite(frames));
 }
 
 void Game::render_scorebox() {
-    window->draw(scorebox_sprite);
-    //render the scorebox text here
+	window->draw(scorebox_sprite);
+	//render the scorebox text here
 }
 
 void Game::render_screen_shake() {
 
-    
-    if (current_screen_shake > 1) {
-        view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
-        window->setView(view);
-        current_screen_shake /= 2;
-        shake_direction *= -1;
-    } else {
-        current_screen_shake = 0;
-        window->setView(window->getDefaultView());
-    }
+
+	if (current_screen_shake > 1) {
+		view.setCenter({ constants::SCREEN_WIDTH / 2 - current_screen_shake * shake_direction, constants::SCREEN_HEIGHT / 2 - current_screen_shake * shake_direction });
+		window->setView(view);
+		current_screen_shake /= 2;
+		shake_direction *= -1;
+	}
+	else {
+		current_screen_shake = 0;
+		window->setView(window->getDefaultView());
+	}
 }
 
 void Game::render() {
@@ -187,7 +181,7 @@ void Game::render() {
 	window->clear();
 	render_backdrop();
 	render_nodes();
-  //render_conveyor(frame_counter);
+	//render_conveyor(frame_counter);
 	render_player();
 	render_scorebox();
 	window->display();

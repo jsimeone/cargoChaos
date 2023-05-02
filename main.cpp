@@ -2,6 +2,7 @@
 #include <SFML/Audio.hpp>
 #include "Game.h"
 #include "Button.h"
+#include "AudioConstants.h"
 
 enum class GameState {
     MainMenu,
@@ -18,7 +19,7 @@ int main() {
     // Load the background image
     sf::Texture backgroundTexture;
     if (!backgroundTexture.loadFromFile("assets/backdrop.png")) {
-        std::cout << "Error loading bacsskground image!" << std::endl;
+        std::cout << "Error loading background image!" << std::endl;
         return 1;
     }
     sf::Sprite backgroundSprite(backgroundTexture);
@@ -34,22 +35,24 @@ int main() {
     backgroundSprite.setScale(scaleX, scaleY);
 
     // Initialize buttons
-     // Create the "Play" button
-    Button playButton(sf::Vector2f(100, 50), sf::Vector2f(350, 275), "Play", sf::Color(0, 128, 128));
+    Button playButton(sf::Vector2f(100, 50), sf::Vector2f(350, 275), "Play", sf::Color(255, 51, 0));
+    Button instructionsButton(sf::Vector2f(150, 50), sf::Vector2f(325, 350), "Intructions", sf::Color(255, 51, 0));
+    Button exitButton(sf::Vector2f(100, 50), sf::Vector2f(350, 425), "Exit", sf::Color(255, 51, 0));
 
-    // Create the "Instructions" button
-    Button instructionsButton(sf::Vector2f(150, 50), sf::Vector2f(325, 350), "Intructions", sf::Color(0, 128, 128));
-
-    // Create the "Exit" button
-    Button exitButton(sf::Vector2f(100, 50), sf::Vector2f(350, 425), "Exit", sf::Color(0, 128, 128));
-
+    sf::Texture logoTexture;
+    sf::Sprite logoSprite;
+    if (!logoTexture.loadFromFile("assets/Cargo-Chaos.png")) {
+        std::cout << "Error loading logo texture! " << std::endl;
+    }
+    logoSprite.setTexture(logoTexture);
 
     // Create the "Back" button for the instructions page
-    Button backButton(sf::Vector2f(100, 50), sf::Vector2f(350, 500), "Back", sf::Color(0, 128, 128));
+    Button backButton(sf::Vector2f(100, 50), sf::Vector2f(350, 500), "Back", sf::Color(255, 51, 0));
     std::vector<Button*> mainMenuButtons = { &playButton, &instructionsButton, &exitButton };
     int selectedButton = 0;
 
     sf::Music backgroundMusic;
+    AudioConstants::loadSounds();
     if (!backgroundMusic.openFromFile("assets/soundtrack.wav")) {
         std::cout << "Error loading sountrack!" << std::endl;
         return 1;
@@ -58,8 +61,21 @@ int main() {
     backgroundMusic.setLoop(true);
     backgroundMusic.play();
 
+    if (!AudioConstants::gameplayMusic.openFromFile("assets/Gameplay.wav")) {
+        std::cout << "Error loading gameplay music!" << std::endl;
+    }
+
+    // Set the scale
+    logoSprite.setScale(0.8f, 0.8f);
+
+    // Set the position
+    float logoX = window.getSize().x / 2.0f - logoSprite.getGlobalBounds().width / 2.0f;
+    float logoY = window.getSize().y * 0.25f - logoSprite.getGlobalBounds().height / 2.0f;
+    logoSprite.setPosition(logoX, logoY);
+
     while (window.isOpen()) {
         sf::Event event;
+        GameState prevState = gameState;
 
         if (gameState == GameState::MainMenu) {
             if (backgroundMusic.getStatus() != sf::Music::Status::Playing) {
@@ -73,18 +89,21 @@ int main() {
                     backgroundMusic.stop();
                 }
                 if (event.type == sf::Event::KeyPressed) {
+                    AudioConstants::selectSound.play();
                     if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
                         if (selectedButton > 0) {
                             selectedButton--;
                         }
                     }
                     if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
+                        AudioConstants::selectSound.play();
                         if (selectedButton < mainMenuButtons.size() - 1) {
                             selectedButton++;
                         }
                     }
                     if (event.key.code == sf::Keyboard::Enter || event.key.code == sf::Keyboard::Space) {
                         if (selectedButton == 0) {
+                            AudioConstants::clickSound.play();
                             gameState = GameState::Playing;
                         }
                         else if (selectedButton == 1) {
@@ -99,23 +118,36 @@ int main() {
 
             window.clear();
             window.draw(backgroundSprite); // Render the background image
-            
+            window.draw(logoSprite); // Logo
+
             for (int i = 0; i < mainMenuButtons.size(); i++) {
                 mainMenuButtons[i]->render(window, i == selectedButton);
             }
             window.display();
         }
         else if (gameState == GameState::Playing) {
+            backgroundMusic.stop();
+            if (AudioConstants::gameplayMusic.getStatus() != sf::Music::Status::Playing) {
+                AudioConstants::gameplayMusic.setLoop(true);
+                AudioConstants::gameplayMusic.play();
+            }
+
             Game game;
 
-            game.spawn_node(500, 500, "circle.png");
+            game.spawn_cargo_node(500, 500, 0);
+            game.spawn_cargo_node(400, 400, 1);
+            game.spawn_cargo_node(300, 300, 2);
+            game.spawn_laser_node(600, 600);
 
             while (game.is_running()) {
                 game.update();
                 game.render();
             }
+
+            AudioConstants::gameplayMusic.stop(); // Stop the gameplay music when the game ends
             gameState = GameState::MainMenu;
         }
+
         else if (gameState == GameState::Instructions) {
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
@@ -133,7 +165,7 @@ int main() {
             font.loadFromFile("assets/VinaSans-Regular.ttf");
             sf::Text instructionsText;
             instructionsText.setFont(font);
-            instructionsText.setString("Instructions: \n\nWASD to move\nE to interact with objects\nComplete tasks to win the game");
+            instructionsText.setString("Instructions: \n\nWASD to move\nSpace to interact with objects\nComplete tasks to win the game");
             instructionsText.setCharacterSize(24);
             instructionsText.setFillColor(sf::Color::Red);
             instructionsText.setPosition(250, 200);

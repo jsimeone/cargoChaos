@@ -18,7 +18,7 @@ Button::Button(sf::Vector2f size, sf::Vector2f position, const std::string& text
 
 void Button::render(sf::RenderWindow& window, bool selected) {
     if (selected) {
-        buttonShape.setFillColor(sf::Color(150, 150, 150));
+        buttonShape.setFillColor(sf::Color(255, 51, 0));
     }
     else {
         buttonShape.setFillColor(sf::Color(100, 100, 100));
