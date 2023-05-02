@@ -12,7 +12,7 @@
 #include <SFML/Network.hpp>
 
 #include "constants.h"
-
+class Laser;
 
 using namespace sf;
 using namespace std;
@@ -33,7 +33,8 @@ public:
 	virtual void update(vector<Node*> nodes);
 	virtual void render(RenderWindow* window);
 	bool get_is_held();
-
+    
+    virtual vector<Laser*> get_lasers();
 };
 
 #endif //NODE_H

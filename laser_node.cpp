@@ -59,3 +59,7 @@ void Laser_Node::render(RenderWindow* window) {
 	blue_laser.render(window);
 	Node::render(window);
 }
+
+vector<Laser*> Laser_Node::get_lasers() {
+    return {&red_laser, &green_laser, &blue_laser};
+}
