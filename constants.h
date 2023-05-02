@@ -31,6 +31,7 @@ namespace constants {
     const float MAX_PLACE_OFFSET = 65;
 
     const float INVALID_PLACEMENT_SHAKE= 0.8;
+    const float HIT_SHAKE = 5;
 
     const int CONVEYOR_SPAWN_X = 1400;
     const int CONVEYOR_SPAWN_Y = 85;

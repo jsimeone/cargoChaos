@@ -16,6 +16,8 @@ void Game::init_window() {
     window->setView(view);
 
 	window->setKeyRepeatEnabled(false);
+    
+
 }
 
 void Game::key_press_checker() {
@@ -193,10 +195,18 @@ void Game::update_screen_shake() {
 
 void Game::update_player() {
     player.update(nodes);
+    if (!player.is_holding) {
+        return;
+    }
     for (Node* node : nodes) {
         if (node->get_color() == "Laser") {
             for (Laser* laser : node->get_lasers()) {
-                // Do whatever to every laser
+                if (laser->get_laser_on() && laser->colliding_with(player)) {
+                    Vector2<float> fried_node_pos = player.put_down_fried_node(nodes);
+                    spawn_fried_node(fried_node_pos.x, fried_node_pos.y);
+                    new_shake_intensity = constants::HIT_SHAKE;
+                    return;
+                }
             }
         }
     }

@@ -22,7 +22,7 @@ private:
 protected:
 	Texture texture;
 	Sprite node_sprite;
-	bool is_held;
+    
 public:
 	Node(int x_pos, int y_pos);
 	Sprite* get_node_sprite();
@@ -33,6 +33,7 @@ public:
 	virtual void update(vector<Node*> nodes);
 	virtual void render(RenderWindow* window);
 	bool get_is_held();
+    bool is_held;
     
     virtual vector<Laser*> get_lasers();
 };

@@ -85,6 +85,8 @@ public:
     void check_node_collisions(Node* node, float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
     void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
     void pick_up_from_conveyor(Node* node);
+    
+    Vector2<float> put_down_fried_node(vector<Node*> nodes);
 };
 
 
