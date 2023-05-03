@@ -215,7 +215,16 @@ void Game::update_player() {
 void Game::update_nodes() {
 	for (Node* node : nodes) {
 		node->update(nodes);
+        Vector2<float> node_pos =  node->get_node_sprite()->getPosition();
+        if (node_pos.x < constants::EXIT_AREA_WIDTH_BOUNDS[1] &&
+            node_pos.x > constants::EXIT_AREA_WIDTH_BOUNDS[0] &&
+            node_pos.y < constants::EXIT_AREA_HEIGHT_BOUNDS[1] &&
+            node_pos.y > constants::EXIT_AREA_HEIGHT_BOUNDS[0]) {
+            increment_score(10);
+            node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
+        }
 	}
+    
 }
 
 void Game::random_spawn() {

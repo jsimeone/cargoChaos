@@ -13,6 +13,8 @@ namespace constants {
     const std::vector<float> PLAY_AREA_WIDTH_BOUNDS = {150, 1450};
     const std::vector<float> PLAY_AREA_HEIGHT_BOUNDS = {190, 1100};
     const std::vector<float> CONVEYOR_PICK_UP_BOUNDS = { 450, 275 };
+    const std::vector<float> EXIT_AREA_WIDTH_BOUNDS = {1250, 1450};
+    const std::vector<float> EXIT_AREA_HEIGHT_BOUNDS = {900, 1100};
 
     const float NODE_SCALE = 0.275;
     const sf::Vector2f OFF_SCREEN(-100, -100);
@@ -38,6 +40,8 @@ namespace constants {
     const int CONVEYOR_SPAWN_Y = 85;
     const int CONVEYOR_SPACING = 110;
     const int CONVEYOR_OFFSET = 400;
+
+    
 }
 
 #endif // CONSTANTS_H
