@@ -41,7 +41,7 @@ void Laser::check_node_collisions(vector<Node*> nodes, bool &x_is_valid, bool &y
         float x_dis = node_pos.x - end_x;
         float y_dis = node_pos.y - end_y;
         float distance = width + (node_sprite.getTexture()->getSize().x * node_sprite.getScale().x) / 2;
-        if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && node_sprite.getLocalBounds() != parent.getLocalBounds()) {
+        if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && node_sprite.getGlobalBounds() != parent.getGlobalBounds()) {
             if (pow(pow(node_pos.x - end_x, 2) + pow(y_dis, 2), 0.5) > distance) {
                 x_is_valid = false;
             }
