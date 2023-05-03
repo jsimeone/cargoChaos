@@ -97,7 +97,7 @@ void Laser::update_length(Vector2f node_pos, float node_rotation, vector<Node*> 
     }
     check_wall_collisions(x_is_valid, y_is_valid, end_x, end_y);
     if (x_is_valid && y_is_valid) {
-        length += 10;
+        length += constants::LASER_SPEED;
     }
     end_x = node_pos.x + length * cos(direction);
     end_y = node_pos.y + length * sin(direction);
