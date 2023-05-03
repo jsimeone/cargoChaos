@@ -13,3 +13,10 @@ sfml-system-2.dll
 sfml-system-d-2.dll
 sfml-window-2.dll
 sfml-window-d-2.dll
+*.vsidx
+.vs/Final_Project/FileContentIndex/read.lock
+.vs/Final_Project/v17/Browse.VC.opendb
+.vs/Final_Project/v17/Browse.VC.db-shm
+.vs/Final_Project/v17/Browse.VC.db
+.vs/Final_Project/v17/Browse.VC.db-wal
+.vs/Final_Project/v17/ipch/AutoPCH/3d3dc51de0954194/MAIN.ipch
