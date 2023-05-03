@@ -55,6 +55,7 @@ private:
     vector<Color> colors;
     Color random_color();
     Color exit_color;
+    int exit_animation_state;
     
     Texture scorebox_texture;
     Sprite scorebox_sprite;
@@ -85,6 +86,7 @@ public:
     void random_spawn();
     void update_screen_shake();
 	void update();
+    void animate_exit_box();
     
     void render_backdrop();
     void render_backdrop_walls();

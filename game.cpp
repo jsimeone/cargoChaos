@@ -48,6 +48,8 @@ void Game::key_press_checker() {
         conveyor.spawn_random_node();
     if (event.key.code == Keyboard::LShift)
         player.is_sprinting = true;
+//    if (event.key.code == Keyboard::Z)
+//        animate_exit_box();
 }
 
 void Game::key_release_checker() {
@@ -246,12 +248,23 @@ void Game::update_nodes() {
                 
                 increment_score(constants::SCORE_INCREMENT);
                 node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
-                exit_color = random_color();
-                exit_rectangle.setFillColor(exit_color);
+                animate_exit_box();
             }
         }
 	}
+}
+
+void Game::animate_exit_box() {
+    Color new_color = exit_rectangle.getFillColor();
+    new_color.a += 10;
+    exit_rectangle.setFillColor(new_color);
+    exit_animation_state++;
     
+    if (exit_animation_state >= 10) {
+        exit_animation_state = 0;
+        exit_color = random_color();
+        exit_rectangle.setFillColor(exit_color);
+    }
 }
 
 void Game::random_spawn() {
@@ -268,6 +281,10 @@ void Game::update() {
 	update_player();
     update_screen_shake();
     conveyor.update();
+    
+    if (exit_animation_state != 0) {
+        animate_exit_box();
+    }
 }
 
 void Game::render_player() {
