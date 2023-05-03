@@ -16,15 +16,21 @@ Button::Button(sf::Vector2f size, sf::Vector2f position, const std::string& text
     label.setPosition(buttonShape.getPosition() + sf::Vector2f(buttonShape.getSize().x / 2.0f, buttonShape.getSize().y / 2.0f));
 }
 
-void Button::render(sf::RenderWindow& window, bool selected) {
+void Button::update_selected(bool selected) {
     if (selected) {
         buttonShape.setFillColor(sf::Color(255, 51, 0));
     }
     else {
         buttonShape.setFillColor(sf::Color(100, 100, 100));
     }
-    window.draw(buttonShape);
-    window.draw(label);
+}
+
+sf::RectangleShape Button::get_button_shape() {
+    return buttonShape;
+}
+
+sf::Text Button::get_button_text() {
+    return label;
 }
 
 bool Button::isClicked(sf::RenderWindow& window) {
