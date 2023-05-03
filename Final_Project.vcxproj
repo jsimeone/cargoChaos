@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioConstants.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="cargo_node.cpp" />
     <ClCompile Include="conveyor.cpp" />
     <ClCompile Include="fried_node.cpp" />
@@ -145,6 +147,8 @@
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioConstants.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="cargo_node.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="conveyor.h" />
