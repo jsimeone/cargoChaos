@@ -12,6 +12,7 @@
 #include <SFML/Network.hpp>
 
 #include "constants.h"
+class Laser;
 
 using namespace sf;
 using namespace std;
@@ -21,10 +22,10 @@ private:
 protected:
 	Texture texture;
 	Sprite node_sprite;
-	bool is_held;
+    
 public:
 	Node(int x_pos, int y_pos);
-	Sprite get_node_sprite();
+	Sprite* get_node_sprite();
 	void set_texture(string texture_file_name);
 	virtual void pick_up(Vector2f player_position, float player_rotation);
 	virtual void put_down(Vector2f player_position, float player_rotation);
@@ -32,7 +33,9 @@ public:
 	virtual void update(vector<Node*> nodes);
 	virtual void render(RenderWindow* window);
 	bool get_is_held();
-
+    bool is_held;
+    
+    virtual vector<Laser*> get_lasers();
 };
 
 #endif //NODE_H

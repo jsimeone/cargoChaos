@@ -7,20 +7,21 @@ void Node::set_texture(string texture_file_name) {
 	node_sprite.setOrigin((sf::Vector2f)texture.getSize() / 2.f);
 }
 
-Node::Node(int x_pos, int y_pos) {
-	is_held = false;
+Node::Node(int x_pos, int y_pos) : 
+	is_held(false)
+{
 	node_sprite.setScale(constants::NODE_SCALE, constants::NODE_SCALE);
 	node_sprite.setPosition(x_pos, y_pos);
 
 }
 
-Sprite Node::get_node_sprite() {
-	return node_sprite;
+Sprite* Node::get_node_sprite() {
+	return &node_sprite;
 }
 
 void Node::pick_up(Vector2f player_position, float player_rotation) {
 	is_held = true;
-	node_sprite.setPosition(constants::off_screen);
+	node_sprite.setPosition(constants::OFF_SCREEN);
 }
 
 void Node::put_down(Vector2f player_position, float player_rotation) {
@@ -39,4 +40,8 @@ void Node::render(RenderWindow* window) {
 
 bool Node::get_is_held() {
 	return is_held;
+}
+
+vector<Laser*> Node::get_lasers() {
+    return {nullptr, nullptr, nullptr}; //should never be run just for complier. Function used by Laser nodes. 
 }

@@ -13,7 +13,7 @@ string Laser_Node::get_color() {
 	return "Laser";
 }
 
-void Laser_Node::update(vector<Node*> nodes) {
+bool Laser_Node::update_lasers_on(vector<Node*> nodes) {
 	bool laser_on = false;
 	for (Node* node : nodes) {
 		if (node->get_is_held() && node->get_color() != "Laser") {
@@ -22,26 +22,27 @@ void Laser_Node::update(vector<Node*> nodes) {
 				red_laser.set_laser(true);
 				green_laser.set_laser(false);
 				blue_laser.set_laser(false);
-
 				laser_on = true;
 			}
 			else if (color == "Green") {
 				red_laser.set_laser(false);
 				green_laser.set_laser(true);
 				blue_laser.set_laser(false);
-
 				laser_on = true;
 			}
 			else if (color == "Blue") {
 				red_laser.set_laser(false);
 				blue_laser.set_laser(true);
 				green_laser.set_laser(false);
-
 				laser_on = true;
 			}
 		}
 	}
-	if (!laser_on) {
+	return laser_on;
+}
+
+void Laser_Node::update(vector<Node*> nodes) {
+	if (!update_lasers_on(nodes)) {
 		red_laser.set_laser(false);
 		blue_laser.set_laser(false);
 		green_laser.set_laser(false);
@@ -53,9 +54,12 @@ void Laser_Node::update(vector<Node*> nodes) {
 }
 
 void Laser_Node::render(RenderWindow* window) {
-	Node::render(window);
-
 	red_laser.render(window);
 	green_laser.render(window);
 	blue_laser.render(window);
+	Node::render(window);
+}
+
+vector<Laser*> Laser_Node::get_lasers() {
+    return {&red_laser, &green_laser, &blue_laser};
 }

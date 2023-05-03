@@ -12,9 +12,10 @@ namespace constants {
 
     const std::vector<float> PLAY_AREA_WIDTH_BOUNDS = {150, 1450};
     const std::vector<float> PLAY_AREA_HEIGHT_BOUNDS = {190, 1100};
+    const std::vector<float> CONVEYOR_PICK_UP_BOUNDS = { 450, 275 };
 
     const float NODE_SCALE = 0.275;
-    const sf::Vector2f off_screen(-100, -100);
+    const sf::Vector2f OFF_SCREEN(-100, -100);
 
     const float PLAYER_SCALE = 0.25;
     const int PLAYER_ANIMATION_FRAMES = 6;
@@ -28,9 +29,15 @@ namespace constants {
     const int PLACE_DISTANCE = 110; // should be a function of node_size + player_size
     const float PLACE_ANGLE_OFFSET = -90;
     const float MAX_PLACE_OFFSET = 65;
+    const float PLAYER_LASER_BUFFER = 5;
 
     const float INVALID_PLACEMENT_SHAKE= 0.8;
+    const float HIT_SHAKE = 1.5;
 
+    const int CONVEYOR_SPAWN_X = 1400;
+    const int CONVEYOR_SPAWN_Y = 85;
+    const int CONVEYOR_SPACING = 110;
+    const int CONVEYOR_OFFSET = 400;
 }
 
-#endif // CONSTANTS_Hd
+#endif // CONSTANTS_H
