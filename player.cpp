@@ -90,7 +90,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
             if (pow(pow(x_dis, 2) + pow(y_dis, 2), 0.5) <= distance && angle_difference <= 60) {
                 string color = node->get_color();
                 if (color != "Fried") {
-                    node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+                    node->pick_up();
                     pick_up_animation(color);
                     pickup_color = color;
                     is_holding = true;
@@ -315,7 +315,7 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, bo
 
 void Player::pick_up_from_conveyor(Node* node) {
     if (!is_holding) {
-        node->pick_up(player_sprite.getPosition(), player_sprite.getRotation());
+        node->pick_up();
         pick_up_animation(node->get_color());
         pickup_color = node->get_color();
         is_holding = true;
