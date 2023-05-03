@@ -64,19 +64,8 @@ int main() {
 
 
 
-    sf::Music backgroundMusic;
+    //Load Sounds
     AudioConstants::loadSounds();
-    if (!backgroundMusic.openFromFile("assets/soundtrack.wav")) {
-        std::cout << "Error loading sountrack!" << std::endl;
-        return 1;
-    }
-
-    backgroundMusic.setLoop(true);
-    backgroundMusic.play();
-
-    if (!AudioConstants::gameplayMusic.openFromFile("assets/Gameplay.wav")) {
-        std::cout << "Error loading gameplay music!" << std::endl;
-    }
 
 
     while (window.isOpen()) {
@@ -84,15 +73,16 @@ int main() {
         GameState prevState = gameState;
 
         if (gameState == GameState::MainMenu) {
-            if (backgroundMusic.getStatus() != sf::Music::Status::Playing) {
-                backgroundMusic.play();
+            if (AudioConstants::backgroundMusic.getStatus() != sf::Music::Status::Playing) {
+                AudioConstants::backgroundMusic.setLoop(true);
+                AudioConstants::backgroundMusic.play();
             }
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
                     window.close();
                 }
                 if (gameState != GameState::MainMenu) {
-                    backgroundMusic.stop();
+                    AudioConstants::backgroundMusic.stop();
                 }
                 if (event.type == sf::Event::KeyPressed) {
                     AudioConstants::selectSound.play();
@@ -132,7 +122,7 @@ int main() {
             window.display();
         }
         else if (gameState == GameState::Playing) {
-            backgroundMusic.stop();
+            AudioConstants::backgroundMusic.stop();
             if (AudioConstants::gameplayMusic.getStatus() != sf::Music::Status::Playing) {
                 AudioConstants::gameplayMusic.setLoop(true);
                 AudioConstants::gameplayMusic.play();

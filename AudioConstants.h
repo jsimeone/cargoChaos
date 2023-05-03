@@ -8,14 +8,12 @@ public:
     static sf::SoundBuffer selectSoundBuffer;
     static sf::SoundBuffer clickSoundBuffer;
     static sf::Music gameplayMusic;
-
+    static sf::Music backgroundMusic;
 
     static sf::Sound selectSound;
     static sf::Sound clickSound;
-
 
     static void loadSounds();
 };
 
 #endif // AUDIO_CONSTANTS_H
-
