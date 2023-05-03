@@ -24,8 +24,8 @@ int main() {
     Game game;
 
 //    bool gameStarted = false;
-    game.spawn_laser_node(800, 800);
-    game.spawn_cargo_node(600, 600, 0);
+//    game.spawn_laser_node(800, 800);
+//    game.spawn_cargo_node(600, 600, 0);
 
     while (game.is_running()) {
 //        sf::Event event;
