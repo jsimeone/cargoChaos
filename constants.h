@@ -42,7 +42,7 @@ namespace constants {
 
     const int SCORE_INCREMENT = 50;
 
-    const float LASER_SPEED = 15;
+    const float LASER_SPEED = 20;
 
     
 }
