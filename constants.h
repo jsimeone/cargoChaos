@@ -32,7 +32,7 @@ namespace constants {
     const float PLAYER_LASER_BUFFER = 5;
 
     const float INVALID_PLACEMENT_SHAKE= 0.8;
-    const float HIT_SHAKE = 0.2;
+    const float HIT_SHAKE = 1.5;
 
     const int CONVEYOR_SPAWN_X = 1400;
     const int CONVEYOR_SPAWN_Y = 85;
