@@ -24,7 +24,8 @@ int main() {
     Game game;
 
 //    bool gameStarted = false;
-//    game.spawn_laser_node(800, 800);
+    game.spawn_laser_node((constants::PLAY_AREA_WIDTH_BOUNDS[0] + constants::PLAY_AREA_WIDTH_BOUNDS[1]) / 2, 
+                            (constants::PLAY_AREA_HEIGHT_BOUNDS[0] + constants::PLAY_AREA_HEIGHT_BOUNDS[1]) / 2);
 //    game.spawn_cargo_node(600, 600, 0);
 
     while (game.is_running()) {

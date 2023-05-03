@@ -96,6 +96,16 @@ C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(18,35): 
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(27,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(28,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\main.cpp(28,109): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\main.cpp(27,105): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
   node.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(8,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(18,35): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -142,5 +152,5 @@ C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(193,89): 
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(204,109): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(204,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Generating Code...
-  LINK : C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe not found or not built by the last incremental link; performing full link
+globals.obj : warning LNK4099: PDB '' was not found with 'globals.obj' or at ''; linking object as if no debug info
   Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe

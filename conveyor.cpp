@@ -75,6 +75,10 @@ void Conveyor::render(RenderWindow* window, int frames) {
     }
 }
 
+bool Conveyor::is_losing() {
+    return conveyor_nodes.size() > constants::MAX_CONVEYOR_CAPACITY;
+}
+
 Conveyor::~Conveyor() {
     return;
 }

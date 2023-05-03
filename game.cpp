@@ -172,7 +172,7 @@ void Game::screen_shake(float intensity) {
 }
 
 bool Game::is_running() {
-	return this->window->isOpen();
+	return this->window->isOpen() && !conveyor.is_losing();
 }
 
 void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
@@ -236,14 +236,13 @@ void Game::update_nodes() {
             } else if (node_color == "Red") {
                 exit_rectangle.setFillColor(Color(255, 0, 0, 50));
             }
-//
         }
 	}
     
 }
 
 void Game::random_spawn() {
-    if (frame_counter % 300 == 0) {
+    if (frame_counter % 600 == 0) {
         conveyor.spawn_random_node();
     }
 }

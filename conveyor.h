@@ -35,6 +35,7 @@ public:
     String pick_up_node();
     void update();
     void render(RenderWindow* window, int frames);
+    bool is_losing();
 };
 
 #endif /* conveyor_h */
