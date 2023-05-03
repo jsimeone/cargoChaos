@@ -7,7 +7,7 @@ void Game::init_variables() {
     srand(time(0));
     exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,constants::EXIT_AREA_RECT.top});
     exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,constants::EXIT_AREA_RECT.height});
-    colors = {Color(200, 0, 0, 100), Color(0, 200, 0, 100), Color(0, 0, 200, 100)};
+    colors = {Color(188, 49, 56, 100), Color(0, 106, 56, 100), Color(25, 87, 164, 100)};
     exit_color = random_color();
     exit_rectangle.setFillColor(exit_color);
 }
