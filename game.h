@@ -51,6 +51,8 @@ private:
     Texture backdrop_texture;
     Sprite backdrop_sprite;
     
+    RectangleShape exit_rectangle;
+    
     Texture scorebox_texture;
     Sprite scorebox_sprite;
     Text scorebox_text;
@@ -89,6 +91,7 @@ public:
     void render_conveyor(int frames);
     void render_scorebox();
 	void render();
+    
 	
 };
 
