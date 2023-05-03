@@ -54,10 +54,16 @@ void Laser_Node::update(vector<Node*> nodes) {
 }
 
 void Laser_Node::render(RenderWindow* window) {
-	red_laser.render(window);
-	green_laser.render(window);
-	blue_laser.render(window);
+//	red_laser.render(window);
+//	green_laser.render(window);
+//	blue_laser.render(window);
 	Node::render(window);
+}
+
+void Laser_Node::render_lasers(RenderWindow* window) {
+    red_laser.render(window);
+    green_laser.render(window);
+    blue_laser.render(window);
 }
 
 vector<Laser*> Laser_Node::get_lasers() {

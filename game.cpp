@@ -172,6 +172,14 @@ void Game::render_backdrop_walls() {
     window->draw(backdrop_walls_sprite);
 }
 
+void Game::render_lasers() {
+    for (Node* node : nodes ) {
+        if (node->get_color() == "Laser"){
+            node->render_lasers(window);
+        }
+    }
+}
+
 void Game::screen_shake(float intensity) {
     current_screen_shake = intensity * 10;
 }
@@ -303,6 +311,7 @@ void Game::render() {
 	window->clear();
 	render_backdrop();
     window->draw(exit_rectangle);
+    render_lasers();
 	render_nodes();
     render_conveyor(frame_counter);
 	render_player();

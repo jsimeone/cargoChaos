@@ -91,6 +91,7 @@ public:
     void render_screen_shake();
 	void render_player();
 	void render_nodes();
+    void render_lasers();
     void render_conveyor(int frames);
     void render_scorebox();
 	void render();

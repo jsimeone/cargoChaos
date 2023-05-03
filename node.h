@@ -34,7 +34,7 @@ public:
 	virtual void render(RenderWindow* window);
 	bool get_is_held();
     bool is_held;
-    
+    virtual void render_lasers(RenderWindow* window);
     virtual vector<Laser*> get_lasers();
 };
 
