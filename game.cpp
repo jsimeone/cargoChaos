@@ -118,7 +118,7 @@ Game::Game() {
     get_backdrop();
     get_scorebox();
     frame_counter = 0;
-    score = 100;
+    score = 0;
 }
 
 Game::~Game() {
@@ -274,7 +274,7 @@ void Game::render_conveyor(int frames) {
 
 void Game::render_scorebox() {
     scorebox_text.setString(to_string(score));
-    scorebox_text.setPosition(1463 - (scorebox_text.getGlobalBounds().width / 2) - (0.1 * score), 65); //The 0.1 will change depending how high the score should feasibly go. Or this can be changed entirely
+    scorebox_text.setPosition(1453 - (scorebox_text.getGlobalBounds().width / 2), 65);
     
     window->draw(scorebox_sprite);
     window->draw(scorebox_text);
