@@ -105,7 +105,7 @@ void Player::pick_up_node(vector<Node*> nodes) {
     }
 }
 
-float Player::calculate_placement_offset(Node* node, Vector2f new_pos, float &angle) {
+float Player::calculate_placement_node_offset(Node* node, Vector2f new_pos, float &angle) {
     float x_dist = node->get_node_sprite()->getPosition().x - new_pos.x;
     float y_dist = node->get_node_sprite()->getPosition().y - new_pos.y;
     angle = atan2(y_dist, x_dist);
@@ -113,7 +113,23 @@ float Player::calculate_placement_offset(Node* node, Vector2f new_pos, float &an
     return dist - node->get_node_sprite()->getTexture()->getSize().x * constants::NODE_SCALE;
 }
 
-bool Player::offset_on_placement(Vector2f &new_pos, float angle, float offset) {
+void Player::calculate_placement_wall_offset(Vector2f &new_pos, float node_radius) {
+    if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - node_radius) {
+        new_pos.x = constants::PLAY_AREA_WIDTH_BOUNDS[1] - node_radius/2.15;
+    } else if (new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + node_radius) {
+        new_pos.x = constants::PLAY_AREA_WIDTH_BOUNDS[0] + node_radius/2.15;
+    }
+    if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - node_radius) {
+        new_pos.y = constants::PLAY_AREA_HEIGHT_BOUNDS[1] - node_radius/1.5;
+    } else if (new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + node_radius) {
+        new_pos.y = constants::PLAY_AREA_HEIGHT_BOUNDS[0] + node_radius/2.25;
+    }
+}
+
+
+
+
+bool Player::node_offset_on_placement(Vector2f &new_pos, float angle, float offset) {
     if (offset < -constants::MAX_PLACE_OFFSET) {
         new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
         return false;
@@ -128,26 +144,22 @@ bool Player::offset_on_placement(Vector2f &new_pos, float angle, float offset) {
         new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
         return false;
     }
-    if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - get_player_width() / 2 || new_pos.x < constants::PLAY_AREA_WIDTH_BOUNDS[0] + get_player_width() / 2) {
-        new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-         return false;
-    }
-    if (new_pos.y > constants::PLAY_AREA_HEIGHT_BOUNDS[1] - get_player_height() / 2 || new_pos.y < constants::PLAY_AREA_HEIGHT_BOUNDS[0] + get_player_height() / 2) {
-        new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
-        return false;
-    }
     return true;
 }
+
 
 void Player::put_down_node(vector<Node*> nodes) {
     if (is_holding) {
         Vector2f new_pos;
         new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
         new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+        
+        calculate_placement_wall_offset(new_pos, held_node->get_node_sprite()->getGlobalBounds().width/2);
+        
         for (Node* node : nodes) {
             float angle = 0;
-            float offset = calculate_placement_offset(node, new_pos, angle);
-            if (!offset_on_placement(new_pos, angle, offset)) {
+            float offset = calculate_placement_node_offset(node, new_pos, angle);
+            if (!node_offset_on_placement(new_pos, angle, offset)) {
                 return;
             }
         }
@@ -347,13 +359,11 @@ Vector2<float> Player::put_down_fried_node(vector<Node*> nodes) {
     Vector2f new_pos;
     new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * cos((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
     new_pos.y = player_sprite.getPosition().y + constants::PLACE_DISTANCE * sin((player_sprite.getRotation() + constants::PLACE_ANGLE_OFFSET) * constants::PI / 180);
+    calculate_placement_wall_offset(new_pos, held_node->get_node_sprite()->getGlobalBounds().width/2);
     for (Node* node : nodes) {
         float angle = 0;
-        float offset = calculate_placement_offset(node, new_pos, angle);
-        offset_on_placement(new_pos, angle, offset);
-        //            if (!offset_on_placement(new_pos, angle, offset)) {
-        //                return;
-        //            }
+        float offset = calculate_placement_node_offset(node, new_pos, angle);
+        node_offset_on_placement(new_pos, angle, offset);
     }
     //held_node->put_down(new_pos, player_sprite.getRotation());
     held_node->is_held = false;
