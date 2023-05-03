@@ -16,6 +16,7 @@ public:
 	void update(vector<Node*> nodes);
 	void render(RenderWindow* window);
     vector<Laser*> get_lasers();
+    
 };
 
 #endif // LASER_NODE_H

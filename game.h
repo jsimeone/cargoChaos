@@ -52,6 +52,9 @@ private:
     Sprite backdrop_sprite;
     
     RectangleShape exit_rectangle;
+    vector<Color> colors;
+    Color random_color();
+    Color exit_color;
     
     Texture scorebox_texture;
     Sprite scorebox_sprite;
