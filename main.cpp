@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "Game.h"
+#include "game.h"
 #include "Button.h"
 #include "AudioConstants.h"
 
@@ -24,6 +24,24 @@ int main() {
     }
     sf::Sprite backgroundSprite(backgroundTexture);
 
+    // Load Logo Sprite and Set Position
+    sf::Texture logoTexture;
+    sf::Sprite logoSprite;
+    if (!logoTexture.loadFromFile("assets/Cargo-Chaos.png")) {
+        std::cout << "Error loading logo texture! " << std::endl;
+    }
+    logoSprite.setTexture(logoTexture);
+    // Set the scale
+    logoSprite.setScale(0.8f, 0.8f);
+
+    // Set the position
+    float logoX = window.getSize().x / 2.0f - logoSprite.getGlobalBounds().width / 2.0f;
+    float logoY = window.getSize().y * 0.25f - logoSprite.getGlobalBounds().height / 2.0f;
+    logoSprite.setPosition(logoX, logoY);
+
+
+
+
     // Get the original size of the image
     sf::Vector2u backgroundSize = backgroundTexture.getSize();
 
@@ -39,17 +57,12 @@ int main() {
     Button instructionsButton(sf::Vector2f(150, 50), sf::Vector2f(325, 350), "Intructions", sf::Color(255, 51, 0));
     Button exitButton(sf::Vector2f(100, 50), sf::Vector2f(350, 425), "Exit", sf::Color(255, 51, 0));
 
-    sf::Texture logoTexture;
-    sf::Sprite logoSprite;
-    if (!logoTexture.loadFromFile("assets/Cargo-Chaos.png")) {
-        std::cout << "Error loading logo texture! " << std::endl;
-    }
-    logoSprite.setTexture(logoTexture);
-
     // Create the "Back" button for the instructions page
     Button backButton(sf::Vector2f(100, 50), sf::Vector2f(350, 500), "Back", sf::Color(255, 51, 0));
     std::vector<Button*> mainMenuButtons = { &playButton, &instructionsButton, &exitButton };
     int selectedButton = 0;
+
+
 
     sf::Music backgroundMusic;
     AudioConstants::loadSounds();
@@ -65,13 +78,6 @@ int main() {
         std::cout << "Error loading gameplay music!" << std::endl;
     }
 
-    // Set the scale
-    logoSprite.setScale(0.8f, 0.8f);
-
-    // Set the position
-    float logoX = window.getSize().x / 2.0f - logoSprite.getGlobalBounds().width / 2.0f;
-    float logoY = window.getSize().y * 0.25f - logoSprite.getGlobalBounds().height / 2.0f;
-    logoSprite.setPosition(logoX, logoY);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -165,7 +171,7 @@ int main() {
             font.loadFromFile("assets/VinaSans-Regular.ttf");
             sf::Text instructionsText;
             instructionsText.setFont(font);
-            instructionsText.setString("Instructions: \n\nWASD to move\nSpace to interact with objects\nComplete tasks to win the game");
+            instructionsText.setString("Instructions: \n\nWASD to move\nSpace to interact with objects\nComplete task by moving nodes to clear area to pickup points.");
             instructionsText.setCharacterSize(24);
             instructionsText.setFillColor(sf::Color::Red);
             instructionsText.setPosition(250, 200);
