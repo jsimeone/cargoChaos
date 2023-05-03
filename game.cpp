@@ -1,14 +1,14 @@
 #include "game.h"
+#include <random>
 
 
 void Game::init_variables() {
 	window = nullptr;
-    
+    srand(time(0));
     exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,constants::EXIT_AREA_RECT.top});
     exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,constants::EXIT_AREA_RECT.height});
-    exit_rectangle.setFillColor(Color(0, 0, 0, 0));
-    exit_rectangle.setFillColor(Color(0, 0, 0, 150));
-    
+    colors = {Color((255, 0, 0, 100)), Color((0, 255, 0, 100)), Color((0, 0, 255, 100))};
+    exit_rectangle.setFillColor(random_color());
 }
 
 void Game::init_window() {
@@ -83,6 +83,10 @@ void Game::poll_events() {
             break;
 		}
 	}
+}
+
+Color Game::random_color() {
+    return colors[rand() % 3];
 }
 
 void Game::conveyor_pick_up() {
