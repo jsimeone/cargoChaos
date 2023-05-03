@@ -7,8 +7,9 @@ void Game::init_variables() {
     srand(time(0));
     exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,constants::EXIT_AREA_RECT.top});
     exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,constants::EXIT_AREA_RECT.height});
-    colors = {Color((255, 0, 0, 100)), Color((0, 255, 0, 100)), Color((0, 0, 255, 100))};
-    exit_rectangle.setFillColor(random_color());
+    colors = {Color(200, 0, 0, 100), Color(0, 200, 0, 100), Color(0, 0, 200, 100)};
+    exit_color = random_color();
+    exit_rectangle.setFillColor(exit_color);
 }
 
 void Game::init_window() {
@@ -230,15 +231,15 @@ void Game::update_nodes() {
         }
         Vector2<float> node_pos =  node->get_node_sprite()->getPosition();
         if (constants::EXIT_AREA_RECT.contains(node_pos)) {
-            increment_score(constants::SCORE_INCREMENT);
-            node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
             string node_color = node->get_color();
-            if (node_color == "Blue") {
-                exit_rectangle.setFillColor(Color(0, 0, 255, 50));
-            } else if (node_color == "Green") {
-                exit_rectangle.setFillColor(Color(0, 255, 0, 50));
-            } else if (node_color == "Red") {
-                exit_rectangle.setFillColor(Color(255, 0, 0, 50));
+            if ((node_color == "Blue" && exit_color == (colors[2])) ||
+                (node_color == "Red" && exit_color == (colors[0])) ||
+                (node_color == "Green" && exit_color == (colors[1]))) {
+                
+                increment_score(constants::SCORE_INCREMENT);
+                node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
+                exit_color = random_color();
+                exit_rectangle.setFillColor(exit_color);
             }
 //
         }
