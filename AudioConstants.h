@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos AudioConstants declaration.
+ * @file AudioConstants.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #ifndef AUDIO_CONSTANTS_H
 #define AUDIO_CONSTANTS_H
 

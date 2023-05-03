@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos Constants namespace declaration.
+ * @file constants.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 

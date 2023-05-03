@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos Laser class declaration.
+ * @file laser.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #ifndef LASER_H
 #define LASER_H
 

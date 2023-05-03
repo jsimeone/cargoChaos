@@ -1,12 +1,12 @@
-//
-//  conveyor.h
-//  SFMLPromisingTest
-//
-//  Created by Joseph Simeone on 4/24/23.
-//
+/**
+ * Project 08: Cargo Chaos Conveyor class declaration.
+ * @file conveyor.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
 
-#ifndef conveyor_h
-#define conveyor_h
+#ifndef CONVEYOR_H
+#define CONVEYOR_H
 #include <iostream>
 #include <vector>
 #include <random>
@@ -38,4 +38,4 @@ public:
     bool is_losing();
 };
 
-#endif /* conveyor_h */
+#endif //CONVEYOR_H

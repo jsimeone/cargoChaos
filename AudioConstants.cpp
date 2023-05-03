@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos AudioConstants class method definitions.
+ * @file AudioConstants.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #include "AudioConstants.h"
 #include <iostream>
 

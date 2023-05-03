@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos Player class declaration.
+ * @file player.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #ifndef PLAYER_H
 #define PLAYER_H
 #include<iostream>

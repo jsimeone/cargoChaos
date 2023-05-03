@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos Player class method definitions.
+ * @file player.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #include "player.h"
 #include "constants.h"
 #include <iostream>

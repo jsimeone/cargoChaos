@@ -1,4 +1,10 @@
-// Button.cpp
+/**
+ * Project 08: Cargo Chaos button class method definitions.
+ * @file button.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #include "Button.h"
 
 Button::Button(sf::Vector2f size, sf::Vector2f position, const std::string& text, sf::Color buttonColor) {

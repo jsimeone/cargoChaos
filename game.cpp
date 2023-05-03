@@ -1,3 +1,9 @@
+/**
+ * Project 08: Cargo Chaos Game class method definitions.
+ * @file game.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
 #include "game.h"
 #include <random>
 

@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos Cargo_Node class declaration.
+ * @file Cargo_Node.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #ifndef CARGO_NODE_H
 #define CARGO_NODE_H
 

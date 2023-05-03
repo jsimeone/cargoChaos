@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos Game class declaration.
+ * @file game.h
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #ifndef GAME_H
 #define GAME_H
 #include<iostream>

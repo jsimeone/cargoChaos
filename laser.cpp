@@ -1,3 +1,9 @@
+/**
+ * Project 08: Cargo Chaos Laser class method definitions.
+ * @file laser.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
 #include "laser.h"
 
 Laser::Laser(Vector2f node_pos, int new_color_index) :
