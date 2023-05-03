@@ -3,6 +3,12 @@
 
 void Game::init_variables() {
 	window = nullptr;
+    
+    exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,constants::EXIT_AREA_RECT.top});
+    exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,constants::EXIT_AREA_RECT.height});
+    exit_rectangle.setFillColor(Color(0, 0, 0, 0));
+    exit_rectangle.setFillColor(Color(0, 0, 0, 150));
+    
 }
 
 void Game::init_window() {
@@ -215,7 +221,25 @@ void Game::update_player() {
 void Game::update_nodes() {
 	for (Node* node : nodes) {
 		node->update(nodes);
+        if (node->get_color() == "Laser") {
+            continue;
+        }
+        Vector2<float> node_pos =  node->get_node_sprite()->getPosition();
+        if (constants::EXIT_AREA_RECT.contains(node_pos)) {
+            increment_score(constants::SCORE_INCREMENT);
+            node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
+            string node_color = node->get_color();
+            if (node_color == "Blue") {
+                exit_rectangle.setFillColor(Color(0, 0, 255, 50));
+            } else if (node_color == "Green") {
+                exit_rectangle.setFillColor(Color(0, 255, 0, 50));
+            } else if (node_color == "Red") {
+                exit_rectangle.setFillColor(Color(255, 0, 0, 50));
+            }
+//
+        }
 	}
+    
 }
 
 void Game::random_spawn() {
@@ -273,11 +297,14 @@ void Game::render() {
 	render_screen_shake();
 	window->clear();
 	render_backdrop();
+    window->draw(exit_rectangle);
 	render_nodes();
     render_conveyor(frame_counter);
 	render_player();
     render_backdrop_walls();
 	render_scorebox();
+    
+    
 	window->display();
     
 	frame_counter += 1;
