@@ -9,10 +9,10 @@
 
  /**
   * @brief: Constructor for a button object.
-  * @param size: The desired length and width of the button in pixels.
-  * @param position: The x and y position of the button in pixels.
-  * @param text: the text to be displayed on the button.
-  * @param buttonColor: The desired color of the button.
+  * @param size The desired length and width of the button in pixels.
+  * @param position The x and y position of the button in pixels.
+  * @param text the text to be displayed on the button.
+  * @param buttonColor The desired color of the button.
   */
 Button::Button(sf::Vector2f size, sf::Vector2f position, 
                const std::string& text, sf::Color buttonColor) {
@@ -35,8 +35,8 @@ Button::Button(sf::Vector2f size, sf::Vector2f position,
 
 /**
  * @brief: Renders the button to the menu window.
- * @param window: The window to render the button to.
- * @param selected: A boolean indicating whether or not the button is currently selected.
+ * @param window The window to render the button to.
+ * @param selected A boolean indicating whether or not the button is currently selected.
  */
 void Button::render(sf::RenderWindow& window, bool selected) {
     if (selected) {
@@ -51,7 +51,7 @@ void Button::render(sf::RenderWindow& window, bool selected) {
 
 /**
  * @brief: Returns whether or not the button is being clicked.
- * @param window: The window the button is currently rendered to.
+ * @param window The window the button is currently rendered to.
  * @return: True if the button is clicked, false otherwise.
  */
 bool Button::isClicked(sf::RenderWindow& window) {

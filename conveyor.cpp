@@ -44,7 +44,7 @@ Sprite Conveyor::get_conveyor_sprite(int frames) {
  @brief: Spawns a random color node on the conveyor. Adds the node to the conveyor_nodes vector
  */
 void Conveyor::spawn_random_node() {
-    srand(time(0));
+    srand((int) time(0));
     int random = rand() % 100;
     if (random >= 60) {
         conveyor_nodes.push_back(new Laser_Node(constants::CONVEYOR_SPAWN_X, 

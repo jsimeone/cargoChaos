@@ -8,8 +8,8 @@
 
 /**
  * @brief: Constructor for a Laser_Node object at a certain x_pos, y_pos.
- * @param x_pos: The x-position, in pixels, that the node should be created at.
- * @param y_pos: The y-position, in pixels, that the node should be created at.
+ * @param x_pos The x-position, in pixels, that the node should be created at.
+ * @param y_pos The y-position, in pixels, that the node should be created at.
  */
 Laser_Node::Laser_Node(int x_pos, int y_pos) : Node(x_pos, y_pos), 
 	red_laser(node_sprite.getPosition(), 0),
@@ -29,7 +29,7 @@ string Laser_Node::get_color() {
 
 /**
  * @brief: Activates the correct lasers for this node.
- * @param Nodes: A vector of pointers to all of the nodes in the play area.
+ * @param nodes A vector of pointers to all of the nodes in the play area.
  * @return: True if a laser is on, false otherwise.
  */
 bool Laser_Node::update_lasers_on(vector<Node*> nodes) {
@@ -56,7 +56,7 @@ bool Laser_Node::update_lasers_on(vector<Node*> nodes) {
 
 /**
  * @brief: Updates this node and its lasers.
- * @param Nodes: A vector of pointers to all of the nodes in the play area.
+ * @param nodes A vector of pointers to all of the nodes in the play area.
  */
 void Laser_Node::update(vector<Node*> nodes) {
 	if (!update_lasers_on(nodes)) {
@@ -72,7 +72,7 @@ void Laser_Node::update(vector<Node*> nodes) {
 
 /**
  * @brief: Renders the lasers that this node owns.
- * @param window: A pointer to the game's window.
+ * @param window A pointer to the game's window.
  */
 void Laser_Node::render_lasers(RenderWindow* window) {
     red_laser.render(window);
