@@ -146,9 +146,6 @@ int main() {
 
             Game game;
 
-            game.spawn_cargo_node(500, 500, 0);
-            game.spawn_cargo_node(400, 400, 1);
-            game.spawn_cargo_node(300, 300, 2);
             game.spawn_laser_node(600, 600);
 
             while (game.is_running()) {
