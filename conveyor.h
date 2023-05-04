@@ -27,7 +27,6 @@ private:
     vector<Node*> conveyor_nodes;
 public:
     Conveyor();
-    ~Conveyor();
     
     Sprite get_conveyor_sprite(int frames);
 

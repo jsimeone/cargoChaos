@@ -1,42 +1,11 @@
-﻿  Button.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\Button.cpp(39,75): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\Button.cpp(39,63): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-  cargo_node.cpp
+﻿  conveyor.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-  conveyor.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\conveyor.cpp(36,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\conveyor.cpp(73,63): warning C4305: 'argument': truncation from 'double' to 'float'
-  fried_node.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\conveyor.cpp(47,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\conveyor.cpp(91,63): warning C4305: 'argument': truncation from 'double' to 'float'
   game.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -94,92 +63,11 @@ C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\game.cpp(237,52): wa
           [
               T=float
           ]
-  laser.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser.cpp(12,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser.cpp(30,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser.cpp(153,16): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  laser_node.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\laser_node.cpp(66,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   main.cpp
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-  node.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\node.cpp(31,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\node.cpp(31,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  player.cpp
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(15,33): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(25,35): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(34,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(35,42): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\constants.h(42,45): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(55,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(57,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(62,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(62,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(64,17): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(67,17): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(71,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(92,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(95,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(130,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(137,58): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(139,58): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(142,59): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(144,59): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(222,83): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(234,52): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(238,89): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(251,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\falco\OneDrive\Desktop\Final_Project\Final_Project\player.cpp(250,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Generating Code...
   Final_Project.vcxproj -> C:\Users\falco\OneDrive\Desktop\Final_Project\x64\Debug\Final_Project.exe

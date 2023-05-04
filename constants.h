@@ -46,7 +46,8 @@ namespace constants {
     const int CONVEYOR_SPAWN_Y = 85;
     const int CONVEYOR_SPACING = 110;
     const int CONVEYOR_OFFSET = 400;
-    const int MAX_CONVEYOR_CAPACITY = 6;
+    const int MAX_CONVEYOR_CAPACITY = 10;
+    const int CONVEYOR_SPEED = 500;
 
     const int SCORE_INCREMENT = 50;
 
