@@ -7,7 +7,9 @@
 #include "game.h"
 #include <random>
 
-
+/**
+ @brief: Initialize member variables needed for the game class
+ */
 void Game::init_variables() {
 	window = nullptr;
     srand(time(0));
@@ -20,6 +22,9 @@ void Game::init_variables() {
     exit_rectangle.setFillColor(exit_color);
 }
 
+/**
+ @brief: Create and configure window object for game
+ */
 void Game::init_window() {
 	videoMode.height = constants::SCREEN_HEIGHT;
 	videoMode.width = constants::SCREEN_WIDTH;
@@ -37,6 +42,9 @@ void Game::init_window() {
 
 }
 
+/**
+ @brief: Handle key press events and trigger appropriate functions
+ */
 void Game::key_press_checker() {
     if (event.key.code == Keyboard::Escape)
         window->close();
@@ -62,6 +70,9 @@ void Game::key_press_checker() {
         player.is_sprinting = true;
 }
 
+/**
+ @brief: Handle key release events
+ */
 void Game::key_release_checker() {
     if (event.key.code == Keyboard::W)
         player.set_moving_up(false);
@@ -75,6 +86,9 @@ void Game::key_release_checker() {
         player.is_sprinting = false;
 }
 
+/**
+ @brief: Route events happening in window to the correct handler function
+ */
 void Game::poll_events() {
 	while (window->pollEvent(event))
 	{
@@ -97,10 +111,17 @@ void Game::poll_events() {
 	}
 }
 
+/**
+ @brief: Generate a random color from the list of game colors
+ @return A random Color object
+ */
 Color Game::random_color() {
     return colors[rand() % 3];
 }
 
+/**
+ @brief: Attempt to pick up a node from the conveyor belt if one exists
+ */
 void Game::conveyor_pick_up() {
     if (!player.is_holding) {
         String node_type = conveyor.pick_up_node();
@@ -123,11 +144,12 @@ void Game::conveyor_pick_up() {
         else {
             return;
         }
-        
     }
-    
 }
 
+/**
+ @brief: Construct a new instance of the Game class
+ */
 Game::Game() {
 	init_variables();
 	init_window();
@@ -137,10 +159,16 @@ Game::Game() {
     score = 0;
 }
 
+/**
+ @brief: A deconstructor for the Game class
+ */
 Game::~Game() {
 	delete window;
 }
 
+/**
+ @brief: Initialize the scorebox sprites and text
+ */
 void Game::get_scorebox() {
     if (!scorebox_texture.loadFromFile("assets/scorebox.png")) {
         cout << "Failed to load scorebox asset" << endl;
@@ -156,6 +184,9 @@ void Game::get_scorebox() {
     scorebox_text.setFillColor(Color(47, 47, 47));
 }
 
+/**
+ @brief: Load textures and sprites for game background
+ */
 void Game::get_backdrop() {
     if (!backdrop_texture.loadFromFile("assets/backdrop.png")) {
         cout<< "Load failed" << endl;
@@ -177,14 +208,23 @@ void Game::get_backdrop() {
                                       constants::SCREEN_HEIGHT/2);
 }
 
+/**
+ @brief: Render the game's backdrop on screen
+ */
 void Game::render_backdrop() {
     window->draw(backdrop_sprite);
 }
 
+/**
+ @brief: Render the game's backdrop walls on screen
+ */
 void Game::render_backdrop_walls() {
     window->draw(backdrop_walls_sprite);
 }
 
+/**
+ @brief: Render lasers for each Laser type node
+ */
 void Game::render_lasers() {
     for (Node* node : nodes ) {
         if (node->get_color() == "Laser"){
@@ -193,30 +233,61 @@ void Game::render_lasers() {
     }
 }
 
+/**
+ @brief: Shake the screen with a given intensity
+ @param intensity A float dictating the intensity of a screen shake event
+ */
 void Game::screen_shake(float intensity) {
     current_screen_shake = intensity * 10;
 }
 
+/**
+ @brief: Check whether or not the game should be running
+ @return: A bool: whether or not the window is open and the player is not currently losing
+ */
 bool Game::is_running() {
 	return this->window->isOpen() && !conveyor.is_losing();
 }
 
+/**
+ @brief: Spawn a new cargo node
+ @param x_pos The x position for the new node
+ @param y_pos The y position for the new node
+ @param color_index The index for the desired color in the colors list
+ */
 void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
 	nodes.push_back(new Cargo_Node(x_pos, y_pos, color_index));
 }
 
+/**
+ @brief: Spawn a new, immovable fried node
+ @param x_pos The x coordinate to spawn the new node at
+ @param y_pos The y coordinate to spawn the new node at
+ */
 void Game::spawn_fried_node(int x_pos, int y_pos) {
 	nodes.push_back(new Fried_Node(x_pos, y_pos));
 }
 
+/**
+ @brief: Spawn a new laser node on screen
+ @param x_pos The x coordinate to spawn the new node at
+ @param y_pos The y coordinate to spawn the new node at
+ */
 void Game::spawn_laser_node(int x_pos, int y_pos) {
 	nodes.insert(nodes.begin(), new Laser_Node(x_pos, y_pos));
 }
 
+/**
+ @brief: Update the score by a given value
+ @param value How much to update the score by
+ */
 void Game::increment_score(int value) {
     score += value;
 }
 
+/**
+ @brief: Shake the screen and then set the new_shake_intensity constant back to zero
+ */
 void Game::update_screen_shake() {
     if (new_shake_intensity > 0) {
         screen_shake(new_shake_intensity);
@@ -224,6 +295,9 @@ void Game::update_screen_shake() {
     }
 }
 
+/**
+ @brief: Update the player's speed, position, and the node it is holding
+ */
 void Game::update_player() {
     player.update(nodes);
     if (!player.is_holding) {
@@ -243,6 +317,9 @@ void Game::update_player() {
     }
 }
 
+/**
+ @brief: Update all of the game's nodes and check if they have been placed in the scoring box
+ */
 void Game::update_nodes() {
 	for (Node* node : nodes) {
 		node->update(nodes);
@@ -265,6 +342,9 @@ void Game::update_nodes() {
 	}
 }
 
+/**
+ @brief: Animate the exit box when the proper node is placed into it before changing to the next required color
+ */
 void Game::animate_exit_box() {
     Color new_color = exit_rectangle.getFillColor();
     new_color.a += 10;
@@ -278,13 +358,18 @@ void Game::animate_exit_box() {
     }
 }
 
+/**
+ @brief: Spawn a new random node on the conveyor every 600 frames
+ */
 void Game::random_spawn() {
     if (frame_counter % 600 == 0) {
         conveyor.spawn_random_node();
     }
 }
 
-
+/**
+ @brief: Update the entire game and fun all methods that should run every frame
+ */
 void Game::update() {
     random_spawn();
 	poll_events();
@@ -298,20 +383,33 @@ void Game::update() {
     }
 }
 
+/**
+ @brief: Draw the player on the screen
+ */
 void Game::render_player() {
 	window->draw(player.get_player_sprite());
 }
 
+/**
+ @brief: Draw each node on the screen
+ */
 void Game::render_nodes() {
 	for (Node* node : nodes) {
 		node->render(window);
 	}
 }
 
+/**
+ @brief: Draw the conveyor belt on screen
+ @param frames The number of frames elapsed during the game so far
+ */
 void Game::render_conveyor(int frames) {
     conveyor.render(window, frames);
 }
 
+/**
+ @brief: Draw the scorebox and its text on screen
+ */
 void Game::render_scorebox() {
     scorebox_text.setString(to_string(score));
     scorebox_text.setPosition(1453 - (scorebox_text.getGlobalBounds().width / 2), 65);
@@ -321,6 +419,9 @@ void Game::render_scorebox() {
     
 }
 
+/**
+ @brief: Draw screen shake events
+ */
 void Game::render_screen_shake() {
     if (current_screen_shake > 1) {
         view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, 
@@ -334,6 +435,9 @@ void Game::render_screen_shake() {
     }
 }
 
+/**
+ @brief: Trigger each render function for the game's different on-screen objects
+ */
 void Game::render() {
 	render_screen_shake();
 	window->clear();
@@ -345,7 +449,6 @@ void Game::render() {
 	render_player();
     render_backdrop_walls();
 	render_scorebox();
-    
     
 	window->display();
     
