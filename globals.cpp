@@ -6,4 +6,6 @@
  */
 #include "globals.h"
 
+//float that is made non-zero when a shake is started.
 float new_shake_intensity = 0;
+
