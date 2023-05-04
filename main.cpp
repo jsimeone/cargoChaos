@@ -1,3 +1,10 @@
+/**
+ * Project 08: Cargo Chaos main file.
+ * @file main.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "game.h"
