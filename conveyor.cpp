@@ -36,21 +36,27 @@ void Conveyor::spawn_random_node() {
     srand(time(0));
     int random = rand() % 100;
     if (random >= 60) {
-        conveyor_nodes.push_back(new Laser_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y));
+        conveyor_nodes.push_back(new Laser_Node(constants::CONVEYOR_SPAWN_X, 
+                                                constants::CONVEYOR_SPAWN_Y));
     }
     else if (random >= 40) {
-        conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y, 0));
+        conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, 
+                                                constants::CONVEYOR_SPAWN_Y, 0));
     }
     else if (random >= 20) {
-        conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y, 1));
+        conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, 
+                                                constants::CONVEYOR_SPAWN_Y, 1));
     }
     else {
-        conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y, 2));
+        conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, 
+                                                constants::CONVEYOR_SPAWN_Y, 2));
     }
 }
 
 String Conveyor::pick_up_node() {
-    if (!conveyor_nodes.empty() && conveyor_nodes[0]->get_node_sprite()->getPosition().x < 1.01 * constants::CONVEYOR_SPACING + constants::CONVEYOR_OFFSET) {
+    if (!conveyor_nodes.empty() && conveyor_nodes[0]->get_node_sprite()->getPosition().x < 
+        1.01 * constants::CONVEYOR_SPACING + constants::CONVEYOR_OFFSET) 
+    {
         String color = conveyor_nodes[0]->get_color();
         conveyor_nodes.erase(conveyor_nodes.begin());
         return color;
@@ -61,7 +67,9 @@ String Conveyor::pick_up_node() {
 
 void Conveyor::update() {
     for (int i = 0; i < conveyor_nodes.size(); i++) {
-        if (conveyor_nodes[i]->get_node_sprite()->getPosition().x > i * constants::CONVEYOR_SPACING + constants::CONVEYOR_OFFSET) {
+        if (conveyor_nodes[i]->get_node_sprite()->getPosition().x > i * 
+            constants::CONVEYOR_SPACING + constants::CONVEYOR_OFFSET) 
+        {
             conveyor_nodes[i]->get_node_sprite()->move(-2.3, 0);
         }
     }
