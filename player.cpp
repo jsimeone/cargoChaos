@@ -61,7 +61,7 @@ void Player::update_player_speed() {
 /**
  * @brief: Updates player position using the velocities and sprint/encumbered
  *         speed factors if the position is valid.
- * @param nodes: Pointers to each node to check player-node collisions.
+ * @param nodes Pointers to each node to check player-node collisions.
  */
 void Player::update_player_position(vector<Node*> nodes) {
     int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * 
@@ -102,7 +102,7 @@ void Player::update_player_animations() {
 /**
  * @brief: Finds the first node in the player's field of vision and within reach distance and
  *         picks it up.
- * @param nodes: A vector for nodes that could be picked up.
+ * @param nodes A vector for nodes that could be picked up.
  */
 void Player::pick_up_node(vector<Node*> nodes) {
     if (!is_holding) {
@@ -144,9 +144,9 @@ void Player::pick_up_node(vector<Node*> nodes) {
 /**
  * @brief: Used when node is placed on top of another. Calculates the distance and direction
  *         the node needs to be to be in a valid position.
- * @param node: The node in the way of the node being placed.
- * @param new_pos: A vector representing the desired placement position of the node.
- * @param angle: The direction that the node should be moved in to be in a valid place.
+ * @param node The node in the way of the node being placed.
+ * @param new_pos A vector representing the desired placement position of the node.
+ * @param angle The direction that the node should be moved in to be in a valid place.
  * @return: The distance that the node should be moved to be in a valid place.
  */
 float Player::calculate_placement_node_offset(Node* node, Vector2f new_pos, float &angle) {
@@ -161,8 +161,8 @@ float Player::calculate_placement_node_offset(Node* node, Vector2f new_pos, floa
 /**
  * @brief: Checks if the player has placed a node out of the play area
  *         and adjusts the placement position.
- * @param new_pos: The vector representing the nodes position.
- * @param node_radius: The radius of the node being placed.
+ * @param new_pos The vector representing the nodes position.
+ * @param node_radius The radius of the node being placed.
  */
 void Player::calculate_place_wall_offset(Vector2f &new_pos, float node_radius) {
     if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - node_radius) {
@@ -179,9 +179,9 @@ void Player::calculate_place_wall_offset(Vector2f &new_pos, float node_radius) {
 
 /**
  * @brief: Checks if the node offset is valid and sets the position according if it is.
- * @param new_pos: A vector representing the node's position.
- * @param angle: The direction that the node is being offset in.
- * @param offset: The distance of the node's offset.
+ * @param new_pos A vector representing the node's position.
+ * @param angle The direction that the node is being offset in.
+ * @param offset The distance of the node's offset.
  * @return: If the offset is not too far away from the original position.
  */
 bool Player::node_offset_on_placement(Vector2f &new_pos, float angle, float offset) {
@@ -207,7 +207,7 @@ bool Player::node_offset_on_placement(Vector2f &new_pos, float angle, float offs
 
 /**
  * @brief: Player puts down the held node if the held node can be placed in a valid position.
- * @param nodes: A vector of node pointers to the nodes on the play area.
+ * @param nodes A vector of node pointers to the nodes on the play area.
  */
 void Player::put_down_node(vector<Node*> nodes) {
     if (is_holding) {
@@ -313,7 +313,7 @@ void Player::get_textures() {
 
 /**
  * @brief: Indicates that player is being moved up by user input.
- * @param new_up: true if player is moving up.
+ * @param new_up true if player is moving up.
  */
 void Player::set_moving_up(bool new_up) {
     moving_up = new_up;
@@ -321,7 +321,7 @@ void Player::set_moving_up(bool new_up) {
 
 /**
  * @brief: Indicates that player is being moved down by user input.
- * @param new_down: True if player is moving down.
+ * @param new_down True if player is moving down.
  */
 void Player::set_moving_down(bool new_down) {
     moving_down = new_down;
@@ -329,7 +329,7 @@ void Player::set_moving_down(bool new_down) {
 
 /**
  * @brief: Indicates that player is being moved right by user input.
- * @param new_right: true if player is moving right.
+ * @param new_right true if player is moving right.
  */
 void Player::set_moving_right(bool new_right) {
     moving_right = new_right;
@@ -337,7 +337,7 @@ void Player::set_moving_right(bool new_right) {
 
 /**
  * @brief: Indicates that player is being moved left by user input.
- * @param new_left: true if player is moving left.
+ * @param new_left true if player is moving left.
  */
 void Player::set_moving_left(bool new_left) {
     moving_left = new_left;
@@ -346,7 +346,7 @@ void Player::set_moving_left(bool new_left) {
 /**
  * @brief: Normalizes velocities if the magnitude of velocities is greater than zero.
  *         Makes it so the sum of velocites can not surpass one.
- * @param velocity: A vector with the x velocity and y velocity
+ * @param velocity A vector with the x velocity and y velocity
  * @return: The velocity vector with magnitude less than or equal to one.
  */
 Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
@@ -359,7 +359,7 @@ Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
 
 /**
  * @brief: Updates player position. Controls sequence of helper position functions.
- * @param nodes: The nodes active in the play area for collisions.
+ * @param nodes The nodes active in the play area for collisions.
  */
 void Player::update(vector<Node*> nodes) {
     update_player_velocity();
@@ -379,7 +379,7 @@ void Player::display() {
  * @brief: Initiates a node pick up or put down based on whether the player is holding a
  *         node or not and if a pick up or put down is
  * already in progress.
- * @param nodes: A vector of pointers to all nodes active on the playing field.
+ * @param nodes A vector of pointers to all nodes active on the playing field.
  */
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (pickup_animation_status == 0 && put_down_animation_status == 0) {
@@ -394,10 +394,10 @@ void Player::toggle_pick_up(vector<Node*> nodes) {
 
 /**
  * @brief: Checks if a the position of the player is within the play area.
- * @param new_x: The x value of the position being checked.
- * @param new_y: The y value of the position being checked.
- * @param x_is_valid: Will be true if the x value of the position is valid.
- * @param y_is_valid: Will be true if the y value of the position is valid.
+ * @param new_x The x value of the position being checked.
+ * @param new_y The y value of the position being checked.
+ * @param x_is_valid Will be true if the x value of the position is valid.
+ * @param y_is_valid Will be true if the y value of the position is valid.
  */
 void Player::check_play_bounds(float new_x, float new_y, 
                                bool &x_is_valid, bool &y_is_valid) 
@@ -418,11 +418,11 @@ void Player::check_play_bounds(float new_x, float new_y,
 
 /**
  * @brief: Checks if the player will collide with a node.
- * @param node: Node to be checked for collisions with player.
- * @param new_x: The x value of the position being checked.
- * @param new_y: The y value of the position being checked.
- * @param x_is_valid: Will be true if the x value of the position is valid.
- * @param y_is_valid: Will be true if the y value of the position is valid.
+ * @param node Node to be checked for collisions with player.
+ * @param new_x The x value of the position being checked.
+ * @param new_y The y value of the position being checked.
+ * @param x_is_valid Will be true if the x value of the position is valid.
+ * @param y_is_valid Will be true if the y value of the position is valid.
  */
 void Player::check_node_collisions(Node* node, float new_x, float new_y, 
                                    bool &x_is_valid, bool &y_is_valid) 
@@ -449,11 +449,11 @@ void Player::check_node_collisions(Node* node, float new_x, float new_y,
 
 /**
  * @brief: Checks if a player position is valid.
- * @param new_x: The x value of the position being checked
- * @param new_y: The y value of the position being checked.
- * @param nodes: A vector of node pointers pointing to the active nodes in the game area.
- * @param x_is_valid: Will be true if the x value of the position is valid.
- * @param y_is_valid: Will be true if the y value of the position is valid.
+ * @param new_x The x value of the position being checked
+ * @param new_y The y value of the position being checked.
+ * @param nodes A vector of node pointers pointing to the active nodes in the game area.
+ * @param x_is_valid Will be true if the x value of the position is valid.
+ * @param y_is_valid Will be true if the y value of the position is valid.
  */
 void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, 
                                bool &x_is_valid, bool &y_is_valid) 
@@ -474,7 +474,7 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes,
 
 /**
  * @brief: Makes player pick up a node from the conveyor.
- * @param node: Pointer pointing to the node to be picked up.
+ * @param node Pointer pointing to the node to be picked up.
  */
 void Player::pick_up_from_conveyor(Node* node) {
     if (!is_holding) {
@@ -488,7 +488,7 @@ void Player::pick_up_from_conveyor(Node* node) {
 
 /**
  * @brief: Continues and advances an active pick-up animation.
- * @param color: The color of the node being picked up.
+ * @param color The color of the node being picked up.
  */
 void Player::pick_up_animation(string color) {
     pickup_animation_status++;
@@ -524,7 +524,7 @@ void Player::put_down_animation() {
 
 /**
  * @brief: Player puts down a fried node after being hit by a laser.
- * @param nodes: Vector of pointers pointing to the active nodes to check for collisions with fried node.
+ * @param nodes Vector of pointers pointing to the active nodes to check for collisions with fried node.
  * @return: The position of the fried node to be spawned by game.
  */
 Vector2<float> Player::put_down_fried_node(vector<Node*> nodes) {

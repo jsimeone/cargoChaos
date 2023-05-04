@@ -10,9 +10,9 @@
 /**
  * @brief: Constructor for a Cargo_Node object at a certain x_pos, y_pos with a certain 
            color.
- * @param x_pos: The x-position, in pixels, that the node should be created at.
- * @param y_pos: The y-position, in pixels, that the node should be created at.
- * @param new_color_index: The index representation of the color this node should be. 
+ * @param x_pos The x-position, in pixels, that the node should be created at.
+ * @param y_pos The y-position, in pixels, that the node should be created at.
+ * @param new_color_index The index representation of the color this node should be. 
                            0->Red, 1->Green, 3->Blue.
  */
 Cargo_Node::Cargo_Node(int x_pos, int y_pos, int new_color_index) : Node(x_pos, y_pos),

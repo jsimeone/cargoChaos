@@ -8,8 +8,8 @@
 
  /**
   * @brief: The constructor for a Laser object.
-  * @param node_pos: The position of the node this laser belongs to.
-  * @param new_color_index: The color index of this laser.
+  * @param node_pos The position of the node this laser belongs to.
+  * @param new_color_index The color index of this laser.
   */
 Laser::Laser(Vector2f node_pos, int new_color_index) :
     laser_on(false),
@@ -30,7 +30,7 @@ Laser::~Laser() {
 
 /**
  * @brief: Renders this laser to the game window.
- * @param window: A pointer to the game window.
+ * @param window A pointer to the game window.
  */
 void Laser::render(RenderWindow* window) {
     if (laser_on) {
@@ -40,7 +40,7 @@ void Laser::render(RenderWindow* window) {
 
 /**
  * @brief: Sets the length of this laser.
- * @param new_length: The new length of this laser.
+ * @param new_length The new length of this laser.
  */
 void Laser::set_length(int new_length) {
     length = new_length;
@@ -48,7 +48,7 @@ void Laser::set_length(int new_length) {
 
 /**
  * @brief: Sets whether the laser is on or off.
- * @param new_laser_on: A bool indicating whether the laser should be on or off.
+ * @param new_laser_on A bool indicating whether the laser should be on or off.
  */
 void Laser::set_laser(bool new_laser_on) {
     if (laser_on == !new_laser_on) {
@@ -59,12 +59,12 @@ void Laser::set_laser(bool new_laser_on) {
 
 /**
  * @brief: Checks if the laser is colliding with a node.
- * @param nodes: A vector of pointers to all of the nodes in the play area.
- * @param x_is_valid: A bool used to pass back whether or not the x position is valid.
- * @param y_is_valid: A bool used to pass back whether or not the y position is valid.
- * @param end_x: The location of the x location of the end point of the laser.
- * @param end_y: The location of the y location of the end point of the laser.
- * @param parent: The sprite of the parent node.
+ * @param nodes A vector of pointers to all of the nodes in the play area.
+ * @param x_is_valid A bool used to pass back whether or not the x position is valid.
+ * @param y_is_valid A bool used to pass back whether or not the y position is valid.
+ * @param end_x The location of the x location of the end point of the laser.
+ * @param end_y The location of the y location of the end point of the laser.
+ * @param parent The sprite of the parent node.
  */
 void Laser::check_node_collisions(vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid, 
                                   float end_x, float end_y, Sprite parent) {
@@ -98,10 +98,10 @@ void Laser::check_node_collisions(vector<Node*> nodes, bool &x_is_valid, bool &y
 
 /**
  * @brief: Checks if the laser is colliding with a wall.
- * @param x_is_valid: A bool used to pass back whether or not the x position is valid.
- * @param y_is_valid: A bool used to pass back whether or not the y position is valid.
- * @param end_x: The location of the x location of the end point of the laser.
- * @param end_y: The location of the y location of the end point of the laser.
+ * @param x_is_valid A bool used to pass back whether or not the x position is valid.
+ * @param y_is_valid A bool used to pass back whether or not the y position is valid.
+ * @param end_x The location of the x location of the end point of the laser.
+ * @param end_y The location of the y location of the end point of the laser.
  */
 void Laser::check_wall_collisions(bool& x_is_valid, bool& y_is_valid, 
                                   float end_x, float end_y) 
@@ -126,10 +126,10 @@ void Laser::check_wall_collisions(bool& x_is_valid, bool& y_is_valid,
 
 /**
  * @brief: Updates the length of the laser, checking for wall and node collisions.
- * @param node_pos: The position of the node this laser belongs to.
- * @param node_rotation: The rotation of the node this laser belongs to.
- * @param nodes: A list of pointers to all the nodes in the play area.
- * @param parent: The sprite of the parent node.
+ * @param node_pos The position of the node this laser belongs to.
+ * @param node_rotation The rotation of the node this laser belongs to.
+ * @param nodes A list of pointers to all the nodes in the play area.
+ * @param parent The sprite of the parent node.
  */
 void Laser::update_length(Vector2f node_pos, float node_rotation, 
                           vector<Node*> nodes, Sprite parent) 
@@ -168,10 +168,10 @@ void Laser::update_length(Vector2f node_pos, float node_rotation,
 
 /**
  * @brief: Updates the laser.
- * @param node_pos: The position of the node this laser belongs to.
- * @param node_rotation: The rotation of the node this laser belongs to.
- * @param nodes: A list of pointers to all the nodes in the play area.
- * @param parent: The sprite of the parent node.
+ * @param node_pos The position of the node this laser belongs to.
+ * @param node_rotation The rotation of the node this laser belongs to.
+ * @param nodes A list of pointers to all the nodes in the play area.
+ * @param parent The sprite of the parent node.
  */
 void Laser::update_laser(Vector2f node_pos, float node_rotation, 
                          vector<Node*> nodes, Sprite parent) 
@@ -187,7 +187,7 @@ void Laser::update_laser(Vector2f node_pos, float node_rotation,
 
 /**
  * @brief: Sets the texture of the laser.
- * @param texture_name: The color to use for this laser's texture.
+ * @param texture_name The color to use for this laser's texture.
  */
 void Laser::set_texture(string texture_name) {
 	if (!texture.loadFromFile("assets/" + texture_name + "_Laser.png")) {
@@ -206,8 +206,8 @@ Sprite* Laser::get_sprite() {
 
 /**
  * @brief: Gets the distance between two positions for laser collisions.
- * @param pos1: The position of the first point to measure.
- * @param pos2: The position of the second point to measure.
+ * @param pos1 The position of the first point to measure.
+ * @param pos2 The position of the second point to measure.
  */
 float Laser::get_distance(Vector2<float> pos1, Vector2<float> pos2) {
     float x_dis = pos1.x - pos2.x;
@@ -217,7 +217,7 @@ float Laser::get_distance(Vector2<float> pos1, Vector2<float> pos2) {
 
 /**
  * @brief: Gets whether or not this laser is colliding with the given player.
- * @param player: The player to check collision with
+ * @param player The player to check collision with
  * @return: Whether or not the player is colliding with this laser.
  */
 bool Laser::colliding_with(Player player) {

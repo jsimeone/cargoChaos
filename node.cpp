@@ -10,7 +10,7 @@
 
  /**
   * @brief: Sets the texture used by this node.
-  * @param texture_file_name: The name of the texture, should be "Red", "Green", "Blue", 
+  * @param texture_file_name The name of the texture, should be "Red", "Green", "Blue",
   *							  "Laser", or "Fried".
   */
 void Node::set_texture(string texture_file_name) {
@@ -21,8 +21,8 @@ void Node::set_texture(string texture_file_name) {
 
 /**
  * @brief: Constructor for a Node object at a certain x_pos, y_pos.
- * @param x_pos: The x-position, in pixels, that the node should be created at.
- * @param y_pos: The y-position, in pixels, that the node should be created at.
+ * @param x_pos The x-position, in pixels, that the node should be created at.
+ * @param y_pos The y-position, in pixels, that the node should be created at.
  */
 Node::Node(int x_pos, int y_pos) : 
 	is_held(false)
@@ -50,9 +50,9 @@ void Node::pick_up() {
 
 /**
  * @brief: Puts this node down at the given position, maintaining the player's rotation.
- * @param placement_position: A Vector2f containing the x and y position the node should
+ * @param placement_position A Vector2f containing the x and y position the node should
  *							  be placed at.
- * @param player_rotation: The angle, in degrees, the node should be placed at.
+ * @param player_rotation The angle, in degrees, the node should be placed at.
  */
 void Node::put_down(Vector2f placement_position, float player_rotation) {
 	node_sprite.setPosition(placement_position);
@@ -62,7 +62,7 @@ void Node::put_down(Vector2f placement_position, float player_rotation) {
 
 /**
  * @brief: Updates the node. Overridden by certain derived classes as needed.
- * @param nodes: A vector of pointers to all of the nodes in the play area.
+ * @param nodes A vector of pointers to all of the nodes in the play area.
  */
 void Node::update(vector<Node*> nodes) {
 	return;
@@ -70,7 +70,7 @@ void Node::update(vector<Node*> nodes) {
 
 /**
  * @brief: Renders the node to the window.
- * @param window: A pointer to the main game window.
+ * @param window A pointer to the main game window.
  */
 void Node::render(RenderWindow* window) {
 	window->draw(node_sprite);
@@ -96,7 +96,7 @@ vector<Laser*> Node::get_lasers() {
 
 /**
  * @brief: Renders any lasers owned by this node to the game window.
- * @param window: A pointer to the main game window.
+ * @param window A pointer to the main game window.
  */
 void Node::render_lasers(RenderWindow* window) {
     return;

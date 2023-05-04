@@ -82,7 +82,6 @@ int main() {
 
     while (window.isOpen()) {
         sf::Event event;
-        GameState prevState = gameState;
 
         if (gameState == GameState::MainMenu) {
             if (AudioConstants::backgroundMusic.getStatus() != 

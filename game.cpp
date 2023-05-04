@@ -12,7 +12,7 @@
  */
 void Game::init_variables() {
 	window = nullptr;
-    srand(time(0));
+    srand((int) time(0));
     exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,
                                 constants::EXIT_AREA_RECT.top});
     exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,
@@ -235,7 +235,7 @@ void Game::render_lasers() {
 
 /**
  @brief: Shake the screen with a given intensity.
- @param intensity: A float dictating the intensity of a screen shake event.
+ @param intensity A float dictating the intensity of a screen shake event.
  */
 void Game::screen_shake(float intensity) {
     current_screen_shake = intensity * 10;
@@ -252,9 +252,9 @@ bool Game::is_running() {
 
 /**
  @brief: Spawn a new cargo node.
- @param x_pos: The x position for the new node.
- @param y_pos: The y position for the new node.
- @param color_index: The index for the desired color in the colors list.
+ @param x_pos The x position for the new node.
+ @param y_pos The y position for the new node.
+ @param color_index The index for the desired color in the colors list.
  */
 void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
 	nodes.push_back(new Cargo_Node(x_pos, y_pos, color_index));
@@ -262,8 +262,8 @@ void Game::spawn_cargo_node(int x_pos, int y_pos, int color_index) {
 
 /**
  @brief: Spawn a new, immovable fried node.
- @param x_pos: The x coordinate to spawn the new node at.
- @param y_pos: The y coordinate to spawn the new node at.
+ @param x_pos The x coordinate to spawn the new node at.
+ @param y_pos The y coordinate to spawn the new node at.
  */
 void Game::spawn_fried_node(int x_pos, int y_pos) {
 	nodes.push_back(new Fried_Node(x_pos, y_pos));
@@ -271,8 +271,8 @@ void Game::spawn_fried_node(int x_pos, int y_pos) {
 
 /**
  @brief: Spawn a new laser node on screen.
- @param x_pos: The x coordinate to spawn the new node at.
- @param y_pos: The y coordinate to spawn the new node at.
+ @param x_pos The x coordinate to spawn the new node at.
+ @param y_pos The y coordinate to spawn the new node at.
  */
 void Game::spawn_laser_node(int x_pos, int y_pos) {
 	nodes.insert(nodes.begin(), new Laser_Node(x_pos, y_pos));
@@ -280,7 +280,7 @@ void Game::spawn_laser_node(int x_pos, int y_pos) {
 
 /**
  @brief: Update the score by a given value.
- @param value: How much to update the score by.
+ @param value How much to update the score by.
  */
 void Game::increment_score(int value) {
     score += value;
@@ -404,7 +404,7 @@ void Game::render_nodes() {
 
 /**
  @brief: Draw the conveyor belt on screen.
- @param frames: The number of frames elapsed during the game so far.
+ @param frames The number of frames elapsed during the game so far.
  */
 void Game::render_conveyor(int frames) {
     conveyor.render(window, frames);
