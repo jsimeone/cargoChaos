@@ -60,13 +60,18 @@ int main() {
     backgroundSprite.setScale(scaleX, scaleY);
 
     // Initialize buttons
-    Button playButton(sf::Vector2f(100, 50), sf::Vector2f(350, 275), "Play", sf::Color(255, 51, 0));
-    Button instructionsButton(sf::Vector2f(150, 50), sf::Vector2f(325, 350), "Intructions", sf::Color(255, 51, 0));
-    Button exitButton(sf::Vector2f(100, 50), sf::Vector2f(350, 425), "Exit", sf::Color(255, 51, 0));
+    Button playButton(sf::Vector2f(100, 50), sf::Vector2f(350, 275), "Play", 
+                      sf::Color(255, 51, 0));
+    Button instructionsButton(sf::Vector2f(150, 50), sf::Vector2f(325, 350), 
+                              "Intructions", sf::Color(255, 51, 0));
+    Button exitButton(sf::Vector2f(100, 50), sf::Vector2f(350, 425), "Exit", 
+                      sf::Color(255, 51, 0));
 
     // Create the "Back" button for the instructions page
-    Button backButton(sf::Vector2f(100, 50), sf::Vector2f(350, 500), "Back", sf::Color(255, 51, 0));
-    std::vector<Button*> mainMenuButtons = { &playButton, &instructionsButton, &exitButton };
+    Button backButton(sf::Vector2f(100, 50), sf::Vector2f(350, 500), "Back", 
+                      sf::Color(255, 51, 0));
+    std::vector<Button*> mainMenuButtons = { &playButton, &instructionsButton, 
+                                             &exitButton };
     int selectedButton = 0;
 
 
@@ -80,7 +85,9 @@ int main() {
         GameState prevState = gameState;
 
         if (gameState == GameState::MainMenu) {
-            if (AudioConstants::backgroundMusic.getStatus() != sf::Music::Status::Playing) {
+            if (AudioConstants::backgroundMusic.getStatus() != 
+                sf::Music::Status::Playing) 
+            {
                 AudioConstants::backgroundMusic.setLoop(true);
                 AudioConstants::backgroundMusic.play();
             }
@@ -93,18 +100,20 @@ int main() {
                 }
                 if (event.type == sf::Event::KeyPressed) {
                     AudioConstants::selectSound.play();
-                    if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
+                    if (event.key.code == sf::Keyboard::Up) {
                         if (selectedButton > 0) {
                             selectedButton--;
                         }
                     }
-                    if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
+                    if (event.key.code == sf::Keyboard::Down) {
                         AudioConstants::selectSound.play();
                         if (selectedButton < mainMenuButtons.size() - 1) {
                             selectedButton++;
                         }
                     }
-                    if (event.key.code == sf::Keyboard::Enter || event.key.code == sf::Keyboard::Space) {
+                    if (event.key.code == sf::Keyboard::Enter || 
+                        event.key.code == sf::Keyboard::Space) 
+                    {
                         if (selectedButton == 0) {
                             AudioConstants::clickSound.play();
                             gameState = GameState::Playing;
@@ -147,7 +156,7 @@ int main() {
                 game.render();
             }
 
-            AudioConstants::gameplayMusic.stop(); // Stop the gameplay music when the game ends
+            AudioConstants::gameplayMusic.stop();
             gameState = GameState::MainMenu;
         }
 
@@ -157,7 +166,10 @@ int main() {
                     window.close();
                 }
 
-                if (event.type == sf::Event::KeyPressed && (event.key.code == sf::Keyboard::Enter || event.key.code == sf::Keyboard::Space)) {
+                if (event.type == sf::Event::KeyPressed && 
+                    (event.key.code == sf::Keyboard::Enter || 
+                     event.key.code == sf::Keyboard::Space)) 
+                {
                     gameState = GameState::MainMenu;
                 }
             }

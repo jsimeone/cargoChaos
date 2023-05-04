@@ -11,8 +11,10 @@
 void Game::init_variables() {
 	window = nullptr;
     srand(time(0));
-    exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,constants::EXIT_AREA_RECT.top});
-    exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,constants::EXIT_AREA_RECT.height});
+    exit_rectangle.setPosition({constants::EXIT_AREA_RECT.left,
+                                constants::EXIT_AREA_RECT.top});
+    exit_rectangle.setSize({constants::EXIT_AREA_RECT.width,
+                            constants::EXIT_AREA_RECT.height});
     colors = {Color(188, 49, 56, 100), Color(0, 106, 56, 100), Color(25, 87, 164, 100)};
     exit_color = random_color();
     exit_rectangle.setFillColor(exit_color);
@@ -22,10 +24,12 @@ void Game::init_window() {
 	videoMode.height = constants::SCREEN_HEIGHT;
 	videoMode.width = constants::SCREEN_WIDTH;
 
-	window = new sf::RenderWindow(videoMode, "CargoChaos", sf::Style::Titlebar | sf::Style::Close);
+	window = new sf::RenderWindow(videoMode, "CargoChaos", 
+                                  sf::Style::Titlebar | sf::Style::Close);
 	window->setFramerateLimit(60);
     
-    view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
+    view = View({constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2}, 
+                {constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT});
     window->setView(view);
 
 	window->setKeyRepeatEnabled(false);
@@ -45,17 +49,17 @@ void Game::key_press_checker() {
     if (event.key.code == Keyboard::D)
         player.set_moving_right(true);
     if (event.key.code == Keyboard::Space) {
-        if (player.get_player_sprite().getPosition().x < constants::CONVEYOR_PICK_UP_BOUNDS[0] && player.get_player_sprite().getPosition().y < constants::CONVEYOR_PICK_UP_BOUNDS[1]) {
+        if (player.get_player_sprite().getPosition().x < 
+            constants::CONVEYOR_PICK_UP_BOUNDS[0] && 
+            player.get_player_sprite().getPosition().y < 
+            constants::CONVEYOR_PICK_UP_BOUNDS[1]) 
+        {
             conveyor_pick_up();
         }
         player.toggle_pick_up(nodes);
     }
-    if (event.key.code == Keyboard::T)
-        conveyor.spawn_random_node();
     if (event.key.code == Keyboard::LShift)
         player.is_sprinting = true;
-//    if (event.key.code == Keyboard::Z)
-//        animate_exit_box();
 }
 
 void Game::key_release_checker() {
@@ -72,7 +76,6 @@ void Game::key_release_checker() {
 }
 
 void Game::poll_events() {
-	//Event polling
 	while (window->pollEvent(event))
 	{
 		switch (event.type)
@@ -168,8 +171,10 @@ void Game::get_backdrop() {
     }
     backdrop_walls_sprite.setTexture(backdrop_walls_texture, true);
     backdrop_walls_sprite.setScale(1, 1);
-    backdrop_walls_sprite.setOrigin((sf::Vector2f)backdrop_walls_texture.getSize() / 2.f);
-    backdrop_walls_sprite.setPosition(constants::SCREEN_WIDTH/2, constants::SCREEN_HEIGHT/2);
+    backdrop_walls_sprite.setOrigin((sf::Vector2f)backdrop_walls_texture.getSize() / 
+                                     2.f);
+    backdrop_walls_sprite.setPosition(constants::SCREEN_WIDTH/2, 
+                                      constants::SCREEN_HEIGHT/2);
 }
 
 void Game::render_backdrop() {
@@ -208,7 +213,6 @@ void Game::spawn_laser_node(int x_pos, int y_pos) {
 	nodes.insert(nodes.begin(), new Laser_Node(x_pos, y_pos));
 }
 
-//Not sure if this will be needed but if the user scoring is handled somewhere that's not the game class, will come in handy
 void Game::increment_score(int value) {
     score += value;
 }
@@ -253,7 +257,8 @@ void Game::update_nodes() {
                 (node_color == "Green" && exit_color == (colors[1]))) {
                 
                 increment_score(constants::SCORE_INCREMENT);
-                node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, constants::OFF_SCREEN.y);
+                node->get_node_sprite()->setPosition(constants::OFF_SCREEN.x, 
+                                                     constants::OFF_SCREEN.y);
                 animate_exit_box();
             }
         }
@@ -318,7 +323,8 @@ void Game::render_scorebox() {
 
 void Game::render_screen_shake() {
     if (current_screen_shake > 1) {
-        view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
+        view.setCenter({constants::SCREEN_WIDTH/2 - current_screen_shake*shake_direction, 
+                     constants::SCREEN_HEIGHT/2 - current_screen_shake*shake_direction});
         window->setView(view);
         current_screen_shake /= 2;
         shake_direction *= -1;
