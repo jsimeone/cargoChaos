@@ -8,6 +8,7 @@ Laser::Laser(Vector2f node_pos, int new_color_index) :
     width(5)
 {
 	set_texture(colors[color_index]);
+    laser_sprite.setScale(constants::LASER_NODE_SCALE, constants::LASER_NODE_SCALE);
 }
 
 Laser::~Laser() {

@@ -34,11 +34,8 @@ private:
     bool moving_up;
     bool moving_down;
     
-    Node* held_node;
+   
     
-    int pickup_animation_status;
-    int put_down_animation_status;
-    string pickup_color;
 
     Vector2<float> velocity;
     Vector2<float> pos;
@@ -60,7 +57,6 @@ private:
     
     float sprint_speed_factor;
     float encumbered_speed_factor;
-    void pick_up_animation(string color);
     void put_down_animation();
     
 public:
@@ -83,13 +79,18 @@ public:
     void set_moving_down(bool new_down);
     void set_moving_left(bool new_left);
     void set_moving_right(bool new_right);
+    
+    void pick_up_animation(string color);
+    int pickup_animation_status;
+    int put_down_animation_status;
+    string pickup_color;
 
     void toggle_pick_up(vector<Node*> nodes);
     void check_play_bounds(float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
     void check_node_collisions(Node* node, float new_x, float new_y, bool &x_is_valid, bool &y_is_valid);
     void position_is_valid(float new_x, float new_y, vector<Node*> nodes, bool &x_is_valid, bool &y_is_valid);
     void pick_up_from_conveyor(Node* node);
-    
+    Node* held_node;
     Vector2<float> put_down_fried_node(vector<Node*> nodes);
 };
 

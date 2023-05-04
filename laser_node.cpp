@@ -7,6 +7,7 @@ Laser_Node::Laser_Node(int x_pos, int y_pos) :
 	blue_laser(node_sprite.getPosition(), 2)
 {
 	set_texture("Laser");
+    //get_node_sprite()->setScale(constants::LASER_NODE_SCALE, constants::LASER_NODE_SCALE);
 }
 
 string Laser_Node::get_color() {

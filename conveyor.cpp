@@ -36,13 +36,13 @@ Sprite Conveyor::get_conveyor_sprite(int frames) {
 void Conveyor::spawn_random_node() {
     srand(time(0));
     int random = rand() % 100;
-    if (random >= 60) {
+    if (random >= 75) {
         conveyor_nodes.push_back(new Laser_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y));
     }
-    else if (random >= 40) {
+    else if (random >= 50) {
         conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y, 0));
     }
-    else if (random >= 20) {
+    else if (random >= 25) {
         conveyor_nodes.push_back(new Cargo_Node(constants::CONVEYOR_SPAWN_X, constants::CONVEYOR_SPAWN_Y, 1));
     }
     else {

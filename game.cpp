@@ -48,6 +48,22 @@ void Game::key_press_checker() {
         conveyor.spawn_random_node();
     if (event.key.code == Keyboard::LShift)
         player.is_sprinting = true;
+<<<<<<< Updated upstream
+=======
+    if (event.key.code == Keyboard::Z)
+        animate_exit_box();
+    if (event.key.code == Keyboard::N) {
+        if (!player.is_holding) {
+            player.is_holding = true;
+            player.held_node = new Cargo_Node(0, 0, rand()%3);
+            player.held_node->is_held = true;
+            player.pick_up_animation(player.held_node->get_color());
+            player.pickup_color =player.held_node->get_color();
+            nodes.push_back(player.held_node);
+            cout << "CHEAT CODE: NEW NODE GIVEN" << endl;
+        }
+    }
+>>>>>>> Stashed changes
 }
 
 void Game::key_release_checker() {
@@ -256,7 +272,11 @@ void Game::update_nodes() {
 }
 
 void Game::random_spawn() {
+<<<<<<< Updated upstream
     if (frame_counter % 300 == 0) {
+=======
+    if (frame_counter % constants::FRAMES_PER_SPAWN == 0) {
+>>>>>>> Stashed changes
         conveyor.spawn_random_node();
     }
 }
