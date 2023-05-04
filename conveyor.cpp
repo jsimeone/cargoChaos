@@ -6,6 +6,9 @@
  */
 #include "conveyor.h"
 
+/**
+ @brief: Constructor for a Conveyor object
+ */
 Conveyor::Conveyor() : 
     animation_status(225) 
 {
@@ -18,6 +21,11 @@ Conveyor::Conveyor() :
     conveyor_sprite.setOrigin(-461, 0);
 }
 
+/**
+ @brief: Gets the correct sprite for a conveyor object depending on frames
+ @param frames The current frame the game is on. Used to calculate which frame of conveyor animation should be shown
+ @return: A Sprite with the correct texture
+ */
 Sprite Conveyor::get_conveyor_sprite(int frames) {
     
     if (frames % 10 == 0) {
@@ -32,6 +40,9 @@ Sprite Conveyor::get_conveyor_sprite(int frames) {
     return conveyor_sprite;
 }
 
+/**
+ @brief: Spawns a random color node on the conveyor. Adds the node to the conveyor_nodes vector
+ */
 void Conveyor::spawn_random_node() {
     srand(time(0));
     int random = rand() % 100;
@@ -53,6 +64,10 @@ void Conveyor::spawn_random_node() {
     }
 }
 
+/**
+ @brief: Removes a node from the conveyor when the player picks it up
+ @return: A string representing the color of the node that was picked up or "Empty" if there are no nodes on the conveyor
+ */
 String Conveyor::pick_up_node() {
     if (!conveyor_nodes.empty() && conveyor_nodes[0]->get_node_sprite()->getPosition().x < 
         1.01 * constants::CONVEYOR_SPACING + constants::CONVEYOR_OFFSET) 
@@ -65,6 +80,9 @@ String Conveyor::pick_up_node() {
     
 }
 
+/**
+ @brief: Updates the state of all nodes on the conveyor belt and moves them to appropriate positions
+ */
 void Conveyor::update() {
     for (int i = 0; i < conveyor_nodes.size(); i++) {
         if (conveyor_nodes[i]->get_node_sprite()->getPosition().x > i * 
@@ -75,6 +93,11 @@ void Conveyor::update() {
     }
 }
 
+/**
+ @brief: Renders the conveyor belt object as well as all of its nodes contained in conveyor_nodes
+ @param window The window to render onto
+ @param frames The current frame the game is on
+ */
 void Conveyor::render(RenderWindow* window, int frames) {
     window->draw(get_conveyor_sprite(frames));
     for (Node* node : conveyor_nodes) {
@@ -82,10 +105,10 @@ void Conveyor::render(RenderWindow* window, int frames) {
     }
 }
 
+/**
+ @brief: Checks whether not the conveyor is full and the player is currently losing
+ @return: Boolean whether or not player is losing
+ */
 bool Conveyor::is_losing() {
     return conveyor_nodes.size() > constants::MAX_CONVEYOR_CAPACITY;
-}
-
-Conveyor::~Conveyor() {
-    return;
 }
