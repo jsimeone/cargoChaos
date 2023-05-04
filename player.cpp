@@ -11,6 +11,9 @@
 #include <cmath>
 using namespace sf;
 
+/**
+ * @brief Updates player velocity vector depending on user input
+ */
 void Player::update_player_velocity() {
     //====UPDATE VELOCITIES====//
     if (moving_up && !moving_down) {
@@ -34,6 +37,10 @@ void Player::update_player_velocity() {
     velocity = normalize_velocities(velocity);
 }
 
+/**
+ * @brief Updates player speed depending on whether or not
+ * the player is holding the sprint key and if the player is holding a noded
+ */
 void Player::update_player_speed() {
     if (is_sprinting) {
         sprint_speed_factor = constants::PLAYER_SPRINT_SPEED / constants::PLAYER_SPEED;
@@ -51,6 +58,11 @@ void Player::update_player_speed() {
     }
 }
 
+/**
+ * @brief Updates player position using the velocities and sprint/encumbered
+ * speed factors if the position is valid.
+ * @param nodes pointers to each node to check player-node collisions
+ */
 void Player::update_player_position(vector<Node*> nodes) {
     int new_x = pos.x + velocity.x * constants::PLAYER_SPEED * 
                 sprint_speed_factor * encumbered_speed_factor;
@@ -74,6 +86,10 @@ void Player::update_player_position(vector<Node*> nodes) {
     player_sprite.setPosition(pos.x, pos.y);
 }
 
+/**
+ * @brief Checks if animations are in progress and if so, animations
+ * are continued with pick_up_animation() and put_down_animation().
+ */
 void Player::update_player_animations() {
     if (pickup_animation_status != 0) {
         pick_up_animation(pickup_color);
@@ -83,6 +99,11 @@ void Player::update_player_animations() {
     }
 }
 
+/**
+ * @brief Finds the first node in the player's field of vision and within reach distance and
+ * picks it up.
+ * @param nodes a vector for nodes that could be picked up.
+ */
 void Player::pick_up_node(vector<Node*> nodes) {
     if (!is_holding) {
         for (Node* node : nodes) {
@@ -120,10 +141,15 @@ void Player::pick_up_node(vector<Node*> nodes) {
     }
 }
 
-float Player::calculate_placement_node_offset(Node* node, 
-                                              Vector2f new_pos, 
-                                              float &angle) 
-{
+/**
+ * @brief Used when node is placed on top of another. Calculates the distance and direction
+ * the node needs to be to be in a valid position.
+ * @param node the node in the way of the node being palced
+ * @param new_pos a vector representing the desired placement position of the node
+ * @param angle the direction that the node should be moved in to be in a valid place
+ * @return the distance that the node should be moved to be in a valid place
+ */
+float Player::calculate_placement_node_offset(Node* node, Vector2f new_pos, float &angle) {
     float x_dist = node->get_node_sprite()->getPosition().x - new_pos.x;
     float y_dist = node->get_node_sprite()->getPosition().y - new_pos.y;
     angle = atan2(y_dist, x_dist);
@@ -132,6 +158,12 @@ float Player::calculate_placement_node_offset(Node* node,
            constants::NODE_SCALE;
 }
 
+/**
+ * @brief checks if the player has placed a node out of the play area
+ * and adjusts the placement position.
+ * @param new_pos the vector representing the nodes position.
+ * @param node_radius the radius of the node being placed.
+ */
 void Player::calculate_place_wall_offset(Vector2f &new_pos, float node_radius) {
     if (new_pos.x > constants::PLAY_AREA_WIDTH_BOUNDS[1] - node_radius) {
         new_pos.x = constants::PLAY_AREA_WIDTH_BOUNDS[1] - node_radius/2.15;
@@ -145,9 +177,13 @@ void Player::calculate_place_wall_offset(Vector2f &new_pos, float node_radius) {
     }
 }
 
-
-
-
+/**
+ * @brief checks if the node offset is valid and sets the position according if it is
+ * @param new_pos a vector representing the nodes position
+ * @param angle the direction that the node is being offset in
+ * @param offset the distance of the node's offset
+ * @return If the offset is not too far away from the original position.
+ */
 bool Player::node_offset_on_placement(Vector2f &new_pos, float angle, float offset) {
     if (offset < -constants::MAX_PLACE_OFFSET) {
         new_shake_intensity = constants::INVALID_PLACEMENT_SHAKE;
@@ -169,7 +205,10 @@ bool Player::node_offset_on_placement(Vector2f &new_pos, float angle, float offs
     return true;
 }
 
-
+/**
+ * @brief Player puts down the held node if the held node can be placed in a valid position.
+ * @param nodes a vector of node pointers to the nodes on the play area.
+ */
 void Player::put_down_node(vector<Node*> nodes) {
     if (is_holding) {
         Vector2f new_pos;
@@ -196,7 +235,9 @@ void Player::put_down_node(vector<Node*> nodes) {
         put_down_animation();
     }
 }
-
+/**
+ * @brief Default constructor for the player class.
+ */
 Player::Player() : 
     pos({ (constants::PLAY_AREA_WIDTH_BOUNDS[1] - 
            constants::PLAY_AREA_WIDTH_BOUNDS[0]) / 2 + 
@@ -222,51 +263,90 @@ Player::Player() :
                       constants::PLAYER_ANIMATION_FRAMES * constants::PLAYER_SCALE*(.25);
 }
 
+/**
+ * @brief Deconstructor for the player class. Useful in further development.
+ */
 Player::~Player() {
     return;
 }
 
+/**
+ * @brief Gets the sprite used by the player
+ * @return returns the player's sprite object.
+ */
 Sprite Player::get_player_sprite() {
     return player_sprite;
 }
  
+/**
+ * @brief Gets the player's height using the texture size and the scale
+ * @return returns an int representing the player's height
+ */
 int Player::get_player_height() {
     return player_sprite.getTexture()->getSize().y * constants::PLAYER_SCALE;
 }
 
+/**
+ * @brief Gets the player's width using the texture size and the scale
+ * @return returns an int representing the player's width
+ */
 int Player::get_player_width() {
     return player_sprite.getTexture()->getSize().x / constants::PLAYER_ANIMATION_FRAMES *
            constants::PLAYER_SCALE;
 }
-
+/**
+ * @brief Gets texture from assets, sets and scales texture according to settings, and sets to sprite.
+ */
 void Player::get_textures() {
     if (!player_texture.loadFromFile("assets/yellowSpriteSheet.png")) {
         cout<< "Loading player texture failed" << endl;
         system("pause");
     }
     player_sprite.setTexture(player_texture, true);
-    player_sprite.setTextureRect(IntRect(0, 0, 512, 512));
+    player_sprite.setTextureRect(IntRect(0, 0, 512, 512)); //original image 512x512 pixels.
     player_sprite.setScale(constants::PLAYER_SCALE, constants::PLAYER_SCALE);
     player_sprite.setOrigin(player_sprite.getTextureRect().width / 2, 
                             player_sprite.getTextureRect().height / 2);
 }
 
+/**
+ * @brief Indicates that player is being moved up by user input.
+ * @param new_up true if player is moving up.
+ */
 void Player::set_moving_up(bool new_up) {
     moving_up = new_up;
 }
 
+/**
+ * @brief Indicates that player is being moved down by user input.
+ * @param new_down  true if player is moving down.
+ */
 void Player::set_moving_down(bool new_down) {
     moving_down = new_down;
 }
 
+/**
+ * @brief Indicates that player is being moved right by user input.
+ * @param new_right true if player is moving right.
+ */
 void Player::set_moving_right(bool new_right) {
     moving_right = new_right;
 }
 
+/**
+ * @brief Indicates that player is being moved left by user input.
+ * @param new_left true if player is moving left.
+ */
 void Player::set_moving_left(bool new_left) {
     moving_left = new_left;
 }
 
+/**
+ * @brief Normalizes velocities if the magnitude of velocities is greater than zero.
+ * Makes it so the sum of velocites can not surpass one.
+ * @param velocity vector with the x velocity and y velocity
+ * @returns the velocity vector with magnitude less than or equal to one.
+ */
 Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     float magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y));
     if (magnitude > 1) {
@@ -275,6 +355,10 @@ Vector2<float> Player::normalize_velocities(Vector2<float> &velocity){
     return velocity;
 }
 
+/**
+ * @brief Updates player position. Controls sequence of helper position functions.
+ * @param nodes the nodes active in the play area for collisions.
+ */
 void Player::update(vector<Node*> nodes) {
     update_player_velocity();
     update_player_speed();
@@ -282,10 +366,19 @@ void Player::update(vector<Node*> nodes) {
     update_player_animations();
 }
 
+/**
+ * @brief display function for the player. To be used in later development.
+ */
 void Player::display() {
     return;
 }
 
+/**
+ * @brief Initiates a node pick up or put down based on whether
+ * the player is holding a node or not and if a pick up or put down is
+ * already in progress.
+ * @param nodes vector of pointers to all nodes active on the playing field.
+ */
 void Player::toggle_pick_up(vector<Node*> nodes) {
     if (pickup_animation_status == 0 && put_down_animation_status == 0) {
         if (is_holding) {
@@ -297,6 +390,13 @@ void Player::toggle_pick_up(vector<Node*> nodes) {
     }
 }
 
+/**
+ * @brief Checks if a the position of the player is within the play area.
+ * @param new_x the x value of the position being checked
+ * @param new_y the y value of the position being checked.
+ * @param x_is_valid will be true if the x value of the position is valid.
+ * @param y_is_valid will be true if the y value of the position is valid.
+ */
 void Player::check_play_bounds(float new_x, float new_y, 
                                bool &x_is_valid, bool &y_is_valid) 
 {
@@ -314,6 +414,14 @@ void Player::check_play_bounds(float new_x, float new_y,
     }
 }
 
+/**
+ * @brief Checks if the player will collide with a node
+ * @param node Node to be checked for collisions with player
+ * @param new_x the x value of the position being checked
+ * @param new_y the y value of the position being checked.
+ * @param x_is_valid will be true if the x value of the position is valid.
+ * @param y_is_valid will be true if the y value of the position is valid.
+ */
 void Player::check_node_collisions(Node* node, float new_x, float new_y, 
                                    bool &x_is_valid, bool &y_is_valid) 
 {
@@ -337,6 +445,14 @@ void Player::check_node_collisions(Node* node, float new_x, float new_y,
     }
 }
 
+/**
+ * @brief Checks if a player position is valid.
+ * @param new_x the x value of the position being checked
+ * @param new_y the y value of the position being checked.
+ * @param nodes a vector of node pointers pointing to the active nodes in the game area.
+ * @param x_is_valid will be true if the x value of the position is valid.
+ * @param y_is_valid will be true if the y value of the position is valid.
+ */
 void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes, 
                                bool &x_is_valid, bool &y_is_valid) 
 {
@@ -354,6 +470,10 @@ void Player::position_is_valid(float new_x, float new_y, vector<Node*> nodes,
     check_play_bounds(new_x, new_y, x_is_valid, y_is_valid);
 }
 
+/**
+ * @brief Makes player pick up a node from the conveyor.
+ * @param node pointer pointing to the node to be picked up.
+ */
 void Player::pick_up_from_conveyor(Node* node) {
     if (!is_holding) {
         node->pick_up();
@@ -364,6 +484,10 @@ void Player::pick_up_from_conveyor(Node* node) {
     }
 }
 
+/**
+ * @brief Continues and advances an active pick-up animation.
+ * @param color the color of the node being picked up.
+ */
 void Player::pick_up_animation(string color) {
     pickup_animation_status++;
     
@@ -378,6 +502,9 @@ void Player::pick_up_animation(string color) {
     player_sprite.setTextureRect(IntRect(512 * pickup_animation_status, 0, 512, 512));
 }
 
+/**
+ * @brief Continues and advances an active put-down animation.
+ */
 void Player::put_down_animation() {
     put_down_animation_status++;
     
@@ -393,6 +520,11 @@ void Player::put_down_animation() {
                                          0, 512, 512));
 }
 
+/**
+ * @brief Player puts down a fried node after being hit by a laser.
+ * @param nodes vector of pointers pointing to the active nodes to check for collisions with fried node.
+ * @return the position of the fried node to be spawned by game.
+ */
 Vector2<float> Player::put_down_fried_node(vector<Node*> nodes) {
     Vector2f new_pos;
     new_pos.x = player_sprite.getPosition().x + constants::PLACE_DISTANCE * 
