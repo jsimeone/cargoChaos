@@ -16,6 +16,9 @@ sf::Music AudioConstants::backgroundMusic;
 sf::Sound AudioConstants::selectSound;
 sf::Sound AudioConstants::clickSound;
 
+/**
+ * @brief: Loads game sounds from their files.
+ */
 void AudioConstants::loadSounds() {
     if (!selectSoundBuffer.loadFromFile("assets/select.wav")) {
         std::cout << "Error loading select sound!" << std::endl;
