@@ -61,7 +61,7 @@ private:
     bool wall_offset_on_placement(Vector2f &new_pos, float angle, float offset);
     bool node_offset_on_placement(Vector2f &new_pos, float angle, float offset);
     float calculate_placement_node_offset(Node* node, Vector2f new_pos, float &angle);
-    void calculate_placement_wall_offset(Vector2f &new_pos, float node_radius);
+    void calculate_place_wall_offset(Vector2f &new_pos, float node_radius);
     
     void put_down_node(vector<Node*> nodes);
     

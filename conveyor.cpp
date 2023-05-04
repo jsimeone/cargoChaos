@@ -1,10 +1,9 @@
-//
-//  conveyor.cpp
-//  SFMLPromisingTest
-//
-//  Created by Joseph Simeone on 4/24/23.
-//
-
+/**
+ * Project 08: Cargo Chaos Conveyor class method definitions.
+ * @file conveyor.ccp
+ * @authors Jack Kertscher, Hank Elsesser, Joe Simeone, Javi Garcia
+ * @date May 4, 2023
+ */
 #include "conveyor.h"
 
 Conveyor::Conveyor() : 
