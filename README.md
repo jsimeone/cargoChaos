@@ -1,5 +1,9 @@
 # How to install
+1. If you're on Windows and you are logged in to your Hamilton College Google account, [click this link](https://drive.google.com/file/d/1mtqTWUqdV9VS-D__UVT76X8zToYX6Fkt/view?usp=sharing) to download the zip file.
 
+2. Unzip the file you just downloaded
+
+3. Double click `setup.exe` to install Cargo Chaos! (Make sure to allow administrator access if prompted)
 
 # Cargo Chaos Setup Instructions
 
