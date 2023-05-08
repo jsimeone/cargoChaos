@@ -1,3 +1,6 @@
+# Welcome to Cargo Chaos: A CS102 Final Project
+Help move cargo across the warehouse floor, but try to avoid getting fried by lasers! We created this game using the SFML library in C++.
+
 # How to install
 1. If you're on Windows and you are logged in to your Hamilton College Google account, [click this link](https://drive.google.com/file/d/1mtqTWUqdV9VS-D__UVT76X8zToYX6Fkt/view?usp=sharing) to download the zip file.
   - You might want to right click -> open in new tab so you can keep viewing these instructions
